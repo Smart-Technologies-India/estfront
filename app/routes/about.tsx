@@ -15,23 +15,21 @@ const About: React.FC = (): JSX.Element => {
                 </div>
                 <div className="p-4 mx-4 bg-white rounded-md my-6 border-l-4 border-[#2f3863] hover:shadow-lg">
                     <p className="text-black text-xl p-2 text-justify font-light">
-                        The Planning and Development Authority Daman (PDA Daman) is a statutory body constituted under Section
+                        The Establishment Section Daman (EST Daman) is a statutory body constituted under Section
                         20
                         Daman & Diu Town and Country Planning (Amendment) Regulation, 1999 (Principal Act- Goa, Daman and Diu
                         Town and
                         Country Planning Act, 1974) in the year 2012.
                     </p>
                     <p className="text-black text-xl p-2 text-justify font-light">
-                        The whole area of Daman district (except area of designated reserved forests and area under the
-                        Jurisdiction of Coast Guard Authority) has been declared as planning area under section 18 of the Act in
-                        the
-                        year 2011.
+                        The Establishment Section Daman (EST Daman) is a statutory body constituted 
+                   in the year 2012.
                     </p>
                 </div>
 
                 <div className="p-4 mx-4 bg-white rounded-md my-4 border-l-4 border-[#2f3863] hover:shadow-lg">
                     <h3 className="text-black text-3xl p-1 text-justify font-medium">
-                        The Members of the Planning and Development Authority, Daman
+                        The Members of the Establishment Section, Daman
                     </h3>
                     <div className="overflow-x-auto sm:mx-0.5 my-2">
                         <table className="min-w-full rounded-md">
@@ -39,7 +37,7 @@ const About: React.FC = (): JSX.Element => {
                                 <tr className="bg-white border-b border-t transition duration-300 ease-in-out hover:bg-gray-100">
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
                                     <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                        Chairman, PDA / The Hon’ble Collector, Daman/
+                                        Chairman, PDA / The Hon’ble Collector, Daman
                                     </td>
                                     <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                                         Shri Saurabh Mishra, IAS
@@ -49,30 +47,29 @@ const About: React.FC = (): JSX.Element => {
                                 <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
                                     <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                        The Member Secretary/ Deputy Collector (HQ)/SDM, Daman/ The Chief Town
-                                        Planner
+                                        The Member Secretary/ Deputy Collector (GEN)/SDM, Daman
                                     </td>
                                     <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                        Shri. Mohit Mishra, Danics
+                                        Shri. Priyanshu Singh, Danics
                                     </td>
 
                                 </tr>
                                 <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">3</td>
                                     <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                        The President, Daman Municipal Council.
+                                        Superitendant PDA.
                                     </td>
                                     <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                        Smt. Sonal I. Patel
+                                        Shri S.H.Parmar
                                     </td>
                                 </tr>
                                 <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">4</td>
                                     <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                        The President, District Panchayat, Daman.
+                                        LDC ,PDA
                                     </td>
                                     <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                        Smt. Jagruti Kalpeshbhai Patel
+                                        Shri.Ritesh Patel
                                     </td>
 
                                 </tr>
@@ -82,18 +79,10 @@ const About: React.FC = (): JSX.Element => {
                                         Expert Member
                                     </td>
                                     <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                        Prof. Y.M. Desai, IIT Powai, Mumbai
+                                        Shri.Sudanshu Patel
                                     </td>
                                 </tr>
-                                <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">6</td>
-                                    <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                        Expert Member
-                                    </td>
-                                    <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                        Dr. B.K. Patel, B.E. (Civil), M.E. (Town & Regional Planning)
-                                    </td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>
@@ -101,77 +90,29 @@ const About: React.FC = (): JSX.Element => {
                 </div>
                 <div className="p-4 mx-4 bg-white rounded-md my-4 border-l-4 border-[#2f3863] hover:shadow-lg">
                     <h3 className="text-black text-3xl p-1 text-justify font-medium">
-                        Functions of PDA
+                        Functions of Establishment Section
                     </h3>
                     <p className="font-normal text-xl">
                         <span className="text-[#2f3863]">&#x2756;</span>
-                        To prepare an Existing Land Use Map;
+                        To give permission for Marriage;
                     </p>
                     <p className="font-normal text-xl">
                         <span className="text-[#2f3863]">&#x2756;</span>
-                        To prepare an Outline Development Plan;
+                        To give permission for Roadshow;
                     </p>
                     <p className="font-normal text-xl">
                         <span className="text-[#2f3863]">&#x2756;</span>
-                        To prepare a Comprehensive Development Plan;
+                        To give permission for Rally;
                     </p>
                     <p className="font-normal text-xl">
                         <span className="text-[#2f3863]">&#x2756;</span>
-                        To prepare and prescribe uses of land within its area;
+                        To give permission for Movie Theater;
                     </p>
                     <p className="font-normal text-xl">
                         <span className="text-[#2f3863]">&#x2756;</span>
-                        To prepare schemes of development and undertake their implementation;
+                        To give permission for Movie Shooting;
                     </p>
-                    <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
-                        To carry out a survey in the planning area for the preparation of an Outline Development
-                        Plan,
-                        Comprehensive
-                        Development Plan, or Town Planning Scheme;
-                    </p>
-                    <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
-                        To control the development activities in accordance with the development plan in the
-                        planning
-                        area;
-                    </p>
-                    <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
-                        To enter into contracts, agreements, or arrangements with any person or organization as
-                        the
-                        planning
-                        development authority may seem necessary for performing its function;
-                    </p>
-                    <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
-                        To acquire, hold, manage and dispose of property, movable or immovable, as it may seem
-                        necessary;
-                    </p>
-                    <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
-                        To execute works in connection with the supply of water, disposal of sewerage, and
-                        provision of
-                        other
-                        services and amenities;
-                    </p>
-                    <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
-                        To prepare various schemes of infrastructure development and undertake their
-                        implementation;
-                    </p>
-                    <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
-                        To
-                        prepare
-                        development schemes and undertake their implementation, and for these purposes, it may
-                        be
-                        carried
-                        out or cause to be carried out, surveys of the planning area and prepare report or
-                        reports of
-                        such
-                        surveys, and to perform such other functions as may be prescribed.
-                    </p>
+                   
                 </div>
 
 
@@ -180,49 +121,50 @@ const About: React.FC = (): JSX.Element => {
                     <h3 className="text-black text-3xl p-1 text-justify font-medium">
                         Addition functions of the Authority
                     </h3>
-                    <p className="font-normal text-xl">
+                     <p className="font-normal text-xl">
                         <span className="text-[#2f3863]">&#x2756;</span>
-                        To accord Construction Permission
+                        To give permission for Marriage;
                     </p>
                     <p className="font-normal text-xl">
                         <span className="text-[#2f3863]">&#x2756;</span>
-                        To accord Occupancy Certificate
+                        To give permission for Roadshow;
                     </p>
                     <p className="font-normal text-xl">
                         <span className="text-[#2f3863]">&#x2756;</span>
-                        To accord Plinth Certificate
+                        To give permission for Rally;
                     </p>
                     <p className="font-normal text-xl">
                         <span className="text-[#2f3863]">&#x2756;</span>
-                        To accord Site Elevation Certificate
+                        To give permission for Movie Theater;
                     </p>
                     <p className="font-normal text-xl">
                         <span className="text-[#2f3863]">&#x2756;</span>
-                        Survey regarding authorized and unauthorized construction and further necessary action
-                        as per
-                        the
-                        development control rules.
+                        To give permission for Movie Shooting;
                     </p>
                 </div>
                 <div className="p-4 mx-4 bg-white rounded-md my-4 border-l-4 border-[#2f3863] hover:shadow-lg">
                     <h3 className="text-black text-3xl p-1 text-justify font-medium">
                         Development Projects undertaken by the Authority
                     </h3>
-                    <p className="font-normal text-xl">
+                     <p className="font-normal text-xl">
                         <span className="text-[#2f3863]">&#x2756;</span>
-                        Work of Repair and Renovation of Khariwad Shopping Complex.
+                        To give permission for Marriage;
                     </p>
                     <p className="font-normal text-xl">
                         <span className="text-[#2f3863]">&#x2756;</span>
-                        Development of Landmark and Beautification of Premises Beside Samudra Narayan Temple,
-                        Near Fort
-                        Area,
-                        Nani
-                        Daman.
+                        To give permission for Roadshow;
                     </p>
                     <p className="font-normal text-xl">
                         <span className="text-[#2f3863]">&#x2756;</span>
-                        Operation and Maintenance of Daman Recreational Club.
+                        To give permission for Rally;
+                    </p>
+                    <p className="font-normal text-xl">
+                        <span className="text-[#2f3863]">&#x2756;</span>
+                        To give permission for Movie Theater;
+                    </p>
+                    <p className="font-normal text-xl">
+                        <span className="text-[#2f3863]">&#x2756;</span>
+                        To give permission for Movie Shooting;
                     </p>
                 </div>
             </main>

@@ -50,7 +50,6 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
         veriables: {},
     });
 
-    ['MARRIAGE', 'RELIGIOUS', 'ROADSHOW', 'GENERIC']
     const processcount = await ApiCall({
         query: `
         query officerFileProgress{
@@ -283,7 +282,6 @@ const DashBoard = (): JSX.Element => {
     };
 
 
-    ['MARRIAGE', 'RELIGIOUS', 'ROADSHOW', 'GENERIC']
     const labels = ["MARRIAGE", 'RELIGIOUS', 'ROADSHOW', 'GENERIC'];
 
 
@@ -326,6 +324,8 @@ const DashBoard = (): JSX.Element => {
 
     const villageNames = villageprocess.map((data: any) => data.village);
 
+
+    console.log(villageprocess);
     const fileTypes = villageprocess[0].fileCounts.map((fileCount: any) => fileCount.formType);
 
     const datasets: any = [];

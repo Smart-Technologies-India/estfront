@@ -70,7 +70,7 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
             }
         },
     });
-
+    
     const village = await ApiCall({
         query: `
         query getVillageById($id:Int!){
@@ -84,6 +84,8 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
             id: parseInt(data.data.getRoadshowById.village_id)
         },
     });
+
+
 
 
     return json({

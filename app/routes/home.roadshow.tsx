@@ -103,7 +103,8 @@ const Roadshow: React.FC = (): JSX.Element => {
                     .nonempty("Applicant address is required."),
                 mobile: z
                     .string()
-                    .nonempty("Applicant Contact Number is required."),
+                    .nonempty("Applicant Contact Number is required.")
+                    .length(10, "Contact Number should be 10 digit."),
                 email: z
                     .string()
                     .email("Enter a valid email.")
@@ -134,7 +135,11 @@ const Roadshow: React.FC = (): JSX.Element => {
                     .string()
                     .nonempty("Enter Route information")
             })
-            .strict();
+            .strict()
+            .refine(obj => obj.from_date < obj.to_date, {
+                message: "From date must be less than To date",
+                path: ["from_date", "to_date"],
+            });
 
         type RoadshowScheme = z.infer<typeof RoadshowScheme>;
 
@@ -210,7 +215,7 @@ const Roadshow: React.FC = (): JSX.Element => {
                             applicant_uid_url: applicant_uid_urlt.data,
                             undertaking_url: undertaking_urlt.data,
                             status: "ACTIVE",
-                            route_info:roadshowScheme.route_info
+                            route_info: roadshowScheme.route_info
                         }
                     },
                 });

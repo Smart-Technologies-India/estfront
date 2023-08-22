@@ -19,7 +19,7 @@ import { ToastContainer } from "react-toastify";
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
   { rel: "stylesheet", href: stylesheet },
-  { rel: "icon", type: "image/jpg", href: "/logo.jpg" },
+  { rel: "icon", type: "image/png", href: "/logo.png" },
   { rel: "stylesheet", href: styles }
 ];
 

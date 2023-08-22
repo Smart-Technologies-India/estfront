@@ -77,7 +77,7 @@ const Home: React.FC = (): JSX.Element => {
                         <div className="md:flex flex-col md:h-full">
                             <div className="text-white text-center mb-4">
                                 <img
-                                    src="/images/logo.jpg"
+                                    src="/images/logo.png"
                                     alt="logo"
                                     className="w-80 md:w-40 inline-block"
                                 />

@@ -110,11 +110,9 @@ const MobileLogin: React.FC = (): JSX.Element => {
                 <img src="/images/login.jpg" alt="login background" className="h-full w-full object-cover object-center" />
             </div>
             <div className="min-h-screen w-full grid place-items-center relative">
-
                 <div className=" p-6 rounded-md shadow-md hover:shadow-xl hover:scale-105 transition-all bg-white border-t-4 border-purple-500">
                     <div className="w-full grid place-items-center">
-
-                        <img src="/images/logo.jpg" alt="logo" className="w-80 h-80 object-cover object-center" />
+                        <img src="/images/logo.png" alt="logo" className="w-80 h-80 object-cover object-center" />
                     </div>
                     <h1 className="text-gray-800 text-xl font-bold text-center my-4">Sign in to Account</h1>
                     {(user != null || user != undefined) ? !(user.name == null || user.name == undefined || user.name == "") ?

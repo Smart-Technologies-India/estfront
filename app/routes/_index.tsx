@@ -6,157 +6,31 @@ import { SVGProps, useState } from "react";
 const Home: React.FC = (): JSX.Element => {
   const links = [
     {
-      name: "Notification for Town and Planning Board Constitution",
+      name: "Notification for Establishment Section Daman",
       link: "#",
     },
     {
-      name: "Development Control Rules (Amendment) 2016",
+      name: "Rules for Marriage Permission",
       link: "#",
     },
     {
-      name: "Order regarding Storage of Construction Material",
+      name: "Procedure for Religious Procession",
       link: "#",
     },
     {
-      name: "Order regarding Inspection Based on Risk Assessment",
+      name: "Order regarding Road show / Rally permission",
       link: "#",
     },
     {
-      name: "Notification Rates for Landuse development charge",
+      name: "Petroleum NOC",
       link: "#",
     },
+   
     {
-      name: "Joint Inspection Order in EODB",
+      name: "Time line for Permissions",
       link: "#",
     },
-    {
-      name: "Order regarding Construction Permission Validity expiring on or after 25/03/2020 are hereby extended upto 31/03/2021",
-      link: "#",
-    },
-    {
-      name: "Regional Plan of Daman 2001",
-      link: "#",
-    },
-    {
-      name: "Fee for Various Permissions and Recommendations",
-      link: "#",
-    },
-    {
-      name: "Daman Extension of Ribbon Development to National Highways, Rules 2020",
-      link: "#",
-    },
-    {
-      name: "Draft Notification for ROWs and road categories for Daman",
-      link: "#",
-    },
-    {
-      name: "Checklist For Grant Of Part Occupancy Certificate And Full Occupancy Certificate",
-      link: "#",
-    },
-    {
-      name: "Checklist For Grant Of Part Occupancy Certificate And Full Occupancy Certificate",
-      link: "#",
-    },
-    {
-      name: "Outline Development Plan - ODP - P1",
-      link: "#",
-    },
-    {
-      name: "Outline Development Plan - ODP - P2",
-      link: "#",
-    },
-    {
-      name: "Daman Development Control Rules, 2014",
-      link: "#",
-    },
-    {
-      name: "Daman Ribbon Development Rules, 2019",
-      link: "#",
-    },
-    {
-      name: "Publish Draft Ribbon Development Rules fixing Road Boundary",
-      link: "#",
-    },
-    {
-      name: "Report of Construction Permission granted",
-      link: "#",
-    },
-    {
-      name: "Qualification required for Registration of Architect and Engineers",
-      link: "#",
-    },
-    {
-      name: "Responsibility of Architects & Engineers",
-      link: "#",
-    },
-    {
-      name: "Authorization of Architect for Completion Certificate",
-      link: "#",
-    },
-    {
-      name: "Inspection Reports to be submitted online within 24 Hrs",
-      link: "#",
-    },
-    {
-      name: "Computerized Inspector Allocation",
-      link: "#",
-    },
-    {
-      name: "Computerized System for identifying building/ area that needs to be inspected based on risk factor",
-      link: "#",
-    },
-    {
-      name: "Risk based classification of all kind of buildings",
-      link: "#",
-    },
-    {
-      name: "Conflict resolution mechanism for land and construction permission",
-      link: "#",
-    },
-    {
-      name: "Time line for Construction Permission/ during construction/ Occupancy Certificate",
-      link: "#",
-    },
-    {
-      name: "Undertaking To Be Submitted By Applicant For Height Relaxation",
-      link: "#",
-    },
-    {
-      name: "Site Inspection Report of Construction Permission granted",
-      link: "#",
-    },
-    {
-      name: "Site Inspection Report of Occupancy Certificate.",
-      link: "#",
-    },
-    {
-      name: "Order regarding Construction Permission under the EoDB.",
-      link: "#",
-    },
-    {
-      name: "Checklist for Building Plan Approval (Construction Permission).",
-      link: "#",
-    },
-    {
-      name: "Checklist of Layout Approval for Residential and Industrial Purpose.",
-      link: "#",
-    },
-    {
-      name: "Performa for Full/Part Occupancy Certificate.",
-      link: "#",
-    },
-    {
-      name: "Real Estate Regulation Act.",
-      link: "#",
-    },
-    {
-      name: "Planning and Development Authority - Circular regarding EoDB 2017.",
-      link: "#",
-    },
-    {
-      name: "PWD Civil Division - Circular regarding EoDB 2017.",
-      link: "#",
-    },
+    
   ];
 
   const [menu, setMenu] = useState<boolean>(false);
@@ -185,24 +59,17 @@ const Home: React.FC = (): JSX.Element => {
         <p className="text-white text-center text-2xl border-b-2 border-white pb-2">&#x2756; Services &#x2756;</p>
         <a href="./assets/doc1.pdf"
           className="px-2 inline-block my-1 cursor-pointer w-full rounded-md text-xl py-2 text-white font-semibold hover:text-black hover:bg-yellow-500 transition-all duration-500">
-          &#x27E1; DCR for Daman
+          &#x27E1; Marriage Permission
         </a>
         <a href="./assets/doc2.pdf"
           className="px-2 inline-block my-1 cursor-pointer w-full rounded-md text-xl py-2 text-white font-semibold hover:text-black hover:bg-yellow-500 transition-all duration-500">
-          &#x27E1; DNH & DD TCP ACT 1974 (amm. 2022)
+          &#x27E1; Religious Permission
         </a>
         <a href="./assets/doc3.pdf"
           className="px-2 inline-block my-1 cursor-pointer w-full rounded-md text-xl py-2 text-white font-semibold hover:text-black hover:bg-yellow-500 transition-all duration-500">
-          &#x27E1; PDA Daman Rules 2011
+          &#x27E1; Roadshow Permission
         </a>
-        <a href="./assets/doc4.pdf"
-          className="px-2 inline-block my-1 cursor-pointer w-full rounded-md text-xl py-2 text-white font-semibold hover:text-black hover:bg-yellow-500 transition-all duration-500">
-          &#x27E1; Regional Plan 2005-2021
-        </a>
-        <a href="./assets/doc5.pdf"
-          className="px-2 inline-block my-1 cursor-pointer w-full rounded-md text-xl py-2 text-white font-semibold hover:text-black hover:bg-yellow-500 transition-all duration-500">
-          &#x27E1; Ribbon Development rules for SH, MDR, ODR & VR for DD
-        </a>
+        
         <div className="grow"></div>
         <Link to={"/mobilelogin/"} className="bg-green-500  font-semibold text-center text-xl py-2 px-4 text-white rounded-md w-full ">Citizen Login</Link>
         <div className="h-6"></div>
@@ -215,9 +82,9 @@ const Home: React.FC = (): JSX.Element => {
           {menu ? null :
             <div className="grow"></div>
           }
-          <img src="/logo.jpg" alt="logo" className="shrink-0 object-fill object-center w-20 h-20" />
+          <img src="/logo.png" alt="logo" className="shrink-0 object-fill object-center w-20 h-20" />
           <div className="ml-4">
-            <p className="text-black font-semibold text-3xl">Establishment</p>
+            <p className="text-black font-semibold text-3xl">Establishment Section Daman</p>
           </div>
           {menu ? null :
             <>
@@ -239,17 +106,13 @@ const Home: React.FC = (): JSX.Element => {
               <h3 className="text-3xl text-[#2f3863] px-2 mx-4 border-b-4 border-[#2f3863] font-semibold">About Us</h3>
               <div className="p-4 mx-4 bg-white">
                 <p className="text-black text-xl p-2 text-justify font-medium">
-                  The Planning and Development Authority Daman (PDA Daman) is a statutory body constituted under Section
-                  20
-                  Daman & Diu Town and Country Planning (Amendment) Regulation, 1999 (Principal Act- Goa, Daman and Diu
-                  Town and
-                  Country Planning Act, 1974) in the year 2012.
+                  The Establishment Section Daman (EST Daman) is a statutory body constituted 
+                   in the year 2012.
                 </p>
                 <p className="text-black text-xl p-2 text-justify font-medium">
-                  The whole area of Daman district (except area of designated reserved forests and area under the
-                  Jurisdiction of Coast Guard Authority) has been declared as planning area under section 18 of the Act in
-                  the
-                  year 2011.
+                  The purpose of this department is to grant permission for Religious events, Marriage ,Rally for 
+                  Political or Event Purpose.Establisment Section also gives permission for Movie Theater and 
+                  Film Shooting.
                 </p>
               </div>
               <div className="w-full grid place-items-end">
@@ -283,12 +146,11 @@ const Home: React.FC = (): JSX.Element => {
             This Website is Designed & Developed by
           </p>
           <p className="text-center text-white text-xl mb-6">
-            <span className="font-semibold">Contents Coordinator</span> - Planning and
-            Development Authority, Daman
+            <span className="font-semibold">Contents Coordinator</span> - Establishment Section, Daman
           </p>
           <p className="text-center text-white text-xl">
             <span className="font-semibold">DISCLAIMER</span> - The content is
-            provided by Planning and Development Authority. PDA is responsible for
+            provided by Establishment Section. Est.Section is responsible for
             correctness, completeness and regularly updating the contents. Daman
             e-Governance Society is not responsible for any consequences
             arising out of this.

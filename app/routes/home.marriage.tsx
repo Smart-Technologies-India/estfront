@@ -103,7 +103,8 @@ const Marriage: React.FC = (): JSX.Element => {
                     .nonempty("Applicant address is required."),
                 mobile: z
                     .string()
-                    .nonempty("Applicant Contact Number is required."),
+                    .nonempty("Applicant Contact Number is required.")
+                    .length(10, "Contact Number should be 10 digit."),
                 email: z
                     .string()
                     .email("Enter a valid email.")
@@ -130,11 +131,12 @@ const Marriage: React.FC = (): JSX.Element => {
                 iagree: z
                     .string()
                     .nonempty("I solemnly affirm & hereby."),
-                // remarks: z
-                //     .string()
-                //     .optional(),
             })
-            .strict();
+            .strict()
+            .refine(obj => obj.from_date < obj.to_date, {
+                message: "From date must be less than To date",
+                path: ["from_date", "to_date"],
+            });
 
         type MarriageScheme = z.infer<typeof MarriageScheme>;
 
