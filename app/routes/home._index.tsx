@@ -325,7 +325,6 @@ const DashBoard = (): JSX.Element => {
     const villageNames = villageprocess.map((data: any) => data.village);
 
 
-    console.log(villageprocess);
     const fileTypes = villageprocess[0].fileCounts.map((fileCount: any) => fileCount.formType);
 
     const datasets: any = [];
