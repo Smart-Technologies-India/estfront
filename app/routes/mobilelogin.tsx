@@ -2,7 +2,7 @@ import { ActionArgs, LoaderArgs, LoaderFunction, redirect } from "@remix-run/nod
 import { Form, Link } from "@remix-run/react";
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { Fa6SolidEye, Fa6SolidEyeSlash, Fa6SolidMessage, Fa6SolidMobile, Fa6SolidUser } from "~/components/icons/icons";
+import { Fa6SolidMessage, Fa6SolidMobile, Fa6SolidUser } from "~/components/icons/icons";
 import { userPrefs } from "~/cookies";
 import { ApiCall } from "~/services/api";
 
@@ -25,7 +25,7 @@ const MobileLogin: React.FC = (): JSX.Element => {
     const [name, setName] = useState<string>("");
     const [mobile, setMobile] = useState<string>("");
     const [otp, setOtp] = useState<string>("");
-
+    const [isAlreadyLogin, setIsAlreadyLogin] = useState<boolean>(false);
     const submit = async () => {
         if (mobile == null || mobile == undefined || mobile == "") {
             return toast.error("Enter the mobile number.", { theme: "light" });
@@ -47,6 +47,7 @@ const MobileLogin: React.FC = (): JSX.Element => {
         if (data.status) {
             setUser((val: any) => data.data.mobileLogin);
             setName(val => data.data.mobileLogin.name);
+            setIsAlreadyLogin((val) => true);
         } else {
             return toast.error(data.message, { theme: "light" });
         }
@@ -199,6 +200,7 @@ const MobileLogin: React.FC = (): JSX.Element => {
                     <input type="hidden" name="contact" ref={cref} />
                     <input type="hidden" name="name" ref={nref} />
                     <input type="hidden" name="role" ref={rref} />
+                    <input type="hidden" name="isAlready" value={isAlreadyLogin ? "1" : "0"} />
                     <button ref={nextButton} name="submit">
                         Submit
                     </button>
@@ -213,9 +215,20 @@ export default MobileLogin;
 export async function action({ request }: ActionArgs) {
     const formData = await request.formData();
     const value = Object.fromEntries(formData);
-    return redirect("/home", {
-        headers: {
-            "Set-Cookie": await userPrefs.serialize(value),
-        },
-    });
+    console.log(value);
+
+    if (value.isAlready.toString() == "1") {
+        return redirect("/home", {
+            headers: {
+                "Set-Cookie": await userPrefs.serialize(value),
+            },
+        });
+    } else {
+        return redirect("/adddata", {
+            headers: {
+                "Set-Cookie": await userPrefs.serialize(value),
+            },
+        });
+    }
+
 }

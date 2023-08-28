@@ -6,7 +6,6 @@ import { CilCameraControl, Fa6RegularStarHalfStroke, Fa6SolidArrowsUpDownLeftRig
 import { userPrefs } from "~/cookies";
 import { ApiCall } from "~/services/api";
 import sideBarStore, { SideBarTabs } from "~/state/sidebar";
-import { toast } from "react-toastify";
 
 
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
@@ -26,8 +25,6 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
         query getUserById($id:Int!){
             getUserById(id:$id){
                 id,
-                access_kay,
-                design_point_id,
                 role,
                 name
             }   
@@ -37,7 +34,6 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
             id: parseInt(cookie.id!)
         },
     });
-
 
     return json({
         user: userdata.data.getUserById,
@@ -113,7 +109,10 @@ const Home: React.FC = (): JSX.Element => {
                                         </Link>
                                         <Link
                                             to={"/home/services"}
-                                            onClick={() => achangeindex(SideBarTabs.Services)}
+                                            onClick={() => {
+                                                achangeindex(SideBarTabs.Services);
+                                                changeMobile(false);
+                                            }}
                                         >
                                             <SidebarTab
                                                 icon={Fa6SolidCodeBranch}
@@ -152,19 +151,27 @@ const Home: React.FC = (): JSX.Element => {
                                         </Link>
                                         <div className="w-full h-[2px] bg-gray-800 my-3"></div>
                                         <p className="text-left px-2 font-serif text-sm my-2 text-gray-600 w-full">Citizen Files</p>
-                                        <Link
-                                            to={"/home/vmarriage"}
-                                            onClick={() => achangeindex(SideBarTabs.Marriage)}
-                                        >
-                                            <SidebarTab
-                                                icon={MaterialSymbolsActivityZone}
-                                                title="Marriage"
-                                                active={asideindex === SideBarTabs.Marriage}
-                                            ></SidebarTab>
-                                        </Link>
+                                        {user.role == "SHO" ? null :
+                                            <Link
+                                                to={"/home/vmarriage"}
+                                                onClick={() => {
+                                                    achangeindex(SideBarTabs.Marriage);
+                                                    changeMobile(false);
+                                                }}
+                                            >
+                                                <SidebarTab
+                                                    icon={MaterialSymbolsActivityZone}
+                                                    title="Marriage"
+                                                    active={asideindex === SideBarTabs.Marriage}
+                                                ></SidebarTab>
+                                            </Link>
+                                        }
                                         <Link
                                             to={"/home/vroadshow"}
-                                            onClick={() => achangeindex(SideBarTabs.Roadshow)}
+                                            onClick={() => {
+                                                achangeindex(SideBarTabs.Roadshow);
+                                                changeMobile(false);
+                                            }}
                                         >
                                             <SidebarTab
                                                 icon={MaterialSymbolsAlignHorizontalRight}
@@ -174,7 +181,10 @@ const Home: React.FC = (): JSX.Element => {
                                         </Link>
                                         <Link
                                             to={"/home/vreligious"}
-                                            onClick={() => achangeindex(SideBarTabs.Religious)}
+                                            onClick={() => {
+                                                achangeindex(SideBarTabs.Religious);
+                                                changeMobile(false);
+                                            }}
                                         >
                                             <SidebarTab
                                                 icon={MaterialSymbolsOralDisease}
@@ -303,7 +313,7 @@ const Footer = () => {
     const year = new Date().getFullYear();
     return (
         <div className="absolute bottom-0 w-full h-14 bg-white font-semibold text-center grid place-items-center text-gray-800 text-xl shadow-xl">
-            &copy; {year} PLANNING & DEVELOPMENT AUTHORITY - All rights reserved.
+            &copy; {year} ESTABLISHMENT SECTION - All rights reserved.
         </div>
     );
 };

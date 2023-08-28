@@ -22,8 +22,8 @@ const About: React.FC = (): JSX.Element => {
                         Country Planning Act, 1974) in the year 2012.
                     </p>
                     <p className="text-black text-xl p-2 text-justify font-light">
-                        The Establishment Section Daman (EST Daman) is a statutory body constituted 
-                   in the year 2012.
+                        The Establishment Section Daman (EST Daman) is a statutory body constituted
+                        in the year 2012.
                     </p>
                 </div>
 
@@ -82,7 +82,7 @@ const About: React.FC = (): JSX.Element => {
                                         Shri.Sudanshu Patel
                                     </td>
                                 </tr>
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -93,26 +93,26 @@ const About: React.FC = (): JSX.Element => {
                         Functions of Establishment Section
                     </h3>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
+                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
                         To give permission for Marriage;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
+                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
                         To give permission for Roadshow;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
+                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
                         To give permission for Rally;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
+                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
                         To give permission for Movie Theater;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
+                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
                         To give permission for Movie Shooting;
                     </p>
-                   
+
                 </div>
 
 
@@ -121,24 +121,24 @@ const About: React.FC = (): JSX.Element => {
                     <h3 className="text-black text-3xl p-1 text-justify font-medium">
                         Addition functions of the Authority
                     </h3>
-                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
+                    <p className="font-normal text-xl">
+                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
                         To give permission for Marriage;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
+                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
                         To give permission for Roadshow;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
+                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
                         To give permission for Rally;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
+                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
                         To give permission for Movie Theater;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
+                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
                         To give permission for Movie Shooting;
                     </p>
                 </div>
@@ -146,24 +146,24 @@ const About: React.FC = (): JSX.Element => {
                     <h3 className="text-black text-3xl p-1 text-justify font-medium">
                         Development Projects undertaken by the Authority
                     </h3>
-                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
+                    <p className="font-normal text-xl">
+                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
                         To give permission for Marriage;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
+                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
                         To give permission for Roadshow;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
+                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
                         To give permission for Rally;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
+                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
                         To give permission for Movie Theater;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863]">&#x2756;</span>
+                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
                         To give permission for Movie Shooting;
                     </p>
                 </div>

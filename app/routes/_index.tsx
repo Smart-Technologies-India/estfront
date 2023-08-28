@@ -25,12 +25,12 @@ const Home: React.FC = (): JSX.Element => {
       name: "Petroleum NOC",
       link: "#",
     },
-   
+
     {
       name: "Time line for Permissions",
       link: "#",
     },
-    
+
   ];
 
   const [menu, setMenu] = useState<boolean>(false);
@@ -57,19 +57,19 @@ const Home: React.FC = (): JSX.Element => {
 
         <div className="h-6"></div>
         <p className="text-white text-center text-2xl border-b-2 border-white pb-2">&#x2756; Services &#x2756;</p>
-        <a href="./assets/doc1.pdf"
+        <Link to="/home/services"
           className="px-2 inline-block my-1 cursor-pointer w-full rounded-md text-xl py-2 text-white font-semibold hover:text-black hover:bg-yellow-500 transition-all duration-500">
           &#x27E1; Marriage Permission
-        </a>
-        <a href="./assets/doc2.pdf"
+        </Link>
+        <Link to="/home/services"
           className="px-2 inline-block my-1 cursor-pointer w-full rounded-md text-xl py-2 text-white font-semibold hover:text-black hover:bg-yellow-500 transition-all duration-500">
           &#x27E1; Religious Permission
-        </a>
-        <a href="./assets/doc3.pdf"
+        </Link>
+        <Link to="/home/services"
           className="px-2 inline-block my-1 cursor-pointer w-full rounded-md text-xl py-2 text-white font-semibold hover:text-black hover:bg-yellow-500 transition-all duration-500">
           &#x27E1; Roadshow Permission
-        </a>
-        
+        </Link>
+
         <div className="grow"></div>
         <Link to={"/mobilelogin/"} className="bg-green-500  font-semibold text-center text-xl py-2 px-4 text-white rounded-md w-full ">Citizen Login</Link>
         <div className="h-6"></div>
@@ -91,7 +91,7 @@ const Home: React.FC = (): JSX.Element => {
               <div className="grow"></div>
               <Link to={"/mobilelogin/"} className="bg-green-500  font-semibold text-center text-xl py-2 px-4 text-white rounded-md">Citizen Login</Link>
               <div className="h-10 w-[2px] bg-gray-600"></div>
-              <Link to={"/login/"} className="bg-green-500  font-semibold text-center text-xl py-2 px-4 text-white rounded-md">smart</Link>
+              <Link to={"/login/"} className="bg-green-500  font-semibold text-center text-xl py-2 px-4 text-white rounded-md">Staff Login</Link>
             </>
 
           }
@@ -106,12 +106,12 @@ const Home: React.FC = (): JSX.Element => {
               <h3 className="text-3xl text-[#2f3863] px-2 mx-4 border-b-4 border-[#2f3863] font-semibold">About Us</h3>
               <div className="p-4 mx-4 bg-white">
                 <p className="text-black text-xl p-2 text-justify font-medium">
-                  The Establishment Section Daman (EST Daman) is a statutory body constituted 
-                   in the year 2012.
+                  The Establishment Section Daman (EST Daman) is a statutory body constituted
+                  in the year 2012.
                 </p>
                 <p className="text-black text-xl p-2 text-justify font-medium">
-                  The purpose of this department is to grant permission for Religious events, Marriage ,Rally for 
-                  Political or Event Purpose.Establisment Section also gives permission for Movie Theater and 
+                  The purpose of this department is to grant permission for Religious events, Marriage ,Rally for
+                  Political or Event Purpose.Establisment Section also gives permission for Movie Theater and
                   Film Shooting.
                 </p>
               </div>

@@ -70,7 +70,7 @@ const Roadshow: React.FC = (): JSX.Element => {
                                         <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">Form Id</th>
                                         <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">Purpose</th>
                                         <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">Applicant</th>
-										<th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">Event Date</th>
+                                        <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">Event Date</th>
                                         <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">Village</th>
                                         <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl">Status</th>
                                         <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl">ACTION</th>
@@ -81,7 +81,8 @@ const Roadshow: React.FC = (): JSX.Element => {
                                         return (
                                             <tr key={index} className="bg-white border-b border-t transition duration-300 ease-in-out hover:bg-gray-100">
                                                 <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                                    {val.form_id}
+                                                    EST-RD-{`0000${val.form_id}`.substring(`0000${val.form_id}`.length - 4)}
+
                                                 </td>
                                                 <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                                                     {val.form_type}
@@ -89,8 +90,8 @@ const Roadshow: React.FC = (): JSX.Element => {
                                                 <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                                                     {val.name}
                                                 </td>
-												<td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                                    {val.event_date}
+                                                <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                                                    {new Date(val.event_date).toJSON().slice(0, 10).split('-').reverse().join('/')}
                                                 </td>
                                                 <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                                                     {val.village}

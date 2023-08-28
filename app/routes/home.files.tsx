@@ -97,6 +97,21 @@ const Dashboard: React.FC = (): JSX.Element => {
         }
     }
 
+    const getname = (value: string): string => {
+
+        if (value == "MARRIAGE") {
+            return `MRG`;
+        } else if (value == "RELIGIOUS") {
+            return `RLG`;
+        } else if (value == "ROADSHOW") {
+            return `RD`;
+        } else if (value == "GENERIC") {
+            return `GEN`;
+        } else {
+            return "GEN";
+        }
+    }
+
 
     return (
         <>
@@ -131,7 +146,7 @@ const Dashboard: React.FC = (): JSX.Element => {
                                             return (
                                                 <tr key={index} className="bg-white border-b border-t transition duration-300 ease-in-out hover:bg-gray-100">
                                                     <td className="text-center text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                                        {val.form_id}
+                                                        EST-{getname(val.form_type)}-{`0000${val.form_id}`.substring(`0000${val.form_id}`.length - 4)}
                                                     </td>
                                                     <td className="text-center text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                                                         {val.form_type}

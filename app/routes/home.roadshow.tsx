@@ -6,19 +6,36 @@ import { toast } from "react-toastify";
 import { LoaderArgs, LoaderFunction, json } from "@remix-run/node";
 import { userPrefs } from "~/cookies";
 import { z } from "zod";
+import { checkUID } from "~/utils";
 
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
     const cookieHeader = props.request.headers.get("Cookie");
     const cookie: any = await userPrefs.parse(cookieHeader);
-    return json({ user: cookie });
+    const userdata = await ApiCall({
+        query: `
+        query getUserById($id:Int!){
+            getUserById(id:$id){
+                id,
+                role,
+                name,
+                address,
+                contact,
+                email,
+                user_uid
+            }   
+        }
+        `,
+        veriables: {
+            id: parseInt(cookie.id!)
+        },
+    });
+    return json({ user: userdata.data.getUserById });
 };
 
 
 
 const Roadshow: React.FC = (): JSX.Element => {
     const user = useLoaderData().user;
-
-
     const nameRef = useRef<HTMLInputElement>(null);
     const mobileRef = useRef<HTMLInputElement>(null);
     const addressRef = useRef<HTMLTextAreaElement>(null);
@@ -77,6 +94,12 @@ const Roadshow: React.FC = (): JSX.Element => {
     }
     useEffect(() => {
         getVillage();
+
+        nameRef!.current!.value = user.name ?? "";
+        mobileRef!.current!.value = user.contact ?? "";
+        emailRef!.current!.value = user.email ?? "";
+        addressRef!.current!.value = user.address ?? "";
+        uidRef!.current!.value = user.user_uid ?? "";
     }, []);
 
 
@@ -111,6 +134,9 @@ const Roadshow: React.FC = (): JSX.Element => {
                     .optional(),
                 user_uid: z
                     .string()
+                    .refine(value => checkUID(value), {
+                        message: "Invalid UIDAI Number",
+                    })
                     .optional(),
                 village_id: z
                     .number({ invalid_type_error: "Select a valid village", required_error: "Select a village" })
@@ -319,19 +345,17 @@ const Roadshow: React.FC = (): JSX.Element => {
                 </div>
                 <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
                     <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
-                        <span className="mr-2">2.5</span> Applicant UID
+                        <span className="mr-2">2.5</span> Applicant Aadhar Number
                     </div>
                     <div className="flex-none lg:flex-1 w-full lg:w-auto">
                         <input
                             ref={uidRef}
-                            placeholder="Applicant UID"
+                            placeholder="Please type Aadhar number"
                             className=" w-full border-2 border-gray-600 bg-transparent outline-none fill-none text-slate-800 p-2"
                         />
                     </div>
                 </div>
                 {/*--------------------- section 2 end here ------------------------- */}
-
-
 
 
                 {/*--------------------- section 3 start here ------------------------- */}
@@ -491,7 +515,7 @@ const Roadshow: React.FC = (): JSX.Element => {
 
                 <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
                     <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
-                        <span className="mr-2">4.3</span> Applicant UIDAI Aadhaar
+                        <span className="mr-2">4.3</span> Applicant Aadhaar Upload
                         <p className="text-rose-500 text-sm">
                             ( Maximum Upload Size 2MB & Allowed Format JPG / PDF / PNG )</p>
                     </div>

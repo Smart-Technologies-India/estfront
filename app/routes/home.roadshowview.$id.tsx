@@ -70,7 +70,7 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
             }
         },
     });
-    
+
     const village = await ApiCall({
         query: `
         query getVillageById($id:Int!){
@@ -575,7 +575,7 @@ const RoadshowView: React.FC = (): JSX.Element => {
                 </div>
                 <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
                     <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
-                        <span className="mr-2">2.5</span> Applicant UID
+                        <span className="mr-2">2.5</span> Applicant Aadhar Number
                     </div>
                     <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal">
                         {from_data.user_uid}
@@ -626,7 +626,7 @@ const RoadshowView: React.FC = (): JSX.Element => {
                         <span className="mr-2">3.5</span> Event From Date
                     </div>
                     <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal">
-                        {new Date(from_data.from_date).toLocaleDateString()}
+                        {new Date(from_data.from_date).toJSON().slice(0, 10).split('-').reverse().join('/')}
                     </div>
                 </div>
                 <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
@@ -634,7 +634,7 @@ const RoadshowView: React.FC = (): JSX.Element => {
                         <span className="mr-2">3.6</span> Event To Date
                     </div>
                     <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal">
-                        {new Date(from_data.to_date).toLocaleDateString()}
+                        {new Date(from_data.to_date).toJSON().slice(0, 10).split('-').reverse().join('/')}
                     </div>
                 </div>
 
@@ -689,7 +689,7 @@ const RoadshowView: React.FC = (): JSX.Element => {
 
                 <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
                     <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
-                        <span className="mr-2">4.3</span> Applicant UIDAI Aadhaar
+                        <span className="mr-2">4.3</span> Applicant Aadhaar Upload
                         <p className="text-rose-500 text-sm">
                             ( Maximum Upload Size 2MB & Allowed Format JPG / PDF / PNG )</p>
                     </div>
@@ -724,16 +724,6 @@ const RoadshowView: React.FC = (): JSX.Element => {
                 </div>
 
                 {/*--------------------- section 4 end here ------------------------- */}
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -773,7 +763,14 @@ const RoadshowView: React.FC = (): JSX.Element => {
                 </div>
                 {/*--------------------- section 5 end here ------------------------- */}
                 {isSubmited ?
-                    user.id == from_data.userId ? null :
+                    user.id == from_data.userId ?
+                        <Link
+                            to={`/roadshowpdf/${from_data.id}`}
+                            className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                        >
+                            Download Certificate
+                        </Link>
+                        :
                         <>
                             <div className="flex flex-wrap gap-6 mt-4">
                                 <Link to={"/home/"}
@@ -1020,8 +1017,14 @@ const RoadshowView: React.FC = (): JSX.Element => {
                                     :
                                     null
                                 }
-
-
+                                {common.form_status == 200 && user.id == 5 ?
+                                    <Link
+                                        to={`/roadshowpdf/${from_data.id}`}
+                                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                                    >
+                                        Download Certificate
+                                    </Link>
+                                    : null}
                             </div>
                         </>
                     :
