@@ -5,15 +5,15 @@ const About: React.FC = (): JSX.Element => {
     return (
         <>
             <main className="bg-[#eeeeee] min-h-screen w-full pt-20">
-                <div className="bg-[#2f3863] w-full py-4 flex px-6 items-center fixed top-0 left-0">
+                <div className="bg-[#03125e] w-full py-4 flex px-6 items-center fixed top-0 left-0">
                     <h1 className="grow text-center text-white text-3xl font-semibold ">
                         About Page
                     </h1>
-                    <Link to="/" className=" rounded-sm border-2 border-white  px-4 py-1 flex gap-4 font-semibold text-2xl text-white items-center">
+                    <Link to="/" className="border-2 border-white  px-4 py-1 flex gap-4 font-semibold text-lg rounded-md text-white items-center">
                         <MaterialSymbolsOtherHousesRounded></MaterialSymbolsOtherHousesRounded> HOME
                     </Link>
                 </div>
-                <div className="p-4 mx-4 bg-white rounded-md my-6 border-l-4 border-[#2f3863] hover:shadow-lg">
+                <div className="p-4 mx-4 bg-white rounded-md my-6 border-l-4 border-[#03125e] hover:shadow-lg">
                     <p className="text-black text-xl p-2 text-justify font-light">
                         The Establishment Section Daman (EST Daman) is a statutory body constituted under Section
                         20
@@ -27,7 +27,7 @@ const About: React.FC = (): JSX.Element => {
                     </p>
                 </div>
 
-                <div className="p-4 mx-4 bg-white rounded-md my-4 border-l-4 border-[#2f3863] hover:shadow-lg">
+                <div className="p-4 mx-4 bg-white rounded-md my-4 border-l-4 border-[#03125e] hover:shadow-lg">
                     <h3 className="text-black text-3xl p-1 text-justify font-medium">
                         The Members of the Establishment Section, Daman
                     </h3>
@@ -88,28 +88,28 @@ const About: React.FC = (): JSX.Element => {
                     </div>
 
                 </div>
-                <div className="p-4 mx-4 bg-white rounded-md my-4 border-l-4 border-[#2f3863] hover:shadow-lg">
+                <div className="p-4 mx-4 bg-white rounded-md my-4 border-l-4 border-[#03125e] hover:shadow-lg">
                     <h3 className="text-black text-3xl p-1 text-justify font-medium">
                         Functions of Establishment Section
                     </h3>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
+                        <span className="text-[#03125e] pr-2">&#x2756;</span>
                         To give permission for Marriage;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
+                        <span className="text-[#03125e] pr-2">&#x2756;</span>
                         To give permission for Roadshow;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
+                        <span className="text-[#03125e] pr-2">&#x2756;</span>
                         To give permission for Rally;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
+                        <span className="text-[#03125e] pr-2">&#x2756;</span>
                         To give permission for Movie Theater;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
+                        <span className="text-[#03125e] pr-2">&#x2756;</span>
                         To give permission for Movie Shooting;
                     </p>
 
@@ -117,53 +117,53 @@ const About: React.FC = (): JSX.Element => {
 
 
 
-                <div className="p-4 mx-4 bg-white rounded-md my-4 border-l-4 border-[#2f3863] hover:shadow-lg">
+                <div className="p-4 mx-4 bg-white rounded-md my-4 border-l-4 border-[#03125e] hover:shadow-lg">
                     <h3 className="text-black text-3xl p-1 text-justify font-medium">
                         Addition functions of the Authority
                     </h3>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
+                        <span className="text-[#03125e] pr-2">&#x2756;</span>
                         To give permission for Marriage;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
+                        <span className="text-[#03125e] pr-2">&#x2756;</span>
                         To give permission for Roadshow;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
+                        <span className="text-[#03125e] pr-2">&#x2756;</span>
                         To give permission for Rally;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
+                        <span className="text-[#03125e] pr-2">&#x2756;</span>
                         To give permission for Movie Theater;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
+                        <span className="text-[#03125e] pr-2">&#x2756;</span>
                         To give permission for Movie Shooting;
                     </p>
                 </div>
-                <div className="p-4 mx-4 bg-white rounded-md my-4 border-l-4 border-[#2f3863] hover:shadow-lg">
+                <div className="p-4 mx-4 bg-white rounded-md my-4 border-l-4 border-[#03125e] hover:shadow-lg">
                     <h3 className="text-black text-3xl p-1 text-justify font-medium">
                         Development Projects undertaken by the Authority
                     </h3>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
+                        <span className="text-[#03125e] pr-2">&#x2756;</span>
                         To give permission for Marriage;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
+                        <span className="text-[#03125e] pr-2">&#x2756;</span>
                         To give permission for Roadshow;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
+                        <span className="text-[#03125e] pr-2">&#x2756;</span>
                         To give permission for Rally;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
+                        <span className="text-[#03125e] pr-2">&#x2756;</span>
                         To give permission for Movie Theater;
                     </p>
                     <p className="font-normal text-xl">
-                        <span className="text-[#2f3863] pr-2">&#x2756;</span>
+                        <span className="text-[#03125e] pr-2">&#x2756;</span>
                         To give permission for Movie Shooting;
                     </p>
                 </div>

@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { LoaderArgs, LoaderFunction, json } from "@remix-run/node";
 import { userPrefs } from "~/cookies";
 import { z } from "zod";
+import { checkUID } from "~/utils";
 
 
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
@@ -138,9 +139,7 @@ const Marriage: React.FC = (): JSX.Element => {
                     .optional(),
                 user_uid: z
                     .string()
-                    .refine(value => {
-                        return /^[2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4}$/.test(value);
-                    }, {
+                    .refine(value => checkUID(value), {
                         message: "Invalid UIDAI Number",
                     })
                     .optional(),
