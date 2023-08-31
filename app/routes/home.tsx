@@ -20,6 +20,7 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
     }
 
 
+
     const userdata = await ApiCall({
         query: `
         query getUserById($id:Int!){
@@ -34,6 +35,7 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
             id: parseInt(cookie.id!)
         },
     });
+
 
     return json({
         user: userdata.data.getUserById,
@@ -282,12 +284,11 @@ const TopNavBar = (props: TopNavBarProps) => {
     return (
         <div className="bg-white rounded-md  text-xl w-full text-center text-white py-2 font-medium flex px-4 gap-4 items-center">
             <div className="px md:hidden text-gray-900 text-2xl cursor-pointer" onClick={() => changeMobile(!isMobile)}>
-                {/* on change will be here */}
                 <Fa6SolidBars></Fa6SolidBars>
             </div>
-            <div className="px hidden md:block text-gray-900 text-2xl cursor-pointer">
+            <Link to={"/home"} className="px hidden md:block text-gray-900 text-2xl cursor-pointer">
                 <Fa6SolidHouse></Fa6SolidHouse>
-            </div>
+            </Link>
             <div className="text-center text-gray-900 text-2xl hidden md:block">Home</div>
             <div className="grow"></div>
             <div className="text-gray-800 flex gap-2 items-center">

@@ -7,7 +7,10 @@ import { LoaderArgs, LoaderFunction, json } from "@remix-run/node";
 import { userPrefs } from "~/cookies";
 import { z } from "zod";
 import { checkUID } from "~/utils";
+import { DatePicker } from "antd";
 
+const { RangePicker } = DatePicker;
+import moment from "moment";
 
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
     const cookieHeader = props.request.headers.get("Cookie");
@@ -39,7 +42,6 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
 const Marriage: React.FC = (): JSX.Element => {
     const user = useLoaderData().user;
 
-    console.log(user);
 
 
     const nameRef = useRef<HTMLInputElement>(null);
@@ -53,6 +55,8 @@ const Marriage: React.FC = (): JSX.Element => {
 
     const from_dateRef = useRef<HTMLInputElement>(null);
     const to_dateRef = useRef<HTMLInputElement>(null);
+
+    const [dates, setDates] = useState<string[]>([]);
 
     const event_nameRef = useRef<HTMLInputElement>(null);
     const event_addressRef = useRef<HTMLTextAreaElement>(null);
@@ -178,8 +182,10 @@ const Marriage: React.FC = (): JSX.Element => {
             email: emailRef!.current!.value,
             user_uid: uidRef!.current!.value,
             village_id: parseInt(villageRef!.current!.value),
-            from_date: new Date(from_dateRef!.current!.value),
-            to_date: new Date(to_dateRef!.current!.value),
+            // from_date: new Date(from_dateRef!.current!.value),
+            // to_date: new Date(to_dateRef!.current!.value),
+            from_date: new Date(dates[0]),
+            to_date: new Date(dates[1]),
             iagree: isChecked ? "YES" : "NO",
             event_name: event_nameRef!.current!.value,
             event_address: event_addressRef!.current!.value,
@@ -257,7 +263,12 @@ const Marriage: React.FC = (): JSX.Element => {
             }
         } else { toast.error(parsed.error.errors[0].message, { theme: "light" }); }
     }
-    {/*--------------------- karan end here ------------------------- */ }
+
+
+
+    const handleDateChange = (values: any, datestring: any) => {
+        setDates(datestring);
+    };
 
     return (
         <>
@@ -405,18 +416,19 @@ const Marriage: React.FC = (): JSX.Element => {
                 </div>
                 <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
                     <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
-                        <span className="mr-2">3.4</span> Event From Date
+                        <span className="mr-2">3.4</span> Event From Date to To Date
                     </div>
                     <div className="flex-none lg:flex-1 w-full lg:w-auto">
-                        <input
+                        {/* <input
                             type="date"
                             ref={from_dateRef}
                             min={new Date().toISOString().split('T')[0]}
                             className=" w-full border-2 border-gray-600 bg-transparent outline-none fill-none text-slate-800 p-2"
-                        />
+                        /> */}
+                        <RangePicker onChange={handleDateChange}></RangePicker>
                     </div>
                 </div>
-                <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
+                {/* <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
                     <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
                         <span className="mr-2">3.5</span> Event To Date
                     </div>
@@ -428,7 +440,7 @@ const Marriage: React.FC = (): JSX.Element => {
                             className=" w-full border-2 border-gray-600 bg-transparent outline-none fill-none text-slate-800 p-2"
                         />
                     </div>
-                </div>
+                </div> */}
                 {/*--------------------- section 3 end here ------------------------- */}
 
                 {/*--------------------- section 4 start here ------------------------- */}

@@ -226,7 +226,7 @@ const Dashboard: React.FC = (): JSX.Element => {
                                             return (
                                                 <tr key={index} className="bg-white border-b border-t transition duration-300 ease-in-out hover:bg-gray-100">
                                                     <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                                        {val.form_id}
+                                                        EST-{getname(val.form_type)}-{`0000${val.form_id}`.substring(`0000${val.form_id}`.length - 4)}
                                                     </td>
                                                     <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                                                         {val.form_type}

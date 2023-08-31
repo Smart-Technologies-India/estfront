@@ -32,7 +32,7 @@ const search = () => {
     const village = loader.village;
     const user = loader.user;
 
-    const nameRef = useRef<HTMLInputElement>(null);
+    const eventRef = useRef<HTMLInputElement>(null);
     const numberRef = useRef<HTMLInputElement>(null);
     const villageRef = useRef<HTMLSelectElement>(null);
     const fromRef = useRef<HTMLInputElement>(null);
@@ -50,8 +50,8 @@ const search = () => {
         if (villageRef.current?.value != null && villageRef.current?.value != undefined && villageRef.current?.value != "" && villageRef.current?.value != "0") {
             res.village = villageRef.current?.value;
         }
-        if (nameRef.current?.value != null && nameRef.current?.value != undefined && nameRef.current?.value != "") {
-            res.name = nameRef.current?.value;
+        if (eventRef.current?.value != null && eventRef.current?.value != undefined && eventRef.current?.value != "") {
+            res.name = eventRef.current?.value;
         }
         if (numberRef.current?.value != null && numberRef.current?.value != undefined && numberRef.current?.value != "") {
             res.number = numberRef.current?.value;
@@ -107,6 +107,22 @@ const search = () => {
         }
     }
 
+
+    const getname = (value: string): string => {
+
+        if (value == "MARRIAGE") {
+            return `MRG`;
+        } else if (value == "RELIGIOUS") {
+            return `RLG`;
+        } else if (value == "ROADSHOW") {
+            return `RD`;
+        } else if (value == "GENERIC") {
+            return `GEN`;
+        } else {
+            return "GEN";
+        }
+    }
+
     return (
         <>
             <div className="bg-white rounded-md shadow-lg p-4 my-4 w-full">
@@ -143,11 +159,11 @@ const search = () => {
                     <div className="bg-gray-300 w-full h-[1px] my-3"></div>
                     <div className="w-96">
                         <div className="w-full text-lg font-semibold  text-gray-700 text-left">
-                            Applicant Name
+                            Event Name
                         </div>
                         <input
-                            ref={nameRef}
-                            placeholder="Applicant Name"
+                            ref={eventRef}
+                            placeholder="Event Name"
                             className="rounded-md bg-[#eeeeee] w-full outline-none fill-none text-slate-800 p-2 mt-2"
                         />
                     </div>
@@ -210,7 +226,7 @@ const search = () => {
                                                 return (
                                                     <tr key={index} className="bg-white border-b border-t transition duration-300 ease-in-out hover:bg-gray-100">
                                                         <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                                            {val.form_id}
+                                                            EST-{getname(val.form_type)}-{`0000${val.form_id}`.substring(`0000${val.form_id}`.length - 4)}
                                                         </td>
                                                         <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                                                             {val.form_type}

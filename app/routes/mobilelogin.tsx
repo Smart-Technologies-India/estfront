@@ -46,8 +46,10 @@ const MobileLogin: React.FC = (): JSX.Element => {
         });
         if (data.status) {
             setUser((val: any) => data.data.mobileLogin);
-            setName(val => data.data.mobileLogin.name);
-            setIsAlreadyLogin((val) => true);
+            if (!(data.data.mobileLogin.name == null || data.data.mobileLogin.name == undefined || data.data.mobileLogin.name == "")) {
+                setName(val => data.data.mobileLogin.name);
+                setIsAlreadyLogin((val) => true);
+            }
         } else {
             return toast.error(data.message, { theme: "light" });
         }
@@ -215,7 +217,6 @@ export default MobileLogin;
 export async function action({ request }: ActionArgs) {
     const formData = await request.formData();
     const value = Object.fromEntries(formData);
-    console.log(value);
 
     if (value.isAlready.toString() == "1") {
         return redirect("/home", {
