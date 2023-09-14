@@ -30,7 +30,8 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
               signature_url,
               iagree,
               remarks,
-              status
+              status,
+              condition_to_follow
             }
           }
       `,
@@ -348,6 +349,10 @@ const RoadshowPdfView = (): JSX.Element => {
 
                 <View style={styles.dividerthree}></View>
                 <View>
+                    <Text style={styles.para}>{form.condition_to_follow.replace(/\\n/g, "\n")}
+                    </Text>
+                </View>
+                {/* <View>
                     <Text style={styles.para}>Noise Control: - The event must adhere to noise pollution guidelines set by the local authority. Sound levels should not exceed [X] decibels during the event, especially during late hours. Live music and amplified sound should be directed away from neighboring properties to minimize noise disturbance.
                     </Text>
                 </View>
@@ -400,7 +405,7 @@ const RoadshowPdfView = (): JSX.Element => {
                 <View>
                     <Text style={styles.para}>Consequences of Non-Compliance: - Failure to adhere to these conditions may result in fines, penalties, or legal action as per local laws and regulations.
                     </Text>
-                </View>
+                </View> */}
 
 
                 <View style={styles.flexbox}>

@@ -9,6 +9,7 @@ enum SideBarTabs {
     Roadshow,
     Generic,
     Search,
+    EditProfile
 }
 
 interface SideBarState {

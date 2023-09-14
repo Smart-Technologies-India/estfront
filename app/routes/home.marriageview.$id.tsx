@@ -33,7 +33,8 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
               applicant_uid_url,
               undertaking_url,
               iagree,
-              signature_url
+              signature_url,
+              condition_to_follow
             }
           }
       `,
@@ -377,6 +378,8 @@ const MarriageView: React.FC = (): JSX.Element => {
         }
     }
 
+ 
+
 
 
 
@@ -461,7 +464,7 @@ const MarriageView: React.FC = (): JSX.Element => {
             {/* forward box start here */}
             <div className={`fixed top-0 left-0 bg-black bg-opacity-20 min-h-screen w-full  z-50 ${forwardbox ? "grid place-items-center" : "hidden"}`}>
                 <div className="bg-white p-4 rounded-md w-80">
-                    <h3 className="text-2xl text-center font-semibold">Forward to SUPTD</h3>
+                    <h3 className="text-2xl text-center font-semibold">{nextdata.title}</h3>
                     <textarea
                         ref={forwardRef}
                         placeholder="Information Needed"

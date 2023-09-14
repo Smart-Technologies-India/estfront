@@ -3,6 +3,7 @@ export default {
   ignoredRouteFiles: ["**/.*"],
   tailwind:true,
   postcss:true,
+  
   // appDirectory: "app",
   // assetsBuildDirectory: "public/build",
   // serverBuildPath: "build/index.js",
@@ -15,5 +16,6 @@ export default {
     v2_meta: true,
     v2_normalizeFormMethod: true,
     v2_routeConvention: true,
+    
   },
 };

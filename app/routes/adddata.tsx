@@ -6,6 +6,7 @@ import { z } from "zod";
 import { CilContact, CilEnvelopeClosed, Fa6SolidUser } from "~/components/icons/icons";
 import { userPrefs } from "~/cookies";
 import { ApiCall } from "~/services/api";
+import { checkUID } from "~/utils";
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
     const cookieHeader = props.request.headers.get("Cookie");
     const cookie: any = await userPrefs.parse(cookieHeader);
@@ -39,7 +40,10 @@ const AddData: React.FC = (): JSX.Element => {
                     .nonempty("Enter Email id."),
                 user_uid: z
                     .string()
-                    .nonempty("Enter Aadhar Number."),
+                    .nonempty("Enter Aadhar Number.")
+                    .refine(value => checkUID(value), {
+                        message: "Invalid UIDAI Number",
+                    }),
             })
             .strict();
 

@@ -34,7 +34,8 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
               applicant_uid_url,
               undertaking_url,
               iagree,
-              signature_url
+              signature_url,
+              condition_to_follow
             }
           }
       `,
@@ -84,7 +85,6 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
             id: parseInt(data.data.getRoadshowById.village_id)
         },
     });
-
 
 
 
@@ -382,9 +382,79 @@ const RoadshowView: React.FC = (): JSX.Element => {
 
 
 
+    const [notingsbox, setNotingsBox] = useState<boolean>(false);
+    const noticeRef = useRef<HTMLTextAreaElement>(null);
+
+
+    useEffect(() => {
+        if (noticeRef) { noticeRef!.current!.value = (from_data.condition_to_follow.replace(/\\n/g, "\n") ?? "") };
+    }, []);
+
+    const sendnotingpint = async (): Promise<boolean> => {
+
+        if (noticeRef!.current!.value == null || noticeRef!.current!.value == undefined || noticeRef!.current!.value == "") {
+            toast.error("Enter some noting points...", { theme: "light" });
+            return false;
+        }
+
+        const data = await ApiCall({
+            query: `
+            mutation updateRoadshowById($updateRoadshowInput:UpdateRoadshowInput!){
+                updateRoadshowById(updateRoadshowInput:$updateRoadshowInput){
+                  id
+                }
+              }
+            `,
+            veriables: {
+                updateRoadshowInput: {
+                    id: Number(from_data.id),
+                    condition_to_follow: noticeRef!.current!.value.replace(/\n/g, "\\n"),
+                }
+            },
+        });
+        if (!data.status) {
+            setNotingsBox(val => false)
+            toast.error(data.message, { theme: "light" });
+        } else {
+            setNotingsBox(val => false)
+            setForwardBox(val => true);
+        }
+
+
+        return false;
+    }
+
+
 
     return (
         <>
+            {/* notings box start here */}
+            <div className={`fixed top-0 left-0 bg-black bg-opacity-20 min-h-screen w-full  z-50 ${notingsbox ? "grid place-items-center" : "hidden"}`}>
+                <div className="bg-white p-4 rounded-md w-80">
+                    <h3 className="text-2xl text-center font-semibold">Notice Points</h3>
+                    <div className="w-full h-[2px] bg-gray-800 my-4"></div>
+                    <textarea
+                        ref={noticeRef}
+                        placeholder="Information Needed"
+                        className=" w-full border-2 border-gray-600 bg-transparent outline-none fill-none text-slate-800 p-2 h-28 resize-none"
+                    ></textarea>
+                    <div className="flex flex-wrap gap-6 mt-4">
+                        <button
+                            onClick={sendnotingpint}
+                            className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium grow"
+                        >
+                            Send
+                        </button>
+                        <button
+                            onClick={() => setNotingsBox(val => false)}
+                            className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-rose-500 text-center rounded-md font-medium grow"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {/* notings box end here */}
             {/* reject box start here */}
             <div className={`fixed top-0 left-0 bg-black bg-opacity-20 min-h-screen w-full  z-50 ${rejectbox ? "grid place-items-center" : "hidden"}`}>
                 <div className="bg-white p-4 rounded-md w-80">
@@ -464,7 +534,7 @@ const RoadshowView: React.FC = (): JSX.Element => {
             {/* forward box start here */}
             <div className={`fixed top-0 left-0 bg-black bg-opacity-20 min-h-screen w-full  z-50 ${forwardbox ? "grid place-items-center" : "hidden"}`}>
                 <div className="bg-white p-4 rounded-md w-80">
-                    <h3 className="text-2xl text-center font-semibold">Forward to Suptd</h3>
+                    <h3 className="text-2xl text-center font-semibold">{nextdata.title}</h3>
                     <textarea
                         ref={forwardRef}
                         placeholder="Information Needed"
@@ -810,6 +880,7 @@ const RoadshowView: React.FC = (): JSX.Element => {
                                                 touserid: 6,
                                                 querystatus: "INPROCESS"
                                             }));
+                                            console.log(nextdata);
                                         }}
                                         className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
                                     >
@@ -872,7 +943,8 @@ const RoadshowView: React.FC = (): JSX.Element => {
                                 {common.form_status == 75 && user.id == 4 ?
                                     <button
                                         onClick={() => {
-                                            setForwardBox(val => true);
+                                            setNotingsBox(val => true);
+                                            // setForwardBox(val => true);
                                             setNextData(val => ({
                                                 title: "Forward to SHO",
                                                 formstatus: 100,
@@ -897,7 +969,8 @@ const RoadshowView: React.FC = (): JSX.Element => {
                                 {common.form_status == 100 && user.id == 8 ?
                                     <button
                                         onClick={() => {
-                                            setForwardBox(val => true);
+                                            setNotingsBox(val => true);
+                                            // setForwardBox(val => true);
                                             setNextData(val => ({
                                                 title: "Reply to Dy.Collector",
                                                 formstatus: 125,
@@ -922,7 +995,8 @@ const RoadshowView: React.FC = (): JSX.Element => {
                                 {common.form_status == 125 && user.id == 4 ?
                                     <button
                                         onClick={() => {
-                                            setForwardBox(val => true);
+                                            setNotingsBox(val => true);
+                                            // setForwardBox(val => true);
                                             setNextData(val => ({
                                                 title: "Forward to Collector",
                                                 formstatus: 150,

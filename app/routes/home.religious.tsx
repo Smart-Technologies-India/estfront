@@ -7,6 +7,9 @@ import { LoaderArgs, LoaderFunction, json } from "@remix-run/node";
 import { userPrefs } from "~/cookies";
 import { z } from "zod";
 import { checkUID } from "~/utils";
+import dayjs from "dayjs";
+import { DatePicker } from "antd";
+const { RangePicker } = DatePicker;
 
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
     const cookieHeader = props.request.headers.get("Cookie");
@@ -47,8 +50,10 @@ const Religious: React.FC = (): JSX.Element => {
     const villageRef = useRef<HTMLSelectElement>(null);
     const [village, setVillage] = useState<any[]>([]);
 
-    const from_dateRef = useRef<HTMLInputElement>(null);
-    const to_dateRef = useRef<HTMLInputElement>(null);
+    // const from_dateRef = useRef<HTMLInputElement>(null);
+    // const to_dateRef = useRef<HTMLInputElement>(null);
+    const [dates, setDates] = useState<string[]>([]);
+
 
     const event_nameRef = useRef<HTMLInputElement>(null);
     const event_addressRef = useRef<HTMLTextAreaElement>(null);
@@ -177,8 +182,8 @@ const Religious: React.FC = (): JSX.Element => {
             email: emailRef!.current!.value,
             user_uid: uidRef!.current!.value,
             village_id: parseInt(villageRef!.current!.value),
-            from_date: new Date(from_dateRef!.current!.value),
-            to_date: new Date(to_dateRef!.current!.value),
+            from_date: parseDateString(dates[0]),
+            to_date: parseDateString(dates[1]),
             iagree: isChecked ? "YES" : "NO",
             event_name: event_nameRef!.current!.value,
             event_address: event_addressRef!.current!.value,
@@ -186,7 +191,7 @@ const Religious: React.FC = (): JSX.Element => {
             route_info: route_infoRef!.current!.value,
         };
 
-        {/*--------------------- Karan start here ------------------------- */ }
+
         const parsed = ReligiousScheme.safeParse(religiousScheme);
         if (parsed.success) {
 
@@ -253,7 +258,32 @@ const Religious: React.FC = (): JSX.Element => {
             }
         } else { toast.error(parsed.error.errors[0].message, { theme: "light" }); }
     }
-    {/*--------------------- karan end here ------------------------- */ }
+
+
+    const handleDateChange = (values: any, datestring: any) => {
+        setDates(datestring);
+    };
+
+    const disabledDate = (current: any) => {
+
+        const currentDate = dayjs();
+
+        return current && (current < currentDate.startOf('day'));
+    };
+    const parseDateString = (dateString: string): Date => {
+        const dateParts = dateString.split("-");
+
+        if (dateParts.length === 3) {
+            const year = parseInt(dateParts[2]);
+            const month = parseInt(dateParts[1]) - 1;
+            const day = parseInt(dateParts[0]);
+
+            if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
+                return new Date(year, month, day);
+            }
+        }
+        return new Date(); // Return null if the date string is not valid
+    }
 
     return (
         <>
@@ -401,18 +431,22 @@ const Religious: React.FC = (): JSX.Element => {
                 </div>
                 <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
                     <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
-                        <span className="mr-2">3.4</span> Event From Date
+                        <span className="mr-2">3.4</span> Event From Date to To Date
                     </div>
                     <div className="flex-none lg:flex-1 w-full lg:w-auto">
-                        <input
+                        <RangePicker onChange={handleDateChange}
+                            disabledDate={disabledDate}
+                            format={"DD-MM-YYYY"}
+                        ></RangePicker>
+                        {/* <input
                             type="date"
                             ref={from_dateRef}
                             min={new Date().toISOString().split('T')[0]}
                             className=" w-full border-2 border-gray-600 bg-transparent outline-none fill-none text-slate-800 p-2"
-                        />
+                        /> */}
                     </div>
                 </div>
-                <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
+                {/* <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
                     <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
                         <span className="mr-2">3.5</span> Event To Date
                     </div>
@@ -424,7 +458,7 @@ const Religious: React.FC = (): JSX.Element => {
                             className=" w-full border-2 border-gray-600 bg-transparent outline-none fill-none text-slate-800 p-2"
                         />
                     </div>
-                </div>
+                </div> */}
 
                 <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
                     <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
