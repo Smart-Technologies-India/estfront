@@ -378,7 +378,7 @@ const MarriageView: React.FC = (): JSX.Element => {
         }
     }
 
- 
+
 
 
 
@@ -514,13 +514,13 @@ const MarriageView: React.FC = (): JSX.Element => {
             </div>
             {/* forward box end here */}
             <div className="bg-white rounded-md shadow-lg p-4 my-4 w-full">
-                <h1 className="text-gray-800 text-3xl font-semibold text-center">Marriage Information</h1>
+                <h1 className="text-gray-800 text-3xl font-semibold text-center">Marriage Permission</h1>
                 <div className="w-full flex gap-4 my-4">
                     <div className="grow bg-gray-700 h-[2px]"></div>
                     <div className="w-10 bg-gray-500 h-[3px]"></div>
                     <div className="grow bg-gray-700 h-[2px]"></div>
                 </div>
-                <p className="text-center font-semibold text-xl text-gray-800"> SUBJECT  :  Request for Obtaining Marriage Information. </p>
+                <p className="text-center font-semibold text-xl text-gray-800"> SUBJECT  :  Request for Obtaining Marriage Permission. </p>
 
 
                 {/*--------------------- section 1 start here ------------------------- */}
@@ -756,14 +756,15 @@ const MarriageView: React.FC = (): JSX.Element => {
                 {/*--------------------- section 5 end here ------------------------- */}
                 {isSubmited ?
                     user.id == from_data.userId ?
-                        <>
-                            <Link
-                                to={`/marriagepdf/${from_data.id}`}
-                                className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
-                            >
-                                Download Certificate
-                            </Link>
-                        </>
+                        common.form_status == 175 ?
+                            <>
+                                <Link
+                                    to={`/marriagepdf/${from_data.id}`}
+                                    className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                                >
+                                    Download Certificate
+                                </Link>
+                            </> : null
                         :
                         <>
                             <div className="flex flex-wrap gap-6 mt-4">

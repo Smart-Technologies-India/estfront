@@ -386,7 +386,7 @@ const ReligiousView: React.FC = (): JSX.Element => {
 
 
     useEffect(() => {
-        if (noticeRef) { noticeRef!.current!.value = (from_data.condition_to_follow.replace(/\\n/g, "\n") ?? "") };
+        if (noticeRef) { noticeRef!.current!.value = (from_data.condition_to_follow ?? "".replace(/\\n/g, "\n") ?? "") };
     }, []);
 
     const sendnotingpint = async (): Promise<boolean> => {
@@ -778,8 +778,9 @@ const ReligiousView: React.FC = (): JSX.Element => {
                 <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
                     <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
                         <span className="mr-2">4.4</span> Undertaking
+
                         <p className="text-rose-500 text-sm">
-                            ( Maximum Upload Size 2MB & Allowed Format JPG / PDF / PNG )</p>
+                            ( Maximum Upload Size 2MB & Allowed Format JPG / PDF / PNG )    </p>
                     </div>
                     <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
                         <a target="_blank"
@@ -844,12 +845,13 @@ const ReligiousView: React.FC = (): JSX.Element => {
                 {/*--------------------- section 5 end here ------------------------- */}
                 {isSubmited ?
                     user.id == from_data.userId ?
-                        <Link
-                            to={`/religiouspdf/${from_data.id}`}
-                            className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
-                        >
-                            Download Certificate
-                        </Link>
+                        common.form_status == 225 ?
+                            <Link
+                                to={`/religiouspdf/${from_data.id}`}
+                                className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                            >
+                                Download Certificate
+                            </Link> : null
                         :
                         <>
                             <div className="flex flex-wrap gap-6 mt-4">

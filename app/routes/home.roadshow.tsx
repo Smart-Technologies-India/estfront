@@ -1,6 +1,6 @@
 import { Link, useLoaderData, useNavigate } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
-import { Fa6SolidFileLines, Fa6SolidLink } from "~/components/icons/icons";
+import { Fa6SolidDownload, Fa6SolidFileLines, Fa6SolidLink } from "~/components/icons/icons";
 import { ApiCall, UploadFile } from "~/services/api";
 import { toast } from "react-toastify";
 import { LoaderArgs, LoaderFunction, json } from "@remix-run/node";
@@ -289,7 +289,7 @@ const Roadshow: React.FC = (): JSX.Element => {
 
     return (
         <>
-        
+
             <div className="bg-white rounded-md shadow-lg p-4 my-4 w-full">
                 <h1 className="text-gray-800 text-3xl font-semibold text-center">Roadshow Permission</h1>
                 <div className="w-full flex gap-4 my-4">
@@ -582,6 +582,7 @@ const Roadshow: React.FC = (): JSX.Element => {
                 <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
                     <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
                         <span className="mr-2">4.4</span> Undertaking
+                        <a href="/undertaking_establish.pdf" download className="text-blue-500 flex gap-2 items-center"> <Fa6SolidDownload className="text-lg" /> <p> Click to Download Format</p></a>
                         <p className="text-rose-500 text-sm">
                             ( Maximum Upload Size 2MB & Allowed Format JPG / PDF / PNG )</p>
                     </div>

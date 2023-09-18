@@ -123,6 +123,15 @@ const search = () => {
         }
     }
 
+    const handleInputChange = () => {
+        if (fromRef.current) {
+            // Remove any non-numeric characters from the input
+            const numericValue = fromRef.current.value.replace(/[^0-9]/g, '');
+            // Update the input value with the filtered numeric value
+            fromRef.current.value = numericValue;
+        }
+    };
+
     return (
         <>
             <div className="bg-white rounded-md shadow-lg p-4 my-4 w-full">
@@ -152,6 +161,7 @@ const search = () => {
                         </div>
                         <input
                             ref={fromRef}
+                            onChange={handleInputChange}
                             placeholder="Case Number"
                             className="rounded-md bg-[#eeeeee] w-full outline-none fill-none text-slate-800 p-2 mt-2"
                         />

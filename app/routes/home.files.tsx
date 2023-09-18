@@ -151,11 +151,10 @@ const Dashboard: React.FC = (): JSX.Element => {
     return (
         <>
             <div className="bg-white rounded-md shadow-lg p-4 my-4 mb-10">
-
                 <div className="flex items-center gap-2">
                     <h1 className="text-gray-800 text-3xl font-semibold text-center">Dashboard</h1>
                     <div className="grow"></div>
-                    {
+                    {user.role == "USER" ? null :
                         isSearch ?
                             <>
                                 <div

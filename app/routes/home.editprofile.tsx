@@ -118,7 +118,7 @@ const EditProfile = () => {
             if (!data.status) {
                 toast.error(data.message, { theme: "light" });
             } else {
-                toast.success("User Date updated successfully", { theme: "light" });
+                toast.success("User Data updated successfully", { theme: "light" });
                 await init();
             }
         } else {

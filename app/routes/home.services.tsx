@@ -11,9 +11,9 @@ const Services: React.FC = (): JSX.Element => {
                     <div className="grow bg-gray-700 h-[2px]"></div>
                 </div>
                 <div className="flex gap-6 flex-wrap justify-center mt-6">
-                    <ServiceCard title="Marriage Applicaton" description="File your marriage application online from the department. Users have to fill this online applicaton form for availing this service" apply="/home/marriage/" view="/home" />
-                    <ServiceCard title="RoadShow Applicaton" description="File your roadshow application online from the department. Users have to fill this online applicaton form for availing this service" apply="/home/roadshow/" view="/home" />
-                    <ServiceCard title="Religious Applicaton" description="File your religious application online from the department. Users have to fill this online applicaton form for availing this service" apply="/home/religious" view="/home" />
+                    <ServiceCard title="Marriage Applicaton" description="Users are required to fill out this online application form to avail of the Marriage Permission service from the department. Your application will be reviewed by the Establishment Section, and you will be notified of the outcome via the portal." apply="/home/marriage/" view="/home" />
+                    <ServiceCard title="RoadShow Applicaton" description="Users are required to fill out this online application form to avail of the Roadshow Permission service from the department. Your application will be reviewed by the Establishment Section, and you will be notified of the outcome via the portal." apply="/home/roadshow/" view="/home" />
+                    <ServiceCard title="Religious Applicaton" description="Users are required to fill out this online application form to avail of the Religious Event Permission service from the department. Your application will be reviewed by the Establishment Section, and you will be notified of the outcome via the portal." apply="/home/religious" view="/home" />
                 </div>
             </div>
         </>

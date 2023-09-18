@@ -387,7 +387,7 @@ const RoadshowView: React.FC = (): JSX.Element => {
 
 
     useEffect(() => {
-        if (noticeRef) { noticeRef!.current!.value = (from_data.condition_to_follow.replace(/\\n/g, "\n") ?? "") };
+        if (noticeRef) { noticeRef!.current!.value = (from_data.condition_to_follow ?? "".replace(/\\n/g, "\n") ?? "") };
     }, []);
 
     const sendnotingpint = async (): Promise<boolean> => {
@@ -834,12 +834,13 @@ const RoadshowView: React.FC = (): JSX.Element => {
                 {/*--------------------- section 5 end here ------------------------- */}
                 {isSubmited ?
                     user.id == from_data.userId ?
-                        <Link
-                            to={`/roadshowpdf/${from_data.id}`}
-                            className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
-                        >
-                            Download Certificate
-                        </Link>
+                        common.form_status == 225 ?
+                            <Link
+                                to={`/roadshowpdf/${from_data.id}`}
+                                className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                            >
+                                Download Certificate
+                            </Link> : null
                         :
                         <>
                             <div className="flex flex-wrap gap-6 mt-4">

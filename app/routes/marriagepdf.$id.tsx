@@ -321,7 +321,7 @@ const MarriagePdfView = (): JSX.Element => {
 
                 <View style={styles.dividertwo}></View>
                 <View>
-                    <Text style={styles.para}>&nbsp;&nbsp;&nbsp;&nbsp; Please see the representation cited, wherein it has been requested to grant permission for a Marriage Event at {form.event_address} on {new Date(form.from_date).toJSON().slice(0, 10).split('-').reverse().join('/')} .
+                    <Text style={styles.para}>&nbsp;&nbsp;&nbsp;&nbsp; Please see the representation cited, wherein it has been requested to grant permission for a Marriage Event of {form.name}  at {form.event_address} on {new Date(form.from_date).toJSON().slice(0, 10).split('-').reverse().join('/')} .
                     </Text>
                 </View>
                 {form.query_status == "APPROVED" ?
