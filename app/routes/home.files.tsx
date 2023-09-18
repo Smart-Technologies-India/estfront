@@ -152,7 +152,7 @@ const Dashboard: React.FC = (): JSX.Element => {
         <>
             <div className="bg-white rounded-md shadow-lg p-4 my-4 mb-10">
                 <div className="flex items-center gap-2">
-                    <h1 className="text-gray-800 text-3xl font-semibold text-center">Dashboard</h1>
+                    <h1 className="text-gray-800 text-2xl font-semibold text-center">Dashboard</h1>
                     <div className="grow"></div>
                     {user.role == "USER" ? null :
                         isSearch ?
@@ -191,7 +191,7 @@ const Dashboard: React.FC = (): JSX.Element => {
                     <div className="grow bg-gray-700 h-[2px]"></div>
                 </div>
                 {(pagination.paginatedItems == undefined || pagination.paginatedItems.length == 0 || pagination.paginatedItems == null) ?
-                    <h3 className="text-2xl font-semibold text-center bg-rose-500 bg-opacity-25 rounded-md border-l-4 border-rose-500 py-2  text-rose-500">You do not have any pending forms.</h3>
+                    <h3 className="text-lg md:text-xl font-semibold text-center bg-rose-500 bg-opacity-25 rounded-md border-l-4 border-rose-500 py-2  text-rose-500">You do not have any pending forms.</h3>
                     :
                     <div className="overflow-x-scroll overflow-y-visible sm:mx-0.5 my-2">
                         <table className="min-w-full rounded-md">

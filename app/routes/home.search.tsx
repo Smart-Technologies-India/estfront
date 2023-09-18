@@ -215,7 +215,7 @@ const search = () => {
                 isSearch ?
                     <div className="bg-white rounded-md shadow-lg p-4 my-4 w-full">
                         {(searchItems == undefined || searchItems.length == 0 || searchItems == null) ?
-                            <h3 className="text-2xl font-semibold text-center bg-rose-500 bg-opacity-25 rounded-md border-l-4 border-rose-500 py-2  text-rose-500">You do not have any pending forms.</h3>
+                            <h3 className="text-lg md:text-xl font-semibold text-center bg-rose-500 bg-opacity-25 rounded-md border-l-4 border-rose-500 py-2  text-rose-500">You do not have any pending forms.</h3>
                             :
                             <>
                                 {/* deparment section */}

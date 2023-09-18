@@ -410,7 +410,7 @@ const ReligiousPdfView = (): JSX.Element => {
                 </View> */}
 
 
-                <View style={styles.flexbox}>
+                <View style={styles.flexbox} fixed>
                     <View style={styles.flexbox1}>
                     </View>
                     <View style={styles.flexbox2}>

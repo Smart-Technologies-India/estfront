@@ -387,7 +387,9 @@ const RoadshowView: React.FC = (): JSX.Element => {
 
 
     useEffect(() => {
-        if (noticeRef) { noticeRef!.current!.value = (from_data.condition_to_follow ?? "".replace(/\\n/g, "\n") ?? "") };
+        if (noticeRef && from_data.condition_to_follow) {
+            noticeRef!.current!.value = (from_data.condition_to_follow.replace(/\\n/g, "\n") ?? "");
+        };
     }, []);
 
     const sendnotingpint = async (): Promise<boolean> => {
@@ -855,7 +857,7 @@ const RoadshowView: React.FC = (): JSX.Element => {
                                 >
                                     Query
                                 </button>
-                                {common.form_status == 1 ?
+                                {common.form_status == 1 && common.form_status == 50 ?
                                     <button
                                         onClick={() => { setRejectid(val => common.id); setRejectBox(true); }}
                                         className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-rose-500 text-center rounded-md font-medium"

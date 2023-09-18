@@ -379,7 +379,7 @@ const DashBoard = (): JSX.Element => {
     return (
         <>
             <div className="bg-white rounded-md shadow-lg px-8 py-4 my-4 mb-10">
-                <h1 className="text-gray-800 text-3xl font-semibold text-center">Dashboard</h1>
+                <h1 className="text-gray-800 text-2xl font-semibold text-center">Dashboard</h1>
                 <div className="w-full flex gap-4 my-4">
                     <div className="grow bg-gray-700 h-[2px]"></div>
                     <div className="w-10 bg-gray-500 h-[3px]"></div>

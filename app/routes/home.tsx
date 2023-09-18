@@ -6,6 +6,7 @@ import { CarbonEdit, CilCameraControl, Fa6RegularStarHalfStroke, Fa6SolidArrowsU
 import { userPrefs } from "~/cookies";
 import { ApiCall } from "~/services/api";
 import sideBarStore, { SideBarTabs } from "~/state/sidebar";
+import { longtext } from "~/utils";
 
 
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
@@ -76,7 +77,7 @@ const Home: React.FC = (): JSX.Element => {
                                 <img
                                     src="/images/logo.png"
                                     alt="logo"
-                                    className="w-80 md:w-40 inline-block"
+                                    className="w-40 md:w-40 inline-block"
                                 />
                             </div>
                             <div className="flex flex-col grow">
@@ -239,7 +240,7 @@ const Home: React.FC = (): JSX.Element => {
                                 </button>
                                 <div
                                     onClick={() => changeMobile(false)}
-                                    className={`md:hidden flex gap-2 items-center my-1 b  py-1 px-2 rounded-md hover:bg-rose-500 hover:bg-opacity-10 hover:text-rose-500 text-gray-900 cursor-pointer`}
+                                    className={`md:hidden flex gap-2 items-center my-1 b  py-1 px-2 rounded-md bg-rose-500 text-white cursor-pointer`}
                                 >
                                     <Fa6SolidXmark></Fa6SolidXmark>
                                     <p className="text-xl">CLOSE</p>
@@ -306,7 +307,7 @@ const TopNavBar = (props: TopNavBarProps) => {
             </Link>
             <div className="text-center text-gray-900 text-2xl hidden md:block">Home</div>
             <div className="grow"></div>
-            <div className="text-gray-800 flex gap-2 items-center">
+            <div className="hidden md:flex text-gray-800 gap-2 items-center">
                 <Fa6SolidCalendarDays></Fa6SolidCalendarDays>
                 <p>
                     {new Date().toDateString()}
@@ -317,8 +318,8 @@ const TopNavBar = (props: TopNavBarProps) => {
                 <div className="shrink-0 rounded-full w-10 h-10 bg-indigo-500 grid place-items-center">
                     {props.name.toString().slice(0, 1).toUpperCase()}
                 </div>
-                <div className="text-gray-900 font-medium text-2xl text-center cursor-pointer">
-                    {props.name}
+                <div className="text-gray-900 font-medium text-lg  md:text-2xl text-center cursor-pointer">
+                    {longtext(props.name, 12)}
                 </div>
             </div>
         </div>
@@ -328,7 +329,7 @@ const TopNavBar = (props: TopNavBarProps) => {
 const Footer = () => {
     const year = new Date().getFullYear();
     return (
-        <div className="absolute bottom-0 w-full h-14 bg-white font-semibold text-center grid place-items-center text-gray-800 text-xl shadow-xl">
+        <div className="absolute bottom-0 w-full h-14 bg-white font-semibold text-center grid place-items-center text-gray-800 text-lg md:text-xl shadow-xl">
             &copy; {year} ESTABLISHMENT SECTION - All rights reserved.
         </div>
     );

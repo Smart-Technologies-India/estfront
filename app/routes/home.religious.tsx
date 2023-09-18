@@ -288,13 +288,13 @@ const Religious: React.FC = (): JSX.Element => {
     return (
         <>
             <div className="bg-white rounded-md shadow-lg p-4 my-4 w-full">
-                <h1 className="text-gray-800 text-3xl font-semibold text-center">Religious Permission</h1>
+                <h1 className="text-gray-800 text-xl md:text-3xl font-semibold text-center">Religious Permission</h1>
                 <div className="w-full flex gap-4 my-4">
                     <div className="grow bg-gray-700 h-[2px]"></div>
                     <div className="w-10 bg-gray-500 h-[3px]"></div>
                     <div className="grow bg-gray-700 h-[2px]"></div>
                 </div>
-                <p className="text-center font-semibold text-xl text-gray-800"> SUBJECT  :  Request for Obtaining Religious Permission. </p>
+                <p className="text-center font-semibold text-lg md:text-xl text-gray-800"> Subject  :  Request for Obtaining Religious Permission. </p>
 
 
                 {/*--------------------- section 1 start here ------------------------- */}
