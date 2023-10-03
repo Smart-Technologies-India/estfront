@@ -18,16 +18,16 @@ const Header = () => {
                 </header>
             </div>
 
-            <div className="border-y-2 border-gray-500">
-                <div className="flex items-center py-1 gap-2 mx-2 md:mx-auto md:w-9/12 px-4">
-                    <Link className="text-lg font-medium text-black px-2" to="/" >Home</Link>
-                    <Link className="text-lg font-medium text-black px-2" to="/about" >About</Link>
-                    <Link className="text-lg font-medium text-black px-2" to="/home/services" >Marriage</Link>
-                    <Link className="text-lg font-medium text-black px-2" to="/home/services" >Roadshow</Link>
-                    <Link className="text-lg font-medium text-black px-2" to="/home/services" >Religious</Link>
+            <div className="bg-[#eeeeee]">
+                <div className="flex items-center py-4 gap-2 mx-2 md:mx-auto md:w-9/12 px-4">
+                    <Link className="roboto text-2xl hover:text-[#c30734] font-medium text-gray-800 px-2" to="/" >Home</Link>
+                    <Link className="roboto text-2xl hover:text-[#c30734] font-medium text-gray-800 px-2" to="/about" >About</Link>
+                    <Link className="roboto text-2xl hover:text-[#c30734] font-medium text-gray-800 px-2" to="/home/services" >Marriage</Link>
+                    <Link className="roboto text-2xl hover:text-[#c30734] font-medium text-gray-800 px-2" to="/home/services" >Roadshow</Link>
+                    <Link className="roboto text-2xl hover:text-[#c30734] font-medium text-gray-800 px-2" to="/home/services" >Religious</Link>
                     <div className="grow"></div>
-                    <Link className="text-lg font-medium text-white px-2 bg-indigo-500 rounded" to="/mobilelogin" >Login</Link>
-                    <Link className="text-lg font-medium text-white px-2 bg-indigo-500 rounded" to="/login" >Staff Login</Link>
+                    <Link className="roboto text-xl font-medium text-white px-4 bg-cyan-500 rounded-md py-1" to="/mobilelogin" >Login</Link>
+                    <Link className="roboto text-xl font-medium text-white px-2 bg-indigo-500 rounded-md py-1" to="/login" >Staff Login</Link>
                 </div>
             </div>
             <div className="w-full grid grid-cols-8">

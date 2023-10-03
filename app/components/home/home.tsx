@@ -1,54 +1,59 @@
+import { Fa6SolidPeopleGroup, GameIconsVillage, MedicalIconIHealthEducation, TablerDimensions } from "../icons/icons";
+
 const HomeSection = () => {
     return (
         <>
             <section>
                 <div className="w-full my-6">
-                    <div className="flex items-start justify-center py-1 gap-2 mx-2 md:mx-auto md:w-9/12 px-4">
-                        <div className="w-64 shrink-0">
-                            <h1 className="font-semibold text-xl text-black mb-4 mt-4">At a Glance</h1>
-                            <ol className="list-disc">
-                                <li>
-                                    <p className="font-semibold text-sm text-black my-2">Daman Area : <span className="font-normal">71.00 sq. km</span></p>
-                                </li>
-                                <li>
-                                    <p className="font-semibold text-sm text-black my-2">Daman Populaction : <span className="font-normal">1,91,173</span> </p>
-                                </li>
-                                <li>
-                                    <p className="font-semibold text-sm text-black my-2">Daman Village : <span className="font-normal">72</span></p>
-                                </li>
-                                <li>
-                                    <p className="font-semibold text-sm text-black my-2">Daman Literacy Rate : <span className="font-normal">88.06%</span></p>
-                                </li>
-                                <li>
-                                    <p className="font-semibold text-sm text-black my-2">Pin code : <span className="font-normal">Moti Daman-396220, Nani Daman-396210</span></p>
-                                </li>
-                            </ol>
-                        </div>
-                        <div className="grow bg-[#eeeeee] pl-16 px-4 py-4">
-                            <h1 className="font-semibold text-xl text-black mb-4">Latest News</h1>
-                            <ol className="list-disc">
-                                <li>Home Department: ORDER – regarding re-designated as CPIO and First Appellate Authority under the RTI Act, 2005 in respect of the Department of Law & Justice.</li>
-                                <li>Home Department: Order regarding officers/officials has been re-designated</li>
-                                <li>राजभाषा विभाग: हिन्दी पखवाड़ा- 2023 के दौरान आयोजित प्रतियोगिताओं में कर्मचारियों को नामित करने के संबंध में</li>
-                                <li>Department of Labour & Employment, Daman: Minimum rates of wages payable to the different categories of employees</li>
-                            </ol>
-                        </div>
-                        <div className="w-64 shrink-0">
-                            <div className="border flex gap-2 p-4 items-center">
-                                <img src="/images/profile1.jpg" alt="error" className="w-14 h-14 object-cover object-center" />
+                    <div className="flex items-center justify-center py-1 gap-2 mx-2 md:mx-auto md:w-9/12 px-4">
+                        <div className="w-96 shrink-0">
+                            <div className="border flex gap-4 p-4">
+                                <img src="/images/profile1.jpg" alt="error" className="w-24 h-24 object-cover object-center shrink-0" />
                                 <div>
-                                    <h1 className="font-medium text-sm text-black">Hon'ble Administrator</h1>
-                                    <p className="font-normal text-xs text-black">Shri. Praful Patel</p>
+                                    <h1 className="font-normal text-xl text-gray-800">Hon'ble Administrator</h1>
+                                    <p className="text-gray-600 py-2 text-lg">Shri. Praful Patel</p>
                                 </div>
                             </div>
-                            <div className="border flex gap-2 p-4 my-4 items-center">
-                                <img src="/images/profile2.png" alt="error" className="w-14 h-14 object-cover object-center" />
+                            <div className="border flex gap-4 p-4 my-4">
+                                <img src="/images/profile2.png" alt="error" className="w-24 h-24 object-cover object-center shrink-0" />
                                 <div>
-                                    <h1 className="font-medium text-sm text-black">Advisor to the Hon’ble Administrator</h1>
-                                    <p className="font-normal text-xs text-black">Shri Amit Singla , IAS</p>
+                                    <h1 className="font-normal text-xl text-gray-800">Advisor to the Hon’ble Administrator</h1>
+                                    <p className="text-gray-600 py-2 text-lg">Shri Amit Singla , IAS</p>
                                 </div>
                             </div>
                         </div>
+                        <div className="grow pl-16 px-4 py-4">
+                            <h1 className="font-normal text-3xl text-gray-800 mb-4">About Our City</h1>
+                            <p className="text-gray-600 py-2 text-xl">Daman is a city in the union territory of Daman and Diu, on India's west coast. In the north, St. Jerome Fort, also known as Nani Daman Fort, recalls the area's Portuguese colonial past. </p>
+                            <p className="text-gray-600 py-2 text-xl">Across the Daman Ganga River, Moti Daman Fort holds the ruins of a Dominican monastery, plus the Basilica of Bom Jesus Church, known for its gilt altarpiece. Close by, the Chapel of Our Lady of Rosary features intricate carvings.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section className="bg-[#eeeeee] w-full p-10 md:p-20">
+                <h1 className="text-center font-normal roboto text-4xl">City Facts and Stats</h1>
+                <div className="flex justify-between gap-6 mt-14">
+                    <div className="grid place-items-center">
+                        <TablerDimensions className="text-6xl text-[#c30734]"></TablerDimensions>
+                        <h1 className="text-center font-semibold roboto text-5xl my-3">70 sq. km</h1>
+                        <p className="text-gray-600 py-2 text-xl mt-4">Land Area</p>
+                    </div>
+                    <div className="grid place-items-center">
+                        <Fa6SolidPeopleGroup className="text-6xl text-[#c30734]"></Fa6SolidPeopleGroup>
+                        <h1 className="text-center font-semibold roboto text-5xl my-3">1,91,173</h1>
+                        <p className="text-gray-600 py-2 text-xl">Population</p>
+                    </div>
+                    <div className="grid place-items-center">
+                        <GameIconsVillage className="text-6xl text-[#c30734]"></GameIconsVillage>
+                        <h1 className="text-center font-semibold roboto text-5xl my-3">72</h1>
+                        <p className="text-gray-600 py-2 text-xl">No. of Villages</p>
+                    </div>
+                    <div className="grid place-items-center">
+                        <MedicalIconIHealthEducation className="text-6xl text-[#c30734]"></MedicalIconIHealthEducation>
+                        <h1 className="text-center font-semibold roboto text-5xl my-3">88.06%</h1>
+                        <p className="text-gray-600 py-2 text-xl">Literacy Rate</p>
                     </div>
                 </div>
             </section>

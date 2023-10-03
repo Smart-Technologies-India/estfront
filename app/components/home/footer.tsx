@@ -1,49 +1,40 @@
 import { Link } from "@remix-run/react";
+import { Fa6SolidDownLeftAndUpRightToCenter, Fa6SolidFireExtinguisher, Fa6SolidHouseChimneyMedical, Fa6SolidPhone } from "../icons/icons";
 
 const Footer = () => {
     return (
         <>
+            <section className="bg-[#fefefe] p-10 sm:p-20">
+                <div className="flex xl:items-center items-start justify-between gap-6 flex-col xl:flex-row">
+                    <div className="shrink-0">
+                        <h1 className="text-black font-medium text-left text-2xl font-sans mt-4">Location</h1>
+                        <p className="text-black font-medium text-left text-lg font-sans mt-2">Office of the Collector & District Magistrate <br />Bhitwadi Road, Municipal Market, Dholar,<br /> Moti Daman, Daman,<br />Daman and Diu and Dadra and Nagar Haveli  396210</p>
+                    </div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14958.90673931113!2d72.8328819!3d20.394156!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be0d094bbefa247%3A0x147da831799ce416!2sOffice%20of%20the%20Collector%20%26%20District%20Magistrate%2C%20Daman!5e0!3m2!1sen!2sin!4v1696066672958!5m2!1sen!2sin" width="600" height="450" className="shrink-0 border-none rounded-xl scale-50 origin-top-left sm:scale-100" loading="lazy"></iframe>
+                </div>
+            </section>
 
-            <div className="bg-[#03125E] w-full gap-8 py-8 flex items-center justify-center px-2 md:px-8">
-                <div className="grid place-items-center">
-                    <div>
-                        <p className="text-left text-3xl font-normal text-white my-2">Map</p>
-                        <img src="/banner/3.jpg" alt="error" className=" mx-auto w-96 h-96 object-cover object-center" />
+            <section className="bg-[#eeeeee] w-full p-10 md:p-20">
+                <h1 className="text-center font-normal roboto text-4xl">Helpline Number</h1>
+                <div className="flex justify-evenly gap-6 mt-12">
+                    <div className="grid place-items-center">
+                        <Fa6SolidPhone className="text-3xl text-[#c30734]"></Fa6SolidPhone>
+                        <p className="text-gray-600 py-2 text-xl mt-4">Police : 100</p>
+                    </div>
+                    <div className="grid place-items-center">
+                        <Fa6SolidFireExtinguisher className="text-3xl text-[#c30734]"></Fa6SolidFireExtinguisher>
+                        <p className="text-gray-600 py-2 text-xl">Fire Station : 101</p>
+                    </div>
+                    <div className="grid place-items-center">
+                        <Fa6SolidHouseChimneyMedical className="text-3xl text-[#c30734]"></Fa6SolidHouseChimneyMedical>
+                        <p className="text-gray-600 py-2 text-xl">AMBULANCE : 108</p>
+                    </div>
+                    <div className="grid place-items-center">
+                        <Fa6SolidDownLeftAndUpRightToCenter className="text-3xl text-[#c30734]"></Fa6SolidDownLeftAndUpRightToCenter>
+                        <p className="text-gray-600 py-2 text-xl">EMERGENCY : 112</p>
                     </div>
                 </div>
-                <div className="grid place-items-center">
-                    <div>
-                        <p className="text-left text-3xl font-normal text-white my-2">Helpline Number</p>
-                        <div className="grid gap-4 grid-cols-2 grid-rows-2 w-96 h-96">
-                            <div className="w-full h-full bg-[#bd3334] grid place-items-center">
-                                <div>
-                                    <p className="text-center text-2xl font-normal text-white">Police</p>
-                                    <p className="text-center text-lg font-medium text-white my-1">100</p>
-                                </div>
-                            </div>
-                            <div className="w-full h-full bg-[#bd3334]  grid place-items-center">
-                                <div>
-                                    <p className="text-center text-2xl font-normal text-white">Fire Station</p>
-                                    <p className="text-center text-lg font-medium text-white my-1">101</p>
-                                </div>
-                            </div>
-                            <div className="w-full h-full bg-[#bd3334]  grid place-items-center">
-                                <div>
-                                    <p className="text-center text-2xl font-normal text-white">AMBULANCE</p>
-                                    <p className="text-center text-lg font-medium text-white my-1">108</p>
-                                </div>
-                            </div>
-                            <div className="w-full h-full bg-[#bd3334] grid place-items-center">
-                                <div>
-                                    <p className="text-center text-2xl font-normal text-white">EMERGENCY</p>
-                                    <p className="text-center text-lg font-medium text-white my-1">112</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+            </section>
             <div className="flex items-center justify-center mx-2 px-4 py-4">
                 <img src="/banner/one.png" alt="footerimage" className="w-44 h-16 object-cover object-center border-x-2" />
                 <img src="/banner/two.png" alt="footerimage" className="w-44 h-16 object-cover object-center border-x-2" />

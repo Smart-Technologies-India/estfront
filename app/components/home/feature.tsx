@@ -1,44 +1,35 @@
 const Feature = () => {
     return (
         <>
-            <section className="text-gray-600 body-font bg-gray-100">
-                <div className="container px-5 py-8 mx-auto">
-
-                    <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900 text-center py-6">Provided Features</h1>
-
-                    <div className="grid grid-items-center grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
-                        <div className="px-8 py-6  bg-white m-4 hover:shadow-lg rounded-lg hover:rounded-none transition-all">
-                            <div className=" h-40 grid place-items-center w-full">
-                                <img src="/images/marriage_permission.png" className="mb-4 w-40" alt="error" />
-                            </div>
-                            <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2 text-center">Marriage Permission</h2>
-                            <p className="leading-relaxed text-base mb-4 text-center">Get marriage permission online, Fill form,Submit Relevant Documents and get permission through Whatsapp.</p>
-
+            <section className="bg-white p-20">
+                <h1 className="text-black text-4xl font-semibold mt-10 font-sans text-center lg:text-left">Provided Features</h1>
+                <div className="flex gap-6 mt-6 flex-col lg:flex-row relative items-center justify-between">
+                    <div className="w-80 md:w-96 h-[32rem] rounded-xl relative overflow-hidden group">
+                        <img src="/images/marriage.jfif" alt="service one" className="w-full h-full absolute top-0 left-0 object-cover object-center rounded-xl" />
+                        <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-70 p-4 rounded-b-xl h-36 translate-y-36 group-hover:translate-y-0 transition-all">
+                            <h1 className="text-gray-300 text-left text-2xl font-semibold font-sans">Marriage Permission</h1>
+                            <p className="text-gray-300 text-left text-lg font-semibold font-sans">Get marriage permission online, Fill form,Submit Relevant Documents and get permission through Whatsapp. </p>
                         </div>
-                        <div className="px-8 py-6 bg-white m-4 hover:shadow-lg rounded-lg hover:rounded-none transition-all">
-                            <div className=" h-40 grid place-items-center w-full">
-                                <img src="/images/religion_permission.png" className="mb-4 w-40" alt="error" />
-                            </div>
-                            <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2  text-center">Religious Permission</h2>
-                            <p className="leading-relaxed text-base mb-4 text-center">Get religious permission online, Fill form,Submit Relevant Documents and get permission through Whatsapp.</p>
-
+                    </div>
+                    <div className="w-80 md:w-96 h-[32rem] rounded-lg relative overflow-hidden group">
+                        <img src="/images/religious_event.jpg" alt="service two" className="w-full h-full absolute top-0 left-0 object-cover object-center rounded-xl" />
+                        <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-70 p-4 rounded-b-xl h-36 translate-y-36 group-hover:translate-y-0 transition-all">
+                            <h1 className="text-gray-300 text-left text-2xl font-semibold font-sans">Religious Permission</h1>
+                            <p className="text-gray-300 text-left text-lg font-semibold font-sans">Get religious permission online, Fill form,Submit Relevant Documents and get permission through Whatsapp. </p>
                         </div>
-                        <div className="px-8 py-6 bg-white m-4 hover:shadow-lg rounded-lg hover:rounded-none transition-all">
-                            <div className=" h-40 grid place-items-center w-full">
-
-                                <img src="/images/roadshow.png" className="mb-4 w-40" alt="error" />
-                            </div>
-                            <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2 text-center">Road Show/Rally Permission</h2>
-                            <p className="leading-relaxed text-base mb-4 text-center">Get rally permission online, Fill form,Submit Relevant Documents and get permission through Whatsapp.</p>
-
+                    </div>
+                    <div className="w-80 md:w-96 h-[32rem] rounded-lg relative overflow-hidden group">
+                        <img src="/images/roadshow.jpg" alt="service three" className="w-full h-full absolute top-0 left-0 object-cover object-center rounded-xl" />
+                        <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-70 p-4 rounded-b-xl h-36 translate-y-36 group-hover:translate-y-0 transition-all">
+                            <h1 className="text-gray-300 text-left text-2xl font-semibold font-sans">Road Show/Rally Permission</h1>
+                            <p className="text-gray-300 text-left text-lg font-semibold font-sans">Get rally permission online, Fill form,Submit Relevant Documents and get permission through Whatsapp. </p>
                         </div>
-                        <div className="px-8 py-6 bg-white m-4 hover:shadow-lg rounded-lg hover:rounded-none transition-all">
-                            <div className=" h-40 grid place-items-center w-full">
-                                <img src="/images/cinema.png" className="mb-4 w-40" alt="error" />
-                            </div>
-                            <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2 text-center">Cinema Hall</h2>
-                            <p className="leading-relaxed text-base mb-4 text-center">Get cinema hall permission online, Fill form,Submit Relevant Documents and get permission through Whatsapp.</p>
-
+                    </div>
+                    <div className="w-80 md:w-96 h-[32rem] rounded-lg relative overflow-hidden group">
+                        <img src="/images/cinema.jpg" alt="service three" className="w-full h-full absolute top-0 left-0 object-cover object-center rounded-xl" />
+                        <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-70 p-4 rounded-b-xl h-36 translate-y-36 group-hover:translate-y-0 transition-all">
+                            <h1 className="text-gray-300 text-left text-2xl font-semibold font-sans">Cinema Hall</h1>
+                            <p className="text-gray-300 text-left text-lg font-semibold font-sans">Get cinema hall permission online, Fill form,Submit Relevant Documents and get permission through Whatsapp. </p>
                         </div>
                     </div>
                 </div>
