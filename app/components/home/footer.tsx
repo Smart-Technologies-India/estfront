@@ -16,7 +16,7 @@ const Footer = () => {
 
             <section className="bg-[#eeeeee] w-full p-10 md:p-20">
                 <h1 className="text-center font-normal roboto text-4xl">Helpline Number</h1>
-                <div className="flex justify-evenly gap-6 mt-12">
+                <div className="flex justify-around gap-6 mt-12 flex-wrap">
                     <div className="grid place-items-center">
                         <Fa6SolidPhone className="text-3xl text-[#c30734]"></Fa6SolidPhone>
                         <p className="text-gray-600 py-2 text-xl mt-4">Police : 100</p>
@@ -35,7 +35,7 @@ const Footer = () => {
                     </div>
                 </div>
             </section>
-            <div className="flex items-center justify-center mx-2 px-4 py-4">
+            <div className="flex items-center justify-center mx-2 px-4 py-4 flex-wrap gap-y-6">
                 <img src="/banner/one.png" alt="footerimage" className="w-44 h-16 object-cover object-center border-x-2" />
                 <img src="/banner/two.png" alt="footerimage" className="w-44 h-16 object-cover object-center border-x-2" />
                 <img src="/banner/three.png" alt="footerimage" className="w-44 h-16 object-cover object-center border-x-2" />
@@ -45,7 +45,7 @@ const Footer = () => {
             </div>
             <section className="bg-[#0c0c0c]">
                 <div className=" w-full bg-[#2a2a2a]">
-                    <div className="flex items-center justify-center py-1 gap-2 mx-2 md:mx-auto md:w-9/12 px-4">
+                    <div className="flex items-center justify-center py-1 gap-2 mx-2 md:mx-auto md:w-9/12 px-4 flex-wrap">
                         <Link className="text-lg font-normal text-white px-1" to="/" >FAQ /</Link>
                         <Link className="text-lg font-normal text-white px-1" to="/" >Website Policies /</Link>
                         <Link className="text-lg font-normal text-white px-1" to="/" >Contact Us /</Link>
@@ -62,11 +62,10 @@ const Footer = () => {
                             Ministry of Electronics & Information Technology, Government of India</p>
                         <p className="text-center text-sm font-normal text-white y-4">Last Updated <span className="font-semibold">Aug 14, 2023</span></p>
                     </div>
-                    <div className="flex items-center justify-center gap-6 mx-2 md:mx-auto md:w-9/12 px-4 py-10">
+                    <div className="flex items-center justify-center gap-6 mx-2 md:mx-auto md:w-9/12 px-4 py-10 flex-wrap">
                         <img src="/images/S3WaaS.png" alt="footerimage" className="w-44 h-16 object-cover object-center" />
                         <img src="/images/nicLogo.png" alt="footerimage" className="w-44 h-16 object-cover object-center" />
                         <img src="/images/digital-india.png" alt="footerimage" className="w-44 h-16 object-cover object-center" />
-
                     </div>
                 </div>
             </section>

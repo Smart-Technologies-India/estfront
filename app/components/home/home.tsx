@@ -5,7 +5,7 @@ const HomeSection = () => {
         <>
             <section>
                 <div className="w-full my-6">
-                    <div className="flex items-center justify-center py-1 gap-2 mx-2 md:mx-auto md:w-9/12 px-4">
+                    <div className="flex items-center justify-center py-1 gap-2 mx-2 md:mx-auto md:w-9/12 px-4 flex-col lg:flex-row">
                         <div className="w-96 shrink-0">
                             <div className="border flex gap-4 p-4">
                                 <img src="/images/profile1.jpg" alt="error" className="w-24 h-24 object-cover object-center shrink-0" />
@@ -34,7 +34,7 @@ const HomeSection = () => {
 
             <section className="bg-[#eeeeee] w-full p-10 md:p-20">
                 <h1 className="text-center font-normal roboto text-4xl">City Facts and Stats</h1>
-                <div className="flex justify-between gap-6 mt-14">
+                <div className="flex justify-between gap-6 mt-14 flex-wrap flex-col md:flex-row">
                     <div className="grid place-items-center">
                         <TablerDimensions className="text-6xl text-[#c30734]"></TablerDimensions>
                         <h1 className="text-center font-semibold roboto text-5xl my-3">70 sq. km</h1>
