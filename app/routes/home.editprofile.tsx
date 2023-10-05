@@ -1,12 +1,14 @@
 import { LoaderArgs, LoaderFunction, json } from "@remix-run/node";
-import { Link, useLoaderData, useNavigate } from "@remix-run/react";
-import { useEffect, useRef } from "react";
+import { useLoaderData } from "@remix-run/react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import { z } from "zod";
 import { CarbonUserAvatar, CilContact, CilEnvelopeClosed } from "~/components/icons/icons";
 import { userPrefs } from "~/cookies";
 import { ApiCall } from "~/services/api";
 import { checkUID } from "~/utils";
+import gsap from "gsap";
+
 
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
     const cookieHeader = props.request.headers.get("Cookie");
@@ -21,8 +23,6 @@ const EditProfile = () => {
 
     const loader = useLoaderData();
     const user = loader.user;
-
-    const navigator = useNavigate();
     const init = async () => {
 
         const userdata = await ApiCall({
@@ -126,9 +126,22 @@ const EditProfile = () => {
         }
     };
 
+
+    const editbox = useRef<HTMLDivElement>(null);
+
+    useLayoutEffect(() => {
+
+        let ctx = gsap.context(() => {
+            gsap.from(editbox.current, {
+                opacity: 0,
+                duration: 0.6,
+                x: -50,
+            });
+        });
+    }, []);
     return (
         <>
-            <div className="p-6 rounded-md shadow-md  bg-white w-80 mt-4">
+            <div className="p-6 rounded-md shadow-md  bg-white w-80 mt-4" ref={editbox}>
                 <h1 className="text-gray-800 text-xl font-bold text-center">Update User Details</h1>
                 <p className="text-left text-sm font-medium text-black mt-4">Name</p>
                 <div className="bg-[#eeeeee] flex items-center rounded-md px-2 mt-1">
@@ -172,7 +185,7 @@ const EditProfile = () => {
                     ></textarea>
                 </div>
                 <div className="flex gap-4 items-center mt-4">
-                    <button onClick={submit} className="bg-indigo-500 rounded-md py-1 text-sm text-center text-white font-semibold flex-1 inline-block">UPDATE</button>
+                    <button onClick={submit} className="bg-[#0984e3] rounded-md py-1 text-sm text-center text-white font-semibold flex-1 inline-block">UPDATE</button>
                 </div>
 
             </div>

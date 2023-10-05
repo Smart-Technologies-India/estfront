@@ -158,7 +158,7 @@ const Dashboard: React.FC = (): JSX.Element => {
                         isSearch ?
                             <>
                                 <div
-                                    className="grid place-items-center rounded-md bg-indigo-500 shadow-md h-full p-2 text-white">
+                                    className="grid place-items-center rounded-md bg-[#0984e3] shadow-md h-full p-2 text-white">
                                     Found : {department.length} result
                                 </div>
                                 <button
@@ -170,7 +170,7 @@ const Dashboard: React.FC = (): JSX.Element => {
                             :
                             isSearching ?
                                 <div
-                                    className="r rounded-md bg-indigo-500 shadow-md h-full p-2 text-white flex gap-2 items-center">
+                                    className="r rounded-md bg-[#0984e3] shadow-md h-full p-2 text-white flex gap-2 items-center">
                                     <Fa6SolidMagnifyingGlass></Fa6SolidMagnifyingGlass> Searching for text {searchRef.current?.value}
                                 </div> :
                                 <>
@@ -179,24 +179,20 @@ const Dashboard: React.FC = (): JSX.Element => {
                                     </div>
                                     <button
                                         onClick={search}
-                                        className="grid place-items-center rounded-md bg-indigo-500 shadow-md h-full p-2 text-white">
+                                        className="grid place-items-center rounded-md bg-[#0984e3] shadow-md h-full p-2 text-white">
                                         <Fa6SolidMagnifyingGlass></Fa6SolidMagnifyingGlass>
                                     </button>
                                 </>
                     }
                 </div>
-                <div className="w-full flex gap-4 my-4">
-                    <div className="grow bg-gray-700 h-[2px]"></div>
-                    <div className="w-10 bg-gray-500 h-[3px]"></div>
-                    <div className="grow bg-gray-700 h-[2px]"></div>
-                </div>
+ 
                 {(pagination.paginatedItems == undefined || pagination.paginatedItems.length == 0 || pagination.paginatedItems == null) ?
                     <h3 className="text-lg md:text-xl font-semibold text-center bg-rose-500 bg-opacity-25 rounded-md border-l-4 border-rose-500 py-2  text-rose-500">You do not have any pending forms.</h3>
                     :
                     <div className="overflow-x-scroll overflow-y-visible sm:mx-0.5 my-2">
                         <table className="min-w-full rounded-md">
                             <thead>
-                                <tr className="rounded-md bg-indigo-500 border-b border-t transition duration-300 ease-in-out hover:bg-indigo-600">
+                                <tr className="rounded-md bg-[#0984e3] border-b border-t transition duration-300 ease-in-out">
                                     <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">Form Id</th>
                                     <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">Purpose</th>
                                     <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">Applicant</th>
@@ -245,7 +241,7 @@ const Dashboard: React.FC = (): JSX.Element => {
                                                             </div>
                                                             :
                                                             <div
-                                                                className="py-1 text-white text-lg px-4 bg-indigo-500 text-center rounded-md font-medium"
+                                                                className="py-1 text-white text-lg px-4 bg-[#0984e3] text-center rounded-md font-medium"
                                                             >
                                                                 {val.query_status}
                                                             </div>
@@ -254,7 +250,7 @@ const Dashboard: React.FC = (): JSX.Element => {
                                             <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
 
                                                 <Link to={getViewLink(val.form_type, val.form_id)}
-                                                    className="py-1 w-full sm:w-auto block text-white text-lg px-4 bg-indigo-500 text-center rounded-md font-medium"
+                                                    className="py-1 w-full sm:w-auto block text-white text-lg px-4 bg-[#0984e3] text-center rounded-md font-medium"
                                                 >
                                                     VIEW
                                                 </Link>

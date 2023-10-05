@@ -88,7 +88,7 @@ const About: React.FC = (): JSX.Element => {
                     </div>
 
                 </div>
-                <div className="p-4 mx-4 bg-white rounded-md my-4 border-l-4 border-[#03125e] hover:shadow-lg">
+                {/* <div className="p-4 mx-4 bg-white rounded-md my-4 border-l-4 border-[#03125e] hover:shadow-lg">
                     <h3 className="text-black text-3xl p-1 text-justify font-medium">
                         Functions of Establishment Section
                     </h3>
@@ -166,7 +166,7 @@ const About: React.FC = (): JSX.Element => {
                         <span className="text-[#03125e] pr-2">&#x2756;</span>
                         To give permission for Movie Shooting;
                     </p>
-                </div>
+                </div> */}
             </main>
         </>
     );
