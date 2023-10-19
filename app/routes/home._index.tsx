@@ -51,8 +51,7 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
     });
 
     const processcount = await ApiCall({
-        query: `
-        query officerFileProgress{
+        query: `query officerFileProgress{
             officerFileProgress{
             MARRIAGE{
               pending,
@@ -75,8 +74,7 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
               rejected
             },
         }
-        }
-      `,
+        }`,
         veriables: {},
     });
 
@@ -95,6 +93,7 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
       `,
         veriables: {},
     });
+
 
     return json({
         filecount: filecount.data.getFileCount,
@@ -116,7 +115,6 @@ const DashBoard = (): JSX.Element => {
 
 
     villagecount.sort((a: any, b: any) => b.count - a.count);
-
     const topItems = villagecount.slice(0, 10);
     const otherCount = villagecount.slice(10).reduce((sum: any, item: any) => sum + item.count, 0);
 
@@ -139,6 +137,9 @@ const DashBoard = (): JSX.Element => {
         }
         return colors;
     };
+
+
+
 
     const topItemColors = dynamicColors(topItems.length);
     const villageData = {

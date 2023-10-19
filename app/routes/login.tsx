@@ -29,6 +29,8 @@ export default function Index() {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const nextButton = useRef<HTMLButtonElement>(null);
 
+    const [isLoading, setLoading] = useState<boolean>(false);
+
     const iref = useRef<HTMLInputElement>(null);
     const cref = useRef<HTMLInputElement>(null);
     const nref = useRef<HTMLInputElement>(null);
@@ -40,6 +42,7 @@ export default function Index() {
     const passRef = useRef<HTMLInputElement>(null);
 
     const submit = async () => {
+        setLoading(true);
         const LoginScheme = z
             .object({
                 contact: z
@@ -88,6 +91,7 @@ export default function Index() {
         } else {
             toast.error(parsed.error.errors[0].message, { theme: "light" });
         }
+        setLoading(false);
     };
 
     return (
@@ -119,11 +123,21 @@ export default function Index() {
                             className="bg-transparent outline-none border-none fill-none text-slate-800 py-2 grow"
                         />
                     </div>
-                    <button onClick={submit}
-                        className="inline-block text-center text-white bg-purple-500 py-2 px-6 text-xl font-medium rounded-md w-full mt-6"
-                    >
-                        Login
-                    </button>
+                    {
+                        isLoading ?
+                            <button
+                                className="inline-block text-center text-white bg-purple-500 py-2 px-6 text-xl font-medium rounded-md w-full mt-6"
+                            >
+                                Loading...
+                            </button>
+                            :
+                            <button onClick={submit}
+                                className="inline-block text-center text-white bg-purple-500 py-2 px-6 text-xl font-medium rounded-md w-full mt-6"
+                            >
+                                Login
+                            </button>
+                    }
+
                     <p className="text-md font-semibold text-gray-800 mt-6 text-center">Don't have an account? <Link to="/register" className="text-blue-500 cursor-pointer">Click here</Link></p>
                 </div>
             </div>

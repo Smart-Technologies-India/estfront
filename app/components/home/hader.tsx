@@ -8,7 +8,7 @@ const Header = () => {
                     <img src="/images/emb.jpg" alt="logo" className="w-16 h-20 object-contain object-center" />
                     <div className="bg-green grid place-items-center">
                         <div>
-                            <h1 className="font-medium text-2xl text-black">Establishment Section</h1>
+                            <h1 className="font-medium text-2xl text-black">Establishment Section Collectorate</h1>
                             <h1 className="font-medium text-2xl text-black">UT of Daman</h1>
                         </div>
                     </div>

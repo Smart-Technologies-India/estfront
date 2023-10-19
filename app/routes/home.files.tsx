@@ -12,7 +12,6 @@ import { ApiCall } from "~/services/api";
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
     const cookieHeader = props.request.headers.get("Cookie");
     const cookie: any = await userPrefs.parse(cookieHeader);
-
     const department = await ApiCall({
         query: `
         query filterCommon($filterCommonInput:FilterCommonInput!){
@@ -27,6 +26,7 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
                 intra_user_id,
                 inter_user_id,
                 number,
+                event_date,
                 form_status,
                 query_status,
                 form_id
@@ -61,8 +61,50 @@ const Dashboard: React.FC = (): JSX.Element => {
     const [isSearching, setIsSearching] = useState<boolean>(false);
 
     const init = () => {
-        setDepartment((val) => loader.department);
+
+        const customOrder = [
+            "NONE",
+            "QUERYRAISED",
+            "INPROCESS",
+            "SUBMIT",
+            "REJECTED",
+            "COMPLETED",
+            "CERTIFICATEGRANT",
+            "APPROVED",
+        ];
+        // loader.department.sort((a: any, b: any) => {
+        //     const statusA = customOrder.indexOf(a.query_status);
+        //     const statusB = customOrder.indexOf(b.query_status);
+        //     return statusA - statusB;
+        // });
+
+        // console.log(loader.department);
+
+        // loader.department.sort((a: any, b: any) => {
+        //     const dateA = new Date(a.event_date.split('/').reverse().join('-'));
+        //     const dateB = new Date(b.event_date.split('/').reverse().join('-'));
+
+        //     return dateA.getTime() - dateB.getTime();
+        // });
+
+
+        loader.department.sort((a: any, b: any) => {
+            const statusA = customOrder.indexOf(a.query_status);
+            const statusB = customOrder.indexOf(b.query_status);
+
+            if (statusA !== statusB) {
+                return statusA - statusB;
+            } else {
+                const dateA = new Date(a.event_date.split('/').reverse().join('-'));
+                const dateB = new Date(b.event_date.split('/').reverse().join('-'));
+
+                return dateA.getTime() - dateB.getTime();
+            }
+        });
+
+        setDepartment(loader.department);
     }
+
     useEffect(() => {
         init();
     }, []);
@@ -185,7 +227,7 @@ const Dashboard: React.FC = (): JSX.Element => {
                                 </>
                     }
                 </div>
- 
+
                 {(pagination.paginatedItems == undefined || pagination.paginatedItems.length == 0 || pagination.paginatedItems == null) ?
                     <h3 className="text-lg md:text-xl font-semibold text-center bg-rose-500 bg-opacity-25 rounded-md border-l-4 border-rose-500 py-2  text-rose-500">You do not have any pending forms.</h3>
                     :
@@ -219,7 +261,7 @@ const Dashboard: React.FC = (): JSX.Element => {
                                             </td>
                                             <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
 
-                                                {val.query_status == "REJCTED" ?
+                                                {val.query_status == "REJECTED" ?
                                                     <div
                                                         className="py-1 text-white text-lg px-4 bg-rose-500 text-center rounded-md font-medium"
                                                     >

@@ -44,7 +44,6 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
         },
     });
 
-    console.log(data);
 
 
     const submit = await ApiCall({
@@ -163,6 +162,7 @@ const ReligiousView: React.FC = (): JSX.Element => {
 
     const [querybox, setQueryBox] = useState<boolean>(false);
     const queryRef = useRef<HTMLTextAreaElement>(null);
+    const rejectRef = useRef<HTMLTextAreaElement>(null);
     const attachmentRef = useRef<HTMLInputElement>(null);
     const [attachment, setAttachment] = useState<File>();
 
@@ -356,6 +356,7 @@ const ReligiousView: React.FC = (): JSX.Element => {
     const [rejectid, setRejectid] = useState<number>(0)
 
     const reject = async (id: number) => {
+        if (rejectRef.current?.value == null || rejectRef.current?.value == "") return toast.error("Reject reason is required", { theme: "light" });
         if (rejectid == 0) return toast.error("Select the form for rejection.", { theme: "light" });
         const data = await ApiCall({
             query: `
@@ -368,17 +369,49 @@ const ReligiousView: React.FC = (): JSX.Element => {
             veriables: {
                 updateCommonInput: {
                     id: id,
-                    query_status: "REJCTED"
+                    query_status: "REJECTED"
                 }
             },
         });
 
         if (!data.status) {
-            setRejectBox(false);
             toast.error(data.message, { theme: "light" });
         } else {
-            window.location.reload();
+            const req: { [key: string]: any } = {
+                "stage": "RELIGIOUS",
+                "form_id": from_data.id,
+                "from_user_id": Number(user.id),
+                "to_user_id": from_data.userId,
+                "form_status": common.form_status,
+                "query_type": "PUBLIC",
+                "remark": rejectRef.current?.value,
+                "query_status": "SENT"
+            }
+
+            const data = await ApiCall({
+                query: `
+                mutation createQuery($createQueryInput:CreateQueryInput!){
+                    createQuery(createQueryInput:$createQueryInput){
+                      id,
+                    }
+                  }
+                `,
+                veriables: {
+                    createQueryInput: req
+                },
+            });
+
+            if (data.status) {
+                setQueryBox(val => false);
+                toast.success("Form Rejected successfully.", { theme: "light" });
+            } else {
+                toast.error(data.message, { theme: "light" });
+            }
         }
+        setRejectBox(false);
+        setTimeout(() => {
+            window.location.reload();
+        }, 1500);
     }
 
 
@@ -463,17 +496,21 @@ const ReligiousView: React.FC = (): JSX.Element => {
             <div className={`fixed top-0 left-0 bg-black bg-opacity-20 min-h-screen w-full  z-50 ${rejectbox ? "grid place-items-center" : "hidden"}`}>
                 <div className="bg-white p-4 rounded-md w-80">
                     <h3 className="text-2xl text-center font-semibold">Are you sure you want to reject?</h3>
-                    <div className="w-full h-[2px] bg-gray-800 my-4"></div>
+                    <textarea
+                        ref={rejectRef}
+                        placeholder="Reject Reason"
+                        className=" w-full border-2 border-gray-600 bg-transparent outline-none fill-none text-slate-800 p-2 h-28 resize-none my-2"
+                    ></textarea>
                     <div className="flex flex-wrap gap-6 mt-4">
                         <button
                             onClick={() => reject(rejectid)}
-                            className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium grow"
+                            className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-rose-500 text-center rounded-md font-medium grow"
                         >
-                            Rejact
+                            Reject
                         </button>
                         <button
                             onClick={() => setRejectBox(val => false)}
-                            className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-rose-500 text-center rounded-md font-medium grow"
+                            className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-blue-500 text-center rounded-md font-medium grow"
                         >
                             Close
                         </button>
@@ -852,254 +889,260 @@ const ReligiousView: React.FC = (): JSX.Element => {
                                 >
                                     Close
                                 </Link>
-                                <button
-                                    onClick={() => setQueryBox(val => true)}
-                                    className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium"
-                                >
-                                    Query
-                                </button>
+                                {
+                                    common.query_status == "REJECTED" ? null :
+                                        <>
+                                            <button
+                                                onClick={() => setQueryBox(val => true)}
+                                                className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium"
+                                            >
+                                                Query
+                                            </button>
 
-                                <button
-                                    onClick={() => { setRejectid(val => common.id); setRejectBox(true); }}
-                                    className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-rose-500 text-center rounded-md font-medium"
-                                >
-                                    Reject
-                                </button>
+                                            <button
+                                                onClick={() => { setRejectid(val => common.id); setRejectBox(true); }}
+                                                className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-rose-500 text-center rounded-md font-medium"
+                                            >
+                                                Reject
+                                            </button>
 
-                                {/* SUPTD button */}
-                                {common.form_status == 1 && user.id == common.auth_user_id ?
-                                    <button
-                                        onClick={() => {
-                                            setForwardBox(val => true);
-                                            setNextData(val => ({
-                                                title: "Forward to LDC",
-                                                formstatus: 25,
-                                                querytype: "INTRA",
-                                                authuserid: "6",
-                                                foacaluserid: "5",
-                                                intrauserid: "5,6",
-                                                interuserid: "0",
-                                                touserid: 6,
-                                                querystatus: "INPROCESS"
-                                            }));
-                                        }}
-                                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
-                                    >
-                                        Forward to LDC
-                                    </button>
-                                    :
-                                    null
-                                }
-                                {/* LDC button */}
-                                {common.form_status == 25 && user.id == 6 ?
-                                    <button
-                                        onClick={() => {
-                                            setForwardBox(val => true);
-                                            setNextData(val => ({
-                                                title: "Forward to SUPTD",
-                                                formstatus: 50,
-                                                querytype: "INTRA",
-                                                authuserid: "5",
-                                                foacaluserid: "5",
-                                                intrauserid: "5,6",
-                                                interuserid: "0",
-                                                touserid: 5,
-                                                querystatus: "INPROCESS"
-                                            }));
-                                        }}
-                                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
-                                    >
-                                        Forward to SUPTD
-                                    </button>
-                                    :
-                                    null
-                                }
+                                            {/* SUPTD button */}
+                                            {common.form_status == 1 && user.id == common.auth_user_id ?
+                                                <button
+                                                    onClick={() => {
+                                                        setForwardBox(val => true);
+                                                        setNextData(val => ({
+                                                            title: "Forward to LDC",
+                                                            formstatus: 25,
+                                                            querytype: "INTRA",
+                                                            authuserid: "6",
+                                                            foacaluserid: "5",
+                                                            intrauserid: "5,6",
+                                                            interuserid: "0",
+                                                            touserid: 6,
+                                                            querystatus: "INPROCESS"
+                                                        }));
+                                                    }}
+                                                    className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                                                >
+                                                    Forward to LDC
+                                                </button>
+                                                :
+                                                null
+                                            }
+                                            {/* LDC button */}
+                                            {common.form_status == 25 && user.id == 6 ?
+                                                <button
+                                                    onClick={() => {
+                                                        setForwardBox(val => true);
+                                                        setNextData(val => ({
+                                                            title: "Forward to SUPTD",
+                                                            formstatus: 50,
+                                                            querytype: "INTRA",
+                                                            authuserid: "5",
+                                                            foacaluserid: "5",
+                                                            intrauserid: "5,6",
+                                                            interuserid: "0",
+                                                            touserid: 5,
+                                                            querystatus: "INPROCESS"
+                                                        }));
+                                                    }}
+                                                    className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                                                >
+                                                    Forward to SUPTD
+                                                </button>
+                                                :
+                                                null
+                                            }
 
-                                {/* SUPTD button */}
-                                {common.form_status == 50 && user.id == 5 ?
-                                    <button
-                                        onClick={() => {
-                                            setForwardBox(val => true);
-                                            setNextData(val => ({
-                                                title: "Forward to Dy.Collector",
-                                                formstatus: 75,
-                                                querytype: "INTRA",
-                                                authuserid: "4",
-                                                foacaluserid: "5",
-                                                intrauserid: "5,4",
-                                                interuserid: "0",
-                                                touserid: 4,
-                                                querystatus: "INPROCESS"
-                                            }));
-                                        }}
-                                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
-                                    >
-                                        Forward to Dy.Collector
-                                    </button>
-                                    :
-                                    null
-                                }
+                                            {/* SUPTD button */}
+                                            {common.form_status == 50 && user.id == 5 ?
+                                                <button
+                                                    onClick={() => {
+                                                        setForwardBox(val => true);
+                                                        setNextData(val => ({
+                                                            title: "Forward to Dy.Collector",
+                                                            formstatus: 75,
+                                                            querytype: "INTRA",
+                                                            authuserid: "4",
+                                                            foacaluserid: "5",
+                                                            intrauserid: "5,4",
+                                                            interuserid: "0",
+                                                            touserid: 4,
+                                                            querystatus: "INPROCESS"
+                                                        }));
+                                                    }}
+                                                    className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                                                >
+                                                    Forward to Dy.Collector
+                                                </button>
+                                                :
+                                                null
+                                            }
 
-                                {/* Dy.Collector button */}
-                                {common.form_status == 75 && user.id == 4 ?
-                                    <button
-                                        onClick={() => {
-                                            setNotingsBox(val => true);
-                                            // setForwardBox(val => true);
-                                            setNextData(val => ({
-                                                title: "Forward to SHO",
-                                                formstatus: 100,
-                                                querytype: "INTRA",
-                                                authuserid: "8",
-                                                foacaluserid: "5",
-                                                intrauserid: "5,4,8",
-                                                interuserid: "0",
-                                                touserid: 8,
-                                                querystatus: "INPROCESS"
-                                            }));
-                                        }}
-                                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
-                                    >
-                                        Forward to SHO
-                                    </button>
-                                    :
-                                    null
-                                }
+                                            {/* Dy.Collector button */}
+                                            {common.form_status == 75 && user.id == 4 ?
+                                                <button
+                                                    onClick={() => {
+                                                        setNotingsBox(val => true);
+                                                        // setForwardBox(val => true);
+                                                        setNextData(val => ({
+                                                            title: "Forward to SHO",
+                                                            formstatus: 100,
+                                                            querytype: "INTRA",
+                                                            authuserid: "8",
+                                                            foacaluserid: "5",
+                                                            intrauserid: "5,4,8",
+                                                            interuserid: "0",
+                                                            touserid: 8,
+                                                            querystatus: "INPROCESS"
+                                                        }));
+                                                    }}
+                                                    className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                                                >
+                                                    Forward to SHO
+                                                </button>
+                                                :
+                                                null
+                                            }
 
-                                {/* SHO button */}
-                                {common.form_status == 100 && user.id == 8 ?
-                                    <button
-                                        onClick={() => {
-                                            setNotingsBox(val => true);
-                                            // setForwardBox(val => true);
-                                            setNextData(val => ({
-                                                title: "Reply to Dy.Collector",
-                                                formstatus: 125,
-                                                querytype: "INTRA",
-                                                authuserid: "4",
-                                                foacaluserid: "5",
-                                                intrauserid: "5,4",
-                                                interuserid: "0",
-                                                touserid: 4,
-                                                querystatus: "INPROCESS"
-                                            }));
-                                        }}
-                                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
-                                    >
-                                        Reply to Dy.Collector
-                                    </button>
-                                    :
-                                    null
-                                }
+                                            {/* SHO button */}
+                                            {common.form_status == 100 && user.id == 8 ?
+                                                <button
+                                                    onClick={() => {
+                                                        setNotingsBox(val => true);
+                                                        // setForwardBox(val => true);
+                                                        setNextData(val => ({
+                                                            title: "Reply to Dy.Collector",
+                                                            formstatus: 125,
+                                                            querytype: "INTRA",
+                                                            authuserid: "4",
+                                                            foacaluserid: "5",
+                                                            intrauserid: "5,4",
+                                                            interuserid: "0",
+                                                            touserid: 4,
+                                                            querystatus: "INPROCESS"
+                                                        }));
+                                                    }}
+                                                    className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                                                >
+                                                    Reply to Dy.Collector
+                                                </button>
+                                                :
+                                                null
+                                            }
 
-                                {/* Dy.Collector button */}
-                                {common.form_status == 125 && user.id == 4 ?
-                                    <button
-                                        onClick={() => {
-                                            setNotingsBox(val => true);
-                                            // setForwardBox(val => true);
-                                            setNextData(val => ({
-                                                title: "Forward to Collector",
-                                                formstatus: 150,
-                                                querytype: "INTRA",
-                                                authuserid: "3",
-                                                foacaluserid: "5",
-                                                intrauserid: "5,4,3",
-                                                interuserid: "0",
-                                                touserid: 3,
-                                                querystatus: "INPROCESS"
-                                            }));
-                                        }}
-                                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
-                                    >
-                                        Forward to Collector
-                                    </button>
-                                    :
-                                    null
-                                }
+                                            {/* Dy.Collector button */}
+                                            {common.form_status == 125 && user.id == 4 ?
+                                                <button
+                                                    onClick={() => {
+                                                        setNotingsBox(val => true);
+                                                        // setForwardBox(val => true);
+                                                        setNextData(val => ({
+                                                            title: "Forward to Collector",
+                                                            formstatus: 150,
+                                                            querytype: "INTRA",
+                                                            authuserid: "3",
+                                                            foacaluserid: "5",
+                                                            intrauserid: "5,4,3",
+                                                            interuserid: "0",
+                                                            touserid: 3,
+                                                            querystatus: "INPROCESS"
+                                                        }));
+                                                    }}
+                                                    className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                                                >
+                                                    Forward to Collector
+                                                </button>
+                                                :
+                                                null
+                                            }
 
-                                {/* Collector button */}
-                                {common.form_status == 150 && user.id == 3 ?
-                                    <button
-                                        onClick={() => {
-                                            setForwardBox(val => true);
-                                            setNextData(val => ({
-                                                title: "Forward to Dy.Collector",
-                                                formstatus: 175,
-                                                querytype: "INTRA",
-                                                authuserid: "4",
-                                                foacaluserid: "5",
-                                                intrauserid: "5,4",
-                                                interuserid: "0",
-                                                touserid: 4,
-                                                querystatus: "INPROCESS"
-                                            }));
-                                        }}
-                                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
-                                    >
-                                        Forward to Dy.Collector
-                                    </button>
-                                    :
-                                    null
-                                }
+                                            {/* Collector button */}
+                                            {common.form_status == 150 && user.id == 3 ?
+                                                <button
+                                                    onClick={() => {
+                                                        setForwardBox(val => true);
+                                                        setNextData(val => ({
+                                                            title: "Forward to Dy.Collector",
+                                                            formstatus: 175,
+                                                            querytype: "INTRA",
+                                                            authuserid: "4",
+                                                            foacaluserid: "5",
+                                                            intrauserid: "5,4",
+                                                            interuserid: "0",
+                                                            touserid: 4,
+                                                            querystatus: "INPROCESS"
+                                                        }));
+                                                    }}
+                                                    className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                                                >
+                                                    Forward to Dy.Collector
+                                                </button>
+                                                :
+                                                null
+                                            }
 
-                                {/* Dy.Collector button */}
-                                {common.form_status == 175 && user.id == 4 ?
-                                    <button
-                                        onClick={() => {
-                                            setForwardBox(val => true);
-                                            setNextData(val => ({
-                                                title: "Forward to SUPTD",
-                                                formstatus: 200,
-                                                querytype: "INTRA",
-                                                authuserid: "5",
-                                                foacaluserid: "5",
-                                                intrauserid: "5,4",
-                                                interuserid: "0",
-                                                touserid: 5,
-                                                querystatus: "INPROCESS"
-                                            }));
-                                        }}
-                                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
-                                    >
-                                        Forward to SUPTD
-                                    </button>
-                                    :
-                                    null
-                                }
+                                            {/* Dy.Collector button */}
+                                            {common.form_status == 175 && user.id == 4 ?
+                                                <button
+                                                    onClick={() => {
+                                                        setForwardBox(val => true);
+                                                        setNextData(val => ({
+                                                            title: "Forward to SUPTD",
+                                                            formstatus: 200,
+                                                            querytype: "INTRA",
+                                                            authuserid: "5",
+                                                            foacaluserid: "5",
+                                                            intrauserid: "5,4",
+                                                            interuserid: "0",
+                                                            touserid: 5,
+                                                            querystatus: "INPROCESS"
+                                                        }));
+                                                    }}
+                                                    className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                                                >
+                                                    Forward to SUPTD
+                                                </button>
+                                                :
+                                                null
+                                            }
 
-                                {/* Suptd button */}
-                                {common.form_status == 200 && user.id == 5 ?
-                                    <button
-                                        onClick={() => {
-                                            setForwardBox(val => true);
-                                            setNextData(val => ({
-                                                title: "Convey to Applicant",
-                                                formstatus: 225,
-                                                querytype: "PUBLIC",
-                                                authuserid: "0",
-                                                foacaluserid: "5",
-                                                intrauserid: "0",
-                                                interuserid: "0",
-                                                touserid: from_data.userId,
-                                                querystatus: "APPROVED"
-                                            }));
-                                        }}
-                                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
-                                    >
-                                        Convey to Applicant
-                                    </button>
-                                    :
-                                    null
-                                }
-                                {common.form_status == 255 && user.id == 5 ?
-                                    <Link
-                                        to={`/religiouspdf/${from_data.id}`}
-                                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
-                                    >
-                                        Download Certificate
-                                    </Link>
-                                    : null
+                                            {/* Suptd button */}
+                                            {common.form_status == 200 && user.id == 5 ?
+                                                <button
+                                                    onClick={() => {
+                                                        setForwardBox(val => true);
+                                                        setNextData(val => ({
+                                                            title: "Convey to Applicant",
+                                                            formstatus: 225,
+                                                            querytype: "PUBLIC",
+                                                            authuserid: "0",
+                                                            foacaluserid: "5",
+                                                            intrauserid: "0",
+                                                            interuserid: "0",
+                                                            touserid: from_data.userId,
+                                                            querystatus: "APPROVED"
+                                                        }));
+                                                    }}
+                                                    className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                                                >
+                                                    Convey to Applicant
+                                                </button>
+                                                :
+                                                null
+                                            }
+                                            {common.form_status == 255 && user.id == 5 ?
+                                                <Link
+                                                    to={`/religiouspdf/${from_data.id}`}
+                                                    className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                                                >
+                                                    Download Certificate
+                                                </Link>
+                                                : null
+                                            }
+
+                                        </>
                                 }
 
 

@@ -261,7 +261,7 @@ const RoadshowPdfView = (): JSX.Element => {
             fontSize: 12,
             fontWeight: 'bold',
             fontFamily: "Roboto",
-            margin: "0px 20px"
+            margin: "4px 20px"
         },
         centerpara: {
             color: "#000000",
@@ -269,7 +269,6 @@ const RoadshowPdfView = (): JSX.Element => {
             fontWeight: 'bold',
             textAlign: "center"
         },
-
     });
 
 
@@ -330,7 +329,7 @@ const RoadshowPdfView = (): JSX.Element => {
                             </Text>
                         </View>
                     </> :
-                    form.query_status == "REJCTED" ?
+                    form.query_status == "REJECTED" ?
                         <>
                             <View style={styles.dividerthree}></View>
                             <View>

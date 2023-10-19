@@ -26,7 +26,10 @@ const MobileLogin: React.FC = (): JSX.Element => {
     const [mobile, setMobile] = useState<string>("");
     const [otp, setOtp] = useState<string>("");
     const [isAlreadyLogin, setIsAlreadyLogin] = useState<boolean>(false);
+    const [isLoading, setLoading] = useState<boolean>(false);
+
     const submit = async () => {
+        setLoading(true);
         if (mobile == null || mobile == undefined || mobile == "") {
             return toast.error("Enter the mobile number.", { theme: "light" });
         }
@@ -53,9 +56,11 @@ const MobileLogin: React.FC = (): JSX.Element => {
         } else {
             return toast.error(data.message, { theme: "light" });
         }
+        setLoading(false);
     }
 
     const verifyOtp = async () => {
+        setLoading(true);
         if (mobile == null || mobile == undefined || mobile == "") {
             toast.error("Enter the mobile number.", { theme: "light" });
         } else if (name == undefined || name == null || name == "") {
@@ -92,6 +97,7 @@ const MobileLogin: React.FC = (): JSX.Element => {
                 nextButton.current!.click();
             }
         }
+        setLoading(false);
     }
 
     const iref = useRef<HTMLInputElement>(null);
@@ -169,22 +175,39 @@ const MobileLogin: React.FC = (): JSX.Element => {
                                     className="bg-transparent outline-none border-none fill-none text-slate-800 py-2 w-full"
                                 />
                             </div>
-                            <button
-                                onClick={verifyOtp}
-                                className="inline-block text-center text-white bg-purple-500 py-2 px-6 text-xl font-medium rounded-md w-full mt-6"
-                            >
-                                Submit
-                            </button>
+                            {
+                                isLoading ?
+                                    <button
+                                        className="inline-block text-center text-white bg-purple-500 py-2 px-6 text-xl font-medium rounded-md w-full mt-6"
+                                    >
+                                        Loading...
+                                    </button>
+                                    :
+                                    <button
+                                        onClick={verifyOtp}
+                                        className="inline-block text-center text-white bg-purple-500 py-2 px-6 text-xl font-medium rounded-md w-full mt-6"
+                                    >
+                                        Submit
+                                    </button>
+                            }
                         </>
                         :
                         <>
-
-                            <button
-                                onClick={submit}
-                                className="inline-block text-center text-white bg-purple-500 py-2 px-6 text-xl font-medium rounded-md w-full mt-6"
-                            >
-                                Verify Mobile
-                            </button>
+                            {
+                                isLoading ?
+                                    <button
+                                        className="inline-block text-center text-white bg-purple-500 py-2 px-6 text-xl font-medium rounded-md w-full mt-6"
+                                    >
+                                        Loading...
+                                    </button>
+                                    :
+                                    <button
+                                        onClick={submit}
+                                        className="inline-block text-center text-white bg-purple-500 py-2 px-6 text-xl font-medium rounded-md w-full mt-6"
+                                    >
+                                        Verify Mobile
+                                    </button>
+                            }
                         </>
                     }
 

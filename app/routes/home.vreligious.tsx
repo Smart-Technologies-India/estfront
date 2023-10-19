@@ -60,6 +60,31 @@ const Religious: React.FC = (): JSX.Element => {
     const [isSearching, setIsSearching] = useState<boolean>(false);
 
     const init = () => {
+
+        const customOrder = [
+            "NONE",
+            "QUERYRAISED",
+            "INPROCESS",
+            "SUBMIT",
+            "REJECTED",
+            "COMPLETED",
+            "CERTIFICATEGRANT",
+            "APPROVED",
+        ];
+
+        loader.department.sort((a: any, b: any) => {
+            const statusA = customOrder.indexOf(a.query_status);
+            const statusB = customOrder.indexOf(b.query_status);
+
+            if (statusA !== statusB) {
+                return statusA - statusB;
+            } else {
+                const dateA = new Date(a.event_date.split('/').reverse().join('-'));
+                const dateB = new Date(b.event_date.split('/').reverse().join('-'));
+
+                return dateA.getTime() - dateB.getTime();
+            }
+        });
         setDepartment(loader.department);
     }
     useEffect(() => {
@@ -200,7 +225,7 @@ const Religious: React.FC = (): JSX.Element => {
                                                 </td>
                                                 <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
 
-                                                    {val.query_status == "REJCTED" ?
+                                                    {val.query_status == "REJECTED" ?
                                                         <div
                                                             className="py-1 text-white text-lg px-4 bg-rose-500 text-center rounded-md font-medium"
                                                         >

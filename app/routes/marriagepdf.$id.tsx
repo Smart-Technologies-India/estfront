@@ -332,7 +332,7 @@ const MarriagePdfView = (): JSX.Element => {
                             </Text>
                         </View>
                     </> :
-                    form.query_status == "REJCTED" ?
+                    form.query_status == "REJECTED" ?
                         <>
                             <View style={styles.dividerthree}></View>
                             <View>

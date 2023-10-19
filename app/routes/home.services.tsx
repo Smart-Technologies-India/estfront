@@ -8,24 +8,24 @@ const Services: React.FC = (): JSX.Element => {
 
     const title = useRef<HTMLHeadingElement | null>(null);
 
-    useLayoutEffect(() => {
-    let ctx = gsap.context(() => {
-        gsap.from(".services >  div", {
-            opacity: 0,
-            duration: 1,
-            y: 100,
-            stagger: {
-                from: "start",
-                amount: 0.5
-            }
-        });
-        gsap.from(title.current, {
-            opacity: 0,
-            duration: 1,
-            y: 50,
-        });
-    });
-    }, []);
+    // useLayoutEffect(() => {
+    // let ctx = gsap.context(() => {
+    //     gsap.from(".services >  div", {
+    //         opacity: 0,
+    //         duration: 1,
+    //         y: 100,
+    //         stagger: {
+    //             from: "start",
+    //             amount: 0.5
+    //         }
+    //     });
+    //     gsap.from(title.current, {
+    //         opacity: 0,
+    //         duration: 1,
+    //         y: 50,
+    //     });
+    // });
+    // }, []);
 
 
     return (

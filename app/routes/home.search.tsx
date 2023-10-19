@@ -249,7 +249,7 @@ const search = () => {
                                                         </td>
                                                         <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
 
-                                                            {val.query_status == "REJCTED" ?
+                                                            {val.query_status == "REJECTED" ?
                                                                 <div
                                                                     className="py-1 text-white text-lg px-4 bg-rose-500 text-center rounded-md font-medium"
                                                                 >

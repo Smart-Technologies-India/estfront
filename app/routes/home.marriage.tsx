@@ -152,8 +152,7 @@ const Marriage: React.FC = (): JSX.Element => {
                     })
                     .optional(),
                 village_id: z
-                    .number({ invalid_type_error: "Select a valid village", required_error: "Select a village" })
-                    .optional(),
+                    .number({ invalid_type_error: "Select a valid village", required_error: "Select a village" }),
                 from_date: z
                     .date({ required_error: "Enter From date", invalid_type_error: "Enter a valid from date" }),
                 to_date: z
@@ -172,6 +171,10 @@ const Marriage: React.FC = (): JSX.Element => {
                     .nonempty("I solemnly affirm & hereby."),
             })
             .strict()
+            .refine(obj => obj.village_id != 0, {
+                message: "Select your village",
+                path: ["village_id"]
+            })
             .refine(obj => obj.from_date < obj.to_date, {
                 message: "From date must be less than To date",
                 path: ["from_date", "to_date"],
@@ -281,6 +284,7 @@ const Marriage: React.FC = (): JSX.Element => {
 
 
     const parseDateString = (dateString: string): Date => {
+        if (dateString == undefined) return new Date();
         const dateParts = dateString.split("-");
 
         if (dateParts.length === 3) {
