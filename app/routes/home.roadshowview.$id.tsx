@@ -3,7 +3,8 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Fa6SolidFileLines, Fa6SolidLink } from "~/components/icons/icons";
 import { ApiCall, UploadFile } from "~/services/api";
 import { toast } from "react-toastify";
-import { LoaderArgs, LoaderFunction, json } from "@remix-run/node";
+import type { LoaderArgs, LoaderFunction} from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { userPrefs } from "~/cookies";
 import QueryTabs from "~/components/QueryTabs";
 
@@ -423,7 +424,7 @@ const RoadshowView: React.FC = (): JSX.Element => {
     useEffect(() => {
         if (noticeRef && from_data.condition_to_follow) {
             noticeRef!.current!.value = (from_data.condition_to_follow.replace(/\\n/g, "\n") ?? "");
-        };
+        }
     }, []);
 
     const sendnotingpint = async (): Promise<boolean> => {
@@ -543,7 +544,7 @@ const RoadshowView: React.FC = (): JSX.Element => {
                         {
                             attachment != null ?
                                 <a target="_blank" href={URL.createObjectURL(attachment)}
-                                    className="py-1 w-full sm:w-auto flex items-center gap-2  text-white text-lg px-4 bg-yellow-500 text-center rounded-md font-medium">
+                                    className="py-1 w-full sm:w-auto flex items-center gap-2  text-white text-lg px-4 bg-yellow-500 text-center rounded-md font-medium" rel="noreferrer">
                                     <Fa6SolidFileLines></Fa6SolidFileLines>
                                     <p>
                                         View Doc.
@@ -595,7 +596,7 @@ const RoadshowView: React.FC = (): JSX.Element => {
                         {
                             attachment != null ?
                                 <a target="_blank" href={URL.createObjectURL(attachment)}
-                                    className="py-1 w-full sm:w-auto flex items-center gap-2  text-white text-lg px-4 bg-yellow-500 text-center rounded-md font-medium">
+                                    className="py-1 w-full sm:w-auto flex items-center gap-2  text-white text-lg px-4 bg-yellow-500 text-center rounded-md font-medium" rel="noreferrer">
                                     <Fa6SolidFileLines></Fa6SolidFileLines>
                                     <p>
                                         View Doc.
@@ -770,7 +771,7 @@ const RoadshowView: React.FC = (): JSX.Element => {
                     <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
                         <a target="_blank"
                             href={from_data.witness_1_url}
-                            className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium"
+                            className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium" rel="noreferrer"
                         >
                             <div className="flex items-center gap-2">
                                 <Fa6SolidLink></Fa6SolidLink> View Doc.
@@ -788,7 +789,7 @@ const RoadshowView: React.FC = (): JSX.Element => {
                     <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
                         <a target="_blank"
                             href={from_data.witness_2_url}
-                            className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium"
+                            className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium" rel="noreferrer"
                         >
                             <div className="flex items-center gap-2">
                                 <Fa6SolidLink></Fa6SolidLink> View Doc.
@@ -806,7 +807,7 @@ const RoadshowView: React.FC = (): JSX.Element => {
                     <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
                         <a target="_blank"
                             href={from_data.applicant_uid_url}
-                            className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium"
+                            className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium" rel="noreferrer"
                         >
                             <div className="flex items-center gap-2">
                                 <Fa6SolidLink></Fa6SolidLink> View Doc.
@@ -824,7 +825,7 @@ const RoadshowView: React.FC = (): JSX.Element => {
                     <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
                         <a target="_blank"
                             href={from_data.undertaking_url}
-                            className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium"
+                            className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium" rel="noreferrer"
                         >
                             <div className="flex items-center gap-2">
                                 <Fa6SolidLink></Fa6SolidLink> View Doc.
@@ -863,7 +864,7 @@ const RoadshowView: React.FC = (): JSX.Element => {
                     <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
                         <a target="_blank"
                             href={from_data.signature_url}
-                            className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium"
+                            className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium" rel="noreferrer"
                         >
                             <div className="flex items-center gap-2">
                                 <Fa6SolidLink></Fa6SolidLink> View Doc.
@@ -1173,7 +1174,7 @@ const RoadshowView: React.FC = (): JSX.Element => {
                     <div className="grow bg-gray-700 h-[2px]"></div>
                 </div>
                 {notings.length == 0 ?
-                    <h3 className="text-2xl font-semibold text-center bg-rose-500 bg-opacity-25 rounded-md border-l-4 border-rose-500 py-2  text-rose-500">You have not submitted any query.</h3> :
+                    <h3 className="text-2xl font-semibold text-center bg-rose-500 bg-opacity-25 rounded-md border-l-4 border-rose-500 py-2  text-rose-500">No pending query.</h3> :
                     <>
                         {notings.map((val: any, index: number) => {
                             return (

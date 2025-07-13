@@ -1,4 +1,5 @@
-import { LoaderArgs, LoaderFunction, json } from "@remix-run/node";
+import type { LoaderArgs, LoaderFunction} from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { toast } from "react-toastify";
@@ -131,13 +132,13 @@ const EditProfile = () => {
 
     useLayoutEffect(() => {
 
-        let ctx = gsap.context(() => {
-            gsap.from(editbox.current, {
-                opacity: 0,
-                duration: 0.6,
-                x: -50,
-            });
-        });
+        // let ctx = gsap.context(() => {
+        //     gsap.from(editbox.current, {
+        //         opacity: 0,
+        //         duration: 0.6,
+        //         x: -50,
+        //     });
+        // });
     }, []);
     return (
         <>

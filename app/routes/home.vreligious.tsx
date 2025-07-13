@@ -1,4 +1,5 @@
-import { LoaderArgs, LoaderFunction, json } from "@remix-run/node";
+import type { LoaderArgs, LoaderFunction} from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
@@ -44,7 +45,7 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
 
     return json({
         user: cookie,
-        department: departmentdata.data.filterCommon
+        department: departmentdata.data.filterCommon ?? []
     });
 };
 const Religious: React.FC = (): JSX.Element => {
