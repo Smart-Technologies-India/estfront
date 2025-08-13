@@ -56,8 +56,10 @@ const Dashboard: React.FC = (): JSX.Element => {
   const user = loader.user;
 
   const [department, setDepartment] = useState<unknown[]>([]);
+  const [filteredDepartment, setFilteredDepartment] = useState<unknown[]>([]);
+  const [filterStatus, setFilterStatus] = useState<string>("ALL");
 
-  const pagination = usePagination(department);
+  const pagination = usePagination(filteredDepartment);
 
   const searchRef = useRef<HTMLInputElement>(null);
   const [isSearch, setIsSearch] = useState<boolean>();
@@ -109,6 +111,23 @@ const Dashboard: React.FC = (): JSX.Element => {
   useEffect(() => {
     init();
   }, []);
+
+  useEffect(() => {
+    if (filterStatus === "ALL") {
+      setFilteredDepartment(department);
+    } else if (filterStatus === "OTHER") {
+      const otherStatuses = ["REJECTED", "INPROCESS", "APPROVED"];
+      setFilteredDepartment(
+        department.filter(
+          (d: any) => !otherStatuses.includes(d.query_status)
+        )
+      );
+    } else {
+      setFilteredDepartment(
+        department.filter((d: any) => d.query_status === filterStatus)
+      );
+    }
+  }, [filterStatus, department]);
 
   const search = async () => {
     setIsSearching((val) => true);
@@ -200,6 +219,58 @@ const Dashboard: React.FC = (): JSX.Element => {
             Dashboard
           </h1>
           <div className="grow"></div>
+          <div className="hidden sm:flex items-center gap-2">
+            <button
+              onClick={() => setFilterStatus("ALL")}
+              className={`text-sm text-center py-1 px-2 rounded-md font-semibold ${
+                filterStatus == "ALL"
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-200 text-gray-700"
+              }`}
+            >
+              ALL
+            </button>
+            <button
+              onClick={() => setFilterStatus("REJECTED")}
+              className={`text-sm text-center py-1 px-2 rounded-md font-semibold ${
+                filterStatus == "REJECTED"
+                  ? "bg-rose-500 text-white"
+                  : "bg-gray-200 text-gray-700"
+              }`}
+            >
+              REJECTED
+            </button>
+            <button
+              onClick={() => setFilterStatus("INPROCESS")}
+              className={`text-sm text-center py-1 px-2 rounded-md font-semibold ${
+                filterStatus == "INPROCESS"
+                  ? "bg-yellow-500 text-white"
+                  : "bg-gray-200 text-gray-700"
+              }`}
+            >
+              INPROCESS
+            </button>
+            <button
+              onClick={() => setFilterStatus("APPROVED")}
+              className={`text-sm text-center py-1 px-2 rounded-md font-semibold ${
+                filterStatus == "APPROVED"
+                  ? "bg-green-500 text-white"
+                  : "bg-gray-200 text-gray-700"
+              }`}
+            >
+              APPROVED
+            </button>
+            <button
+              onClick={() => setFilterStatus("OTHER")}
+              className={`text-sm text-center py-1 px-2 rounded-md font-semibold ${
+                filterStatus == "OTHER"
+                  ? "bg-gray-500 text-white"
+                  : "bg-gray-200 text-gray-700"
+              }`}
+            >
+              OTHER
+            </button>
+          </div>
           {user.role == "USER" ? null : isSearch ? (
             <>
               <div className="grid place-items-center rounded-md bg-[#0984e3] shadow-md h-full p-2 text-white">
