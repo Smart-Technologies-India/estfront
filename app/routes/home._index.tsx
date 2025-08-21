@@ -429,28 +429,28 @@ const DashBoard = (): JSX.Element => {
               title="Marriage"
               color="bg-gradient-to-r from-rose-400 to-rose-600"
               textcolor="text-rose-500"
-              link="/"
+              link="/home/vmarriage"
               value={filecount.MARRIAGE}
             />
             <DashboradCard
               title="Religious"
               color="bg-gradient-to-r from-cyan-400 to-cyan-600"
               textcolor="text-cyan-500"
-              link="/"
+              link="/home/vreligious"
               value={filecount.RELIGIOUS}
             />
             <DashboradCard
               title="Roadshow"
               color="bg-gradient-to-r from-blue-400 to-blue-600"
               textcolor="text-blue-500"
-              link="/"
+              link="/home/vroadshow"
               value={filecount.ROADSHOW}
             />
             <DashboradCard
               title="Generic"
               color="bg-gradient-to-r from-green-400 to-green-600"
               textcolor="text-green-500"
-              link="/"
+              link="/home"
               value={filecount.GENERIC}
             />
           </div>

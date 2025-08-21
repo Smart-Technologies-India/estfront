@@ -56,9 +56,6 @@ const Marriage: React.FC = (): JSX.Element => {
   const villageRef = useRef<HTMLSelectElement>(null);
   const [village, setVillage] = useState<any[]>([]);
 
-  const from_dateRef = useRef<HTMLInputElement>(null);
-  const to_dateRef = useRef<HTMLInputElement>(null);
-
   const [dates, setDates] = useState<string[]>([]);
 
   const event_nameRef = useRef<HTMLInputElement>(null);
@@ -168,6 +165,10 @@ const Marriage: React.FC = (): JSX.Element => {
       });
 
     type MarriageScheme = z.infer<typeof MarriageScheme>;
+    const toIST = (date: Date): Date => {
+      // IST is UTC+5:30, so add 5.5 hours (in ms)
+      return new Date(date.getTime() + 5.5 * 60 * 60 * 1000);
+    };
 
     const marriageScheme: MarriageScheme = {
       name: nameRef!.current!.value,
@@ -176,8 +177,8 @@ const Marriage: React.FC = (): JSX.Element => {
       email: emailRef!.current!.value,
       user_uid: uidRef!.current!.value,
       village_id: parseInt(villageRef!.current!.value),
-      from_date: parseDateString(dates[0]),
-      to_date: parseDateString(dates[1]),
+      from_date: toIST(parseDateString(dates[0])),
+      to_date: toIST(parseDateString(dates[1])),
       iagree: isChecked ? "YES" : "NO",
       event_name: event_nameRef!.current!.value,
       event_address: event_addressRef!.current!.value,

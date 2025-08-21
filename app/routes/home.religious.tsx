@@ -7,7 +7,7 @@ import {
 } from "~/components/icons/icons";
 import { ApiCall, UploadFile } from "~/services/api";
 import { toast } from "react-toastify";
-import type { LoaderArgs, LoaderFunction} from "@remix-run/node";
+import type { LoaderArgs, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { userPrefs } from "~/cookies";
 import { z } from "zod";
@@ -163,6 +163,12 @@ const Religious: React.FC = (): JSX.Element => {
 
     type ReligiousScheme = z.infer<typeof ReligiousScheme>;
 
+    // Helper to convert a UTC date to IST (Indian Standard Time)
+    const toIST = (date: Date): Date => {
+      // IST is UTC+5:30, so add 5.5 hours (in ms)
+      return new Date(date.getTime() + 5.5 * 60 * 60 * 1000);
+    };
+
     const religiousScheme: ReligiousScheme = {
       name: nameRef!.current!.value,
       address: addressRef!.current!.value,
@@ -170,8 +176,8 @@ const Religious: React.FC = (): JSX.Element => {
       email: emailRef!.current!.value,
       user_uid: uidRef!.current!.value,
       village_id: parseInt(villageRef!.current!.value),
-      from_date: parseDateString(dates[0]),
-      to_date: parseDateString(dates[1]),
+      from_date: toIST(parseDateString(dates[0])),
+      to_date: toIST(parseDateString(dates[1])),
       iagree: isChecked ? "YES" : "NO",
       event_name: event_nameRef!.current!.value,
       event_address: event_addressRef!.current!.value,
@@ -505,7 +511,7 @@ const Religious: React.FC = (): JSX.Element => {
 
         <div className="w-full bg-[#0984e3] py-2 rounded-md px-4 mt-4">
           <p className="text-left font-semibold text-xl text-white">
-            " rel="noreferrer 4. Attachment(s){" "}
+            4. Attachment(s){" "}
           </p>
         </div>
 
@@ -535,12 +541,12 @@ const Religious: React.FC = (): JSX.Element => {
                 {applicant_uid_url == null ? "Attach Doc." : "Update Doc."}
               </div>
             </button>
-            " rel=noreferrer"" rel=noreferrer"
             {applicant_uid_url != null ? (
               <a
                 target="_blank"
                 href={URL.createObjectURL(applicant_uid_url)}
-                className="py-1 w-full sm:w-auto flex items-center gap-2  text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium" rel="noreferrer"
+                className="py-1 w-full sm:w-auto flex items-center gap-2  text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium"
+                rel="noreferrer"
               >
                 <Fa6SolidFileLines></Fa6SolidFileLines>
                 <p>View Doc.</p>
@@ -655,15 +661,14 @@ const Religious: React.FC = (): JSX.Element => {
               <div className="flex items-center gap-2">
                 <Fa6SolidLink></Fa6SolidLink>{" "}
                 {witness_2_url == null ? "Attach Doc." : "Update Doc."}{" "}
-                rel="noreferrer" rel="noreferrer"
               </div>
-            </button>{" "}
-            rel="noreferrer"
+            </button>
             {witness_2_url != null ? (
               <a
                 target="_blank"
                 href={URL.createObjectURL(witness_2_url)}
-                className="py-1 w-full sm:w-auto flex items-center gap-2  text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium" rel="noreferrer"
+                className="py-1 w-full sm:w-auto flex items-center gap-2  text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium"
+                rel="noreferrer"
               >
                 <Fa6SolidFileLines></Fa6SolidFileLines>
                 <p>View Doc.</p>
@@ -726,13 +731,13 @@ const Religious: React.FC = (): JSX.Element => {
                 <Fa6SolidLink></Fa6SolidLink>{" "}
                 {sigimg == null ? "Attach Doc." : "Update Doc."}
               </div>
-              " rel="noreferrer" rel="noreferrer
             </button>
             {sigimg != null ? (
               <a
                 target="_blank"
                 href={URL.createObjectURL(sigimg)}
-                className="py-1 w-full sm:w-auto flex items-center gap-2  text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium" rel="noreferrer"
+                className="py-1 w-full sm:w-auto flex items-center gap-2  text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium"
+                rel="noreferrer"
               >
                 <Fa6SolidFileLines></Fa6SolidFileLines>
                 <p>View Doc.</p>
