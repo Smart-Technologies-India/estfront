@@ -1,4 +1,4 @@
-import type { LoaderArgs, LoaderFunction} from "@remix-run/node";
+import type { LoaderArgs, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
@@ -11,6 +11,7 @@ import Pagination from "~/components/pagination";
 import { userPrefs } from "~/cookies";
 import { usePagination } from "~/hooks/usepagination";
 import { ApiCall } from "~/services/api";
+import { authusertorole } from "~/utils";
 
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
   const cookieHeader = props.request.headers.get("Cookie");
@@ -214,7 +215,7 @@ const Marriage: React.FC = (): JSX.Element => {
                       Form Id
                     </th>
                     <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">
-                      Purpose
+                      File With
                     </th>
                     <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">
                       Event Name
@@ -247,7 +248,7 @@ const Marriage: React.FC = (): JSX.Element => {
                           )}
                         </td>
                         <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                          {val.form_type}
+                          {authusertorole(val.auth_user_id)}
                         </td>
                         <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                           {val.name}

@@ -11,6 +11,7 @@ import Pagination from "~/components/pagination";
 import { userPrefs } from "~/cookies";
 import { usePagination } from "~/hooks/usepagination";
 import { ApiCall } from "~/services/api";
+import { authusertorole } from "~/utils";
 
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
   const cookieHeader = props.request.headers.get("Cookie");
@@ -118,9 +119,7 @@ const Dashboard: React.FC = (): JSX.Element => {
     } else if (filterStatus === "OTHER") {
       const otherStatuses = ["REJECTED", "INPROCESS", "APPROVED"];
       setFilteredDepartment(
-        department.filter(
-          (d: any) => !otherStatuses.includes(d.query_status)
-        )
+        department.filter((d: any) => !otherStatuses.includes(d.query_status))
       );
     } else {
       setFilteredDepartment(
@@ -323,7 +322,7 @@ const Dashboard: React.FC = (): JSX.Element => {
                     Form Id
                   </th>
                   <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">
-                    Purpose
+                    File With
                   </th>
                   <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">
                     Applicant
@@ -353,7 +352,7 @@ const Dashboard: React.FC = (): JSX.Element => {
                         )}
                       </td>
                       <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                        {val.form_type}
+                        {authusertorole(val.auth_user_id)}
                       </td>
                       <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                         {val.name}

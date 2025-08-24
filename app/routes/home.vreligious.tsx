@@ -8,6 +8,7 @@ import Pagination from "~/components/pagination";
 import { userPrefs } from "~/cookies";
 import { usePagination } from "~/hooks/usepagination";
 import { ApiCall } from "~/services/api";
+import { authusertorole } from "~/utils";
 
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
     const cookieHeader = props.request.headers.get("Cookie");
@@ -197,7 +198,7 @@ const Religious: React.FC = (): JSX.Element => {
                                 <thead>
                                     <tr className="rounded-md bg-[#0984e3] border-b border-t transition duration-300 ease-in-out">
                                         <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">Form Id</th>
-                                        <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">Purpose</th>
+                                        <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">File With</th>
                                         <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">Applicant</th>
                                         <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">Event Date</th>
                                         <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">Village</th>
@@ -213,7 +214,7 @@ const Religious: React.FC = (): JSX.Element => {
                                                     EST-RLG-{`0000${val.form_id}`.substring(`0000${val.form_id}`.length - 4)}
                                                 </td>
                                                 <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                                    {val.form_type}
+                                                    {authusertorole(val.auth_user_id)}
                                                 </td>
                                                 <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                                                     {val.name}
