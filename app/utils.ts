@@ -117,20 +117,19 @@ const longtext = (text: string, long: number): string => {
 };
 export { longtext };
 
-const authusertorole = (id: number) => {
+const authusertorole = (id: string) => {
   switch (id) {
-    case 3:
+    case "3":
       return "Collector";
 
-    case 4:
+    case "4":
       return "Dy.Collector";
-    case 5:
+    case "5":
       return "Suptd";
-    case 6:
+    case "6":
       return "LDC";
-    case 8:
+    case "8":
       return "SDPO";
-
     default:
       return "Suptd";
   }

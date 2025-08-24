@@ -248,7 +248,7 @@ const Marriage: React.FC = (): JSX.Element => {
                           )}
                         </td>
                         <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                          {authusertorole(val.auth_user_id)}
+                          {authusertorole(val.auth_user_id.toString())}
                         </td>
                         <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                           {val.name}
