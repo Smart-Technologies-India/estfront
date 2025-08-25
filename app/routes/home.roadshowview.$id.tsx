@@ -1076,6 +1076,52 @@ const RoadshowView: React.FC = (): JSX.Element => {
                       </button>
                     ) : null}
 
+                    {/* Dy.Collector button */}
+                    {common.form_status == 75 && user.id == 4 ? (
+                      <button
+                        onClick={() => {
+                          setNotingsBox((val) => true);
+                          // setForwardBox(val => true);
+                          setNextData((val) => ({
+                            title: "Forward to Collector",
+                            formstatus: 150,
+                            querytype: "INTRA",
+                            authuserid: "3",
+                            foacaluserid: "5",
+                            intrauserid: "5,4,3",
+                            interuserid: "0",
+                            touserid: 3,
+                            querystatus: "INPROCESS",
+                          }));
+                        }}
+                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                      >
+                        Forward to Collector
+                      </button>
+                    ) : null}
+
+                    {common.form_status == 75 && user.id == 4 ? (
+                      <button
+                        onClick={() => {
+                          setForwardBox((val) => true);
+                          setNextData((val) => ({
+                            title: "Forward to SUPTD",
+                            formstatus: 200,
+                            querytype: "INTRA",
+                            authuserid: "5",
+                            foacaluserid: "5",
+                            intrauserid: "5,4",
+                            interuserid: "0",
+                            touserid: 5,
+                            querystatus: "INPROCESS",
+                          }));
+                        }}
+                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                      >
+                        Forward to SUPTD
+                      </button>
+                    ) : null}
+
                     {/* SHO button */}
                     {common.form_status == 100 && user.id == 8 ? (
                       <button
