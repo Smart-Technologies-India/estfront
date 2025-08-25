@@ -1,5 +1,5 @@
 import { Link, useLoaderData, useNavigate } from "@remix-run/react";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Fa6SolidFileLines, Fa6SolidLink } from "~/components/icons/icons";
 import { ApiCall, UploadFile } from "~/services/api";
 import { toast } from "react-toastify";
@@ -864,7 +864,7 @@ const RoadshowView: React.FC = (): JSX.Element => {
           <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
             <a
               target="_blank"
-              href={from_data.witness_1_url}
+              href={from_data.doc_1_url}
               className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium"
               rel="noreferrer"
             >
@@ -877,7 +877,7 @@ const RoadshowView: React.FC = (): JSX.Element => {
 
         <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
-            <span className="mr-2">4.4</span> Ohter Document 2
+            <span className="mr-2">4.4</span> Other Document 2
             <p className="text-rose-500 text-sm">
               ( Maximum Upload Size 2MB & Allowed Format JPG / PDF / PNG )
             </p>
@@ -885,7 +885,7 @@ const RoadshowView: React.FC = (): JSX.Element => {
           <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
             <a
               target="_blank"
-              href={from_data.witness_2_url}
+              href={from_data.doc_2_url}
               className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium"
               rel="noreferrer"
             >

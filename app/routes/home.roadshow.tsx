@@ -197,22 +197,22 @@ const Roadshow: React.FC = (): JSX.Element => {
       if (witness_1_url == null || witness_1_url == undefined) {
         toast.error("Select Signature Image.", { theme: "light" });
       }
-      const witness_1_urlt = await UploadFile(sigimg!);
+      const witness_1_urlt = await UploadFile(witness_1_url!);
 
       if (witness_2_url == null || witness_2_url == undefined) {
         toast.error("Select Signature Image.", { theme: "light" });
       }
-      const witness_2_urlt = await UploadFile(sigimg!);
+      const witness_2_urlt = await UploadFile(witness_2_url!);
 
       if (applicant_uid_url == null || applicant_uid_url == undefined) {
         toast.error("Select Signature Image.", { theme: "light" });
       }
-      const applicant_uid_urlt = await UploadFile(sigimg!);
+      const applicant_uid_urlt = await UploadFile(applicant_uid_url!);
 
       if (undertaking_url == null || undertaking_url == undefined) {
         toast.error("Select Signature Image.", { theme: "light" });
       }
-      const undertaking_urlt = await UploadFile(sigimg!);
+      const undertaking_urlt = await UploadFile(undertaking_url!);
 
       if (
         witness_1_urlt.status &&

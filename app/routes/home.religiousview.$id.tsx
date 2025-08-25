@@ -1,5 +1,5 @@
 import { Link, useLoaderData, useNavigate } from "@remix-run/react";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Fa6SolidFileLines, Fa6SolidLink } from "~/components/icons/icons";
 import { ApiCall, UploadFile } from "~/services/api";
 import { toast } from "react-toastify";
@@ -863,7 +863,7 @@ const ReligiousView: React.FC = (): JSX.Element => {
           <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
             <a
               target="_blank"
-              href={from_data.witness_1_url}
+              href={from_data.doc_1_url}
               className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium"
               rel="noreferrer"
             >
@@ -884,7 +884,7 @@ const ReligiousView: React.FC = (): JSX.Element => {
           <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
             <a
               target="_blank"
-              href={from_data.witness_2_url}
+              href={from_data.doc_2_url}
               className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium"
               rel="noreferrer"
             >
