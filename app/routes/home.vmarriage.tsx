@@ -34,7 +34,8 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
 				event_date,
                 form_status,
                 query_status,
-                form_id
+                form_id,
+                createdAt
             }
           }
       `,
@@ -245,7 +246,15 @@ const Marriage: React.FC = (): JSX.Element => {
                           EST-MRG-
                           {`0000${val.form_id}`.substring(
                             `0000${val.form_id}`.length - 4
-                          )}
+                          )}{" "}
+                          (
+                          {new Date(val.createdAt)
+                            .toJSON()
+                            .slice(0, 10)
+                            .split("-")
+                            .reverse()
+                            .join("/")}
+                          )
                         </td>
                         <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                           {authusertorole(val.auth_user_id.toString())}
