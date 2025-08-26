@@ -190,36 +190,28 @@ const Roadshow: React.FC = (): JSX.Element => {
     const parsed = RoadshowScheme.safeParse(roadshowScheme);
     if (parsed.success) {
       if (sigimg == null || sigimg == undefined) {
-        toast.error("Select Signature Image.", { theme: "light" });
+        toast.error("Upload Signature Image.", { theme: "light" });
       }
       const sign_url = await UploadFile(sigimg!);
 
-      if (witness_1_url == null || witness_1_url == undefined) {
-        toast.error("Select Signature Image.", { theme: "light" });
-      }
       const witness_1_urlt = await UploadFile(witness_1_url!);
 
-      if (witness_2_url == null || witness_2_url == undefined) {
-        toast.error("Select Signature Image.", { theme: "light" });
-      }
       const witness_2_urlt = await UploadFile(witness_2_url!);
 
       if (applicant_uid_url == null || applicant_uid_url == undefined) {
-        toast.error("Select Signature Image.", { theme: "light" });
+        toast.error("Upload Applicant UID.", { theme: "light" });
       }
       const applicant_uid_urlt = await UploadFile(applicant_uid_url!);
 
       if (undertaking_url == null || undertaking_url == undefined) {
-        toast.error("Select Signature Image.", { theme: "light" });
+        toast.error("Upload Undertaking Document.", { theme: "light" });
       }
       const undertaking_urlt = await UploadFile(undertaking_url!);
 
       if (
-        witness_1_urlt.status &&
         sign_url.status &&
-        witness_2_urlt &&
-        applicant_uid_urlt &&
-        undertaking_urlt
+        applicant_uid_urlt.status &&
+        undertaking_urlt.status
       ) {
         const data = await ApiCall({
           query: `
@@ -245,8 +237,8 @@ const Roadshow: React.FC = (): JSX.Element => {
               event_name: roadshowScheme.event_name,
               event_address: roadshowScheme.event_address,
               relation: roadshowScheme.relation,
-              doc_1_url: witness_1_urlt.data,
-              doc_2_url: witness_2_urlt.data,
+              doc_1_url: witness_1_urlt.data ?? "",
+              doc_2_url: witness_2_urlt.data ?? "",
               applicant_uid_url: applicant_uid_urlt.data,
               undertaking_url: undertaking_urlt.data,
               status: "ACTIVE",
@@ -260,7 +252,7 @@ const Roadshow: React.FC = (): JSX.Element => {
           navigator(`/home/roadshowview/${data.data.createRoadshow.id}`);
         }
       } else {
-        toast.error("Something want wrong unable to upload images.", {
+        toast.error("Something went wrong unable to upload images.", {
           theme: "light",
         });
       }

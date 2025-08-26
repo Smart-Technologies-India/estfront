@@ -145,21 +145,21 @@ const DashBoard = (): JSX.Element => {
   const villageprocess = loader.villageprocess;
 
   villagecount.sort((a: any, b: any) => b.count - a.count);
-  const topItems = villagecount.slice(0, 10);
-  const otherCount = villagecount
-    .slice(10)
-    .reduce((sum: any, item: any) => sum + item.count, 0);
+  // const topItems = villagecount.slice(0, 10);
+  // const otherCount = villagecount
+  //   .slice(10)
+  //   .reduce((sum: any, item: any) => sum + item.count, 0);
 
-  const otherDataset =
-    otherCount !== 0
-      ? {
-          label: "Other",
-          data: [otherCount],
-          backgroundColor: "rgba(192, 192, 192, 0.75)",
-          borderColor: "rgba(255, 255, 255, 1)",
-          borderWidth: 1,
-        }
-      : null;
+  // const otherDataset =
+  //   otherCount !== 0
+  //     ? {
+  //         label: "Other",
+  //         data: [otherCount],
+  //         backgroundColor: "rgba(192, 192, 192, 0.75)",
+  //         borderColor: "rgba(255, 255, 255, 1)",
+  //         borderWidth: 1,
+  //       }
+  //     : null;
 
   const dynamicColors = (numColors: any) => {
     const colors = [];
@@ -173,55 +173,55 @@ const DashBoard = (): JSX.Element => {
     return colors;
   };
 
-  const topItemColors = dynamicColors(topItems.length);
-  const villageData = {
-    labels: [
-      ...topItems.map((item: any) => item.village),
-      ...(otherDataset ? ["Other"] : []),
-    ],
-    datasets: [
-      {
-        label: "# of Votes",
-        data: [
-          ...topItems.map((item: any) => item.count),
-          ...(otherDataset ? [otherCount] : []),
-        ],
-        backgroundColor: [
-          ...topItemColors,
-          ...(otherDataset ? ["rgba(192, 192, 192, 0.75)"] : []),
-        ],
-        borderColor: [
-          ...topItemColors.map((color) => color.replace("0.2", "1")),
-          ...(otherDataset ? ["rgba(255, 255, 255, 1)"] : []),
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
+  // const topItemColors = dynamicColors(topItems.length);
+  // const villageData = {
+  //   labels: [
+  //     ...topItems.map((item: any) => item.village),
+  //     ...(otherDataset ? ["Other"] : []),
+  //   ],
+  //   datasets: [
+  //     {
+  //       label: "# of Votes",
+  //       data: [
+  //         ...topItems.map((item: any) => item.count),
+  //         ...(otherDataset ? [otherCount] : []),
+  //       ],
+  //       backgroundColor: [
+  //         ...topItemColors,
+  //         ...(otherDataset ? ["rgba(192, 192, 192, 0.75)"] : []),
+  //       ],
+  //       borderColor: [
+  //         ...topItemColors.map((color) => color.replace("0.2", "1")),
+  //         ...(otherDataset ? ["rgba(255, 255, 255, 1)"] : []),
+  //       ],
+  //       borderWidth: 1,
+  //     },
+  //   ],
+  // };
 
-  const villageOptions: any = {
-    responsive: true,
-    plugins: {
-      datalabels: {
-        anchor: "center",
-        align: "center",
-        color: "#1e293b",
-        font: {
-          size: 30,
-        },
-        formatter: function (value: any) {
-          return value;
-        },
-      },
-      legend: {
-        labels: {
-          font: {
-            size: 25,
-          },
-        },
-      },
-    },
-  };
+  // const villageOptions: any = {
+  //   responsive: true,
+  //   plugins: {
+  //     datalabels: {
+  //       anchor: "center",
+  //       align: "center",
+  //       color: "#1e293b",
+  //       font: {
+  //         size: 30,
+  //       },
+  //       formatter: function (value: any) {
+  //         return value;
+  //       },
+  //     },
+  //     legend: {
+  //       labels: {
+  //         font: {
+  //           size: 25,
+  //         },
+  //       },
+  //     },
+  //   },
+  // };
 
   const officerDataColors = dynamicColors(officercount.length);
 
@@ -479,6 +479,9 @@ const DashBoard = (): JSX.Element => {
               <div className="w-10 bg-gray-500 h-[3px]"></div>
               <div className="grow bg-gray-700 h-[2px]"></div>
             </div>
+            {officerData.datasets.length == 0 && (
+              <p className="text-gray-500 text-center">No data available</p>
+            )}
             <div className="w-[30rem] h-[30rem] mx-auto">
               <Doughnut data={officerData} options={officerOptions} />
             </div>
@@ -495,6 +498,9 @@ const DashBoard = (): JSX.Element => {
           <div className="w-10 bg-gray-500 h-[3px]"></div>
           <div className="grow bg-gray-700 h-[2px]"></div>
         </div>
+        {data.datasets.length == 0 && (
+          <p className="text-gray-500 text-center">No data available</p>
+        )}
         <Bar options={options} data={data} />
       </div>
 
@@ -507,6 +513,9 @@ const DashBoard = (): JSX.Element => {
           <div className="w-10 bg-gray-500 h-[3px]"></div>
           <div className="grow bg-gray-700 h-[2px]"></div>
         </div>
+        {villageprocessdata.datasets.length == 0 && (
+          <p className="text-gray-500 text-center">No data available</p>
+        )}
         <Bar options={villageprocessoptions} data={villageprocessdata} />
       </div>
     </>

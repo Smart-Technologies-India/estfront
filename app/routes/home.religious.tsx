@@ -188,36 +188,28 @@ const Religious: React.FC = (): JSX.Element => {
     const parsed = ReligiousScheme.safeParse(religiousScheme);
     if (parsed.success) {
       if (sigimg == null || sigimg == undefined) {
-        toast.error("Select Signature Image.", { theme: "light" });
+        toast.error("Upload Signature Image.", { theme: "light" });
       }
       const sign_url = await UploadFile(sigimg!);
 
-      if (witness_1_url == null || witness_1_url == undefined) {
-        toast.error("Select Signature Image.", { theme: "light" });
-      }
       const witness_1_urlt = await UploadFile(witness_1_url!);
 
-      if (witness_2_url == null || witness_2_url == undefined) {
-        toast.error("Select Signature Image.", { theme: "light" });
-      }
       const witness_2_urlt = await UploadFile(witness_2_url!);
 
       if (applicant_uid_url == null || applicant_uid_url == undefined) {
-        toast.error("Select Signature Image.", { theme: "light" });
+        toast.error("Upload Applicant UID.", { theme: "light" });
       }
       const applicant_uid_urlt = await UploadFile(applicant_uid_url!);
 
       if (undertaking_url == null || undertaking_url == undefined) {
-        toast.error("Select Signature Image.", { theme: "light" });
+        toast.error("Upload Undertaking Document.", { theme: "light" });
       }
       const undertaking_urlt = await UploadFile(undertaking_url!);
 
       if (
-        witness_1_urlt.status &&
         sign_url.status &&
-        witness_2_urlt &&
-        applicant_uid_urlt &&
-        undertaking_urlt
+        applicant_uid_urlt.status &&
+        undertaking_urlt.status
       ) {
         const data = await ApiCall({
           query: `
@@ -244,8 +236,8 @@ const Religious: React.FC = (): JSX.Element => {
               event_address: religiousScheme.event_address,
               relation: religiousScheme.relation,
               route_info: religiousScheme.route_info,
-              doc_1_url: witness_1_urlt.data,
-              doc_2_url: witness_2_urlt.data,
+              doc_1_url: witness_1_urlt.data ?? "",
+              doc_2_url: witness_2_urlt.data ?? "",
               applicant_uid_url: applicant_uid_urlt.data,
               undertaking_url: undertaking_urlt.data,
               status: "ACTIVE",
@@ -258,7 +250,7 @@ const Religious: React.FC = (): JSX.Element => {
           navigator(`/home/religiousview/${data.data.createReligious.id}`);
         }
       } else {
-        toast.error("Something want wrong unable to upload images.", {
+        toast.error("Something went wrong unable to upload images.", {
           theme: "light",
         });
       }

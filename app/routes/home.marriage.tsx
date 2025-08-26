@@ -192,36 +192,36 @@ const Marriage: React.FC = (): JSX.Element => {
     const parsed = MarriageScheme.safeParse(marriageScheme);
     if (parsed.success) {
       if (sigimg == null || sigimg == undefined) {
-        toast.error("Select Signature Image.", { theme: "light" });
+        toast.error("Upload Signature Image.", { theme: "light" });
       }
       const sign_url = await UploadFile(sigimg!);
 
       if (witness_1_url == null || witness_1_url == undefined) {
-        toast.error("Select Signature Image.", { theme: "light" });
+        toast.error("Upload witness 1 document.", { theme: "light" });
       }
       const witness_1_urlt = await UploadFile(witness_1_url!);
 
       if (witness_2_url == null || witness_2_url == undefined) {
-        toast.error("Select Signature Image.", { theme: "light" });
+        toast.error("Upload witness 2 document.", { theme: "light" });
       }
       const witness_2_urlt = await UploadFile(witness_2_url!);
 
       if (applicant_uid_url == null || applicant_uid_url == undefined) {
-        toast.error("Select Signature Image.", { theme: "light" });
+        toast.error("Upload applicant UID document.", { theme: "light" });
       }
       const applicant_uid_urlt = await UploadFile(applicant_uid_url!);
 
       if (undertaking_url == null || undertaking_url == undefined) {
-        toast.error("Select Signature Image.", { theme: "light" });
+        toast.error("Upload undertaking document.", { theme: "light" });
       }
       const undertaking_urlt = await UploadFile(undertaking_url!);
 
       if (
         witness_1_urlt.status &&
         sign_url.status &&
-        witness_2_urlt &&
-        applicant_uid_urlt &&
-        undertaking_urlt
+        witness_2_urlt.status &&
+        applicant_uid_urlt.status &&
+        undertaking_urlt.status
       ) {
         const data = await ApiCall({
           query: `
@@ -261,7 +261,7 @@ const Marriage: React.FC = (): JSX.Element => {
           navigator(`/home/marriageview/${data.data.createMarriage.id}`);
         }
       } else {
-        toast.error("Something want wrong unable to upload images.", {
+        toast.error("Something went wrong unable to upload images.", {
           theme: "light",
         });
       }
