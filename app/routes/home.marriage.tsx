@@ -158,11 +158,11 @@ const Marriage: React.FC = (): JSX.Element => {
       .refine((obj) => obj.village_id != 0, {
         message: "Select your village",
         path: ["village_id"],
-      })
-      .refine((obj) => obj.from_date < obj.to_date, {
-        message: "From date must be less than To date",
-        path: ["from_date", "to_date"],
       });
+    // .refine((obj) => obj.from_date < obj.to_date, {
+    //   message: "From date must be less than To date",
+    //   path: ["from_date", "to_date"],
+    // });
 
     type MarriageScheme = z.infer<typeof MarriageScheme>;
     const toIST = (date: Date): Date => {
@@ -321,6 +321,7 @@ const Marriage: React.FC = (): JSX.Element => {
         <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
             <span className="mr-2">1.1</span> Applicant village
+            <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
             <select
@@ -360,6 +361,7 @@ const Marriage: React.FC = (): JSX.Element => {
         <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
             <span className="mr-2">2.1</span> Applicant Name
+            <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
             <input
@@ -372,6 +374,7 @@ const Marriage: React.FC = (): JSX.Element => {
         <div className="flex flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
             <span className="mr-2">2.2</span> Applicant address
+            <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
             <textarea
@@ -384,6 +387,7 @@ const Marriage: React.FC = (): JSX.Element => {
         <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
             <span className="mr-2">2.3</span> Applicant Contact Number
+            <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
             <input
@@ -396,6 +400,7 @@ const Marriage: React.FC = (): JSX.Element => {
         <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
             <span className="mr-2">2.4</span> Applicant Email
+            <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
             <input
@@ -408,6 +413,7 @@ const Marriage: React.FC = (): JSX.Element => {
         <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
             <span className="mr-2">2.5</span> Applicant Aadhar Number
+            <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
             <input
@@ -431,6 +437,7 @@ const Marriage: React.FC = (): JSX.Element => {
         <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
             <span className="mr-2">3.1</span> Name of the Bride / Groom
+            <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
             <input
@@ -443,6 +450,7 @@ const Marriage: React.FC = (): JSX.Element => {
         <div className="flex flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
             <span className="mr-2">3.2</span> Event address
+            <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
             <textarea
@@ -455,6 +463,7 @@ const Marriage: React.FC = (): JSX.Element => {
         <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
             <span className="mr-2">3.3</span> Applicant Relation
+            <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
             <input
@@ -467,6 +476,7 @@ const Marriage: React.FC = (): JSX.Element => {
         <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
             <span className="mr-2">3.4</span> Event From Date to To Date
+            <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
             {/* <input
@@ -509,9 +519,9 @@ const Marriage: React.FC = (): JSX.Element => {
         <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
             <span className="mr-2">4.1</span> Applicant and 2 witness Aadhar
-            Upload
+            Upload<span className="text-rose-500">*</span>
             <p className="text-rose-500 text-sm">
-              ( Maximum Upload Size 2MB & Allowed Format JPG / PDF / PNG )
+              ( Maximum Upload Size 4 MB & Allowed Format JPG / PDF / PNG )
             </p>
           </div>
           <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
@@ -548,6 +558,7 @@ const Marriage: React.FC = (): JSX.Element => {
         <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
             <span className="mr-2">4.2</span> Undertaking
+            <span className="text-rose-500">*</span>
             <a
               href="/undertaking_establish.pdf"
               download
@@ -558,7 +569,7 @@ const Marriage: React.FC = (): JSX.Element => {
               <p> Click to Download Format</p>
             </a>
             <p className="text-rose-500 text-sm">
-              ( Maximum Upload Size 2MB & Allowed Format JPG / PDF / PNG )
+              ( Maximum Upload Size 4 MB & Allowed Format JPG / PDF / PNG )
             </p>
           </div>
           <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
@@ -595,8 +606,9 @@ const Marriage: React.FC = (): JSX.Element => {
         <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
             <span className="mr-2">4.3</span> Other Documents 1
+            <span className="text-rose-500">*</span>
             <p className="text-rose-500 text-sm">
-              ( Maximum Upload Size 2MB & Allowed Format JPG / PDF / PNG )
+              ( Maximum Upload Size 4 MB & Allowed Format JPG / PDF / PNG )
             </p>
           </div>
           <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
@@ -633,8 +645,9 @@ const Marriage: React.FC = (): JSX.Element => {
         <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
             <span className="mr-2">4.4</span> Other Documents 2
+            <span className="text-rose-500">*</span>
             <p className="text-rose-500 text-sm">
-              ( Maximum Upload Size 2MB & Allowed Format JPG / PDF / PNG )
+              ( Maximum Upload Size 4 MB & Allowed Format JPG / PDF / PNG )
             </p>
           </div>
           <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
@@ -679,7 +692,7 @@ const Marriage: React.FC = (): JSX.Element => {
 
         <div className="flex gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="text-xl font-normal text-left text-gray-700 ">
-            5.1
+            5.1<span className="text-rose-500">*</span>
           </div>
           <div className="flex items-start">
             <input
@@ -701,8 +714,9 @@ const Marriage: React.FC = (): JSX.Element => {
         <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
             <span className="mr-2">5.2</span> Applicant Signature Image
+            <span className="text-rose-500">*</span>
             <p className="text-rose-500 text-sm">
-              ( Maximum Upload Size 2MB & Allowed Format JPG / PDF / PNG )
+              ( Maximum Upload Size 4 MB & Allowed Format JPG / PDF / PNG )
             </p>
           </div>
           <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">

@@ -155,11 +155,11 @@ const Religious: React.FC = (): JSX.Element => {
         iagree: z.string().nonempty("I solemnly affirm & hereby."),
         route_info: z.string().nonempty("Enter Route information"),
       })
-      .strict()
-      .refine((obj) => obj.from_date < obj.to_date, {
-        message: "From date must be less than To date",
-        path: ["from_date", "to_date"],
-      });
+      .strict();
+    // .refine((obj) => obj.from_date < obj.to_date, {
+    //   message: "From date must be less than To date",
+    //   path: ["from_date", "to_date"],
+    // });
 
     type ReligiousScheme = z.infer<typeof ReligiousScheme>;
 
@@ -192,9 +192,15 @@ const Religious: React.FC = (): JSX.Element => {
       }
       const sign_url = await UploadFile(sigimg!);
 
-      const witness_1_urlt = await UploadFile(witness_1_url!);
+      let witness_1_urlt;
+      if (witness_1_url != null || witness_1_url != undefined) {
+        witness_1_urlt = await UploadFile(witness_1_url!);
+      }
 
-      const witness_2_urlt = await UploadFile(witness_2_url!);
+      let witness_2_urlt;
+      if (witness_2_url != null || witness_2_url != undefined) {
+        witness_2_urlt = await UploadFile(witness_2_url!);
+      }
 
       if (applicant_uid_url == null || applicant_uid_url == undefined) {
         toast.error("Upload Applicant UID.", { theme: "light" });
@@ -236,8 +242,8 @@ const Religious: React.FC = (): JSX.Element => {
               event_address: religiousScheme.event_address,
               relation: religiousScheme.relation,
               route_info: religiousScheme.route_info,
-              doc_1_url: witness_1_urlt.data ?? "",
-              doc_2_url: witness_2_urlt.data ?? "",
+              doc_1_url: witness_1_urlt != undefined ? witness_1_urlt.data : "",
+              doc_2_url: witness_2_urlt != undefined ? witness_2_urlt.data : "",
               applicant_uid_url: applicant_uid_urlt.data,
               undertaking_url: undertaking_urlt.data,
               status: "ACTIVE",
@@ -307,7 +313,8 @@ const Religious: React.FC = (): JSX.Element => {
         </div>
         <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
-            <span className="mr-2">1.1</span> Applicant village
+            <span className="mr-2">1.1</span> Applicant village{" "}
+            <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
             <select
@@ -347,6 +354,7 @@ const Religious: React.FC = (): JSX.Element => {
         <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
             <span className="mr-2">2.1</span> Applicant Name
+            <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
             <input
@@ -359,6 +367,7 @@ const Religious: React.FC = (): JSX.Element => {
         <div className="flex flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
             <span className="mr-2">2.2</span> Applicant address
+            <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
             <textarea
@@ -371,6 +380,7 @@ const Religious: React.FC = (): JSX.Element => {
         <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
             <span className="mr-2">2.3</span> Applicant Contact Number
+            <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
             <input
@@ -383,6 +393,7 @@ const Religious: React.FC = (): JSX.Element => {
         <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
             <span className="mr-2">2.4</span> Applicant Email
+            <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
             <input
@@ -395,6 +406,7 @@ const Religious: React.FC = (): JSX.Element => {
         <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
             <span className="mr-2">2.5</span> Applicant Aadhar Number
+            <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
             <input
@@ -418,6 +430,7 @@ const Religious: React.FC = (): JSX.Element => {
         <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
             <span className="mr-2">3.1</span> Name of the event
+            <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
             <input
@@ -430,6 +443,7 @@ const Religious: React.FC = (): JSX.Element => {
         <div className="flex flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
             <span className="mr-2">3.2</span> Event address
+            <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
             <textarea
@@ -442,6 +456,7 @@ const Religious: React.FC = (): JSX.Element => {
         <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
             <span className="mr-2">3.3</span> Applicant Relation
+            <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
             <input
@@ -453,7 +468,8 @@ const Religious: React.FC = (): JSX.Element => {
         </div>
         <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
-            <span className="mr-2">3.4</span> Event From Date to To Date
+            <span className="mr-2">3.4</span> Event From Date To Date
+            <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
             <RangePicker
@@ -486,6 +502,7 @@ const Religious: React.FC = (): JSX.Element => {
         <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
             <span className="mr-2">3.6</span> Route Information
+            <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
             <input
@@ -510,9 +527,10 @@ const Religious: React.FC = (): JSX.Element => {
         <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
             <span className="mr-2">4.1</span> Applicant and 2 witness Aadhaar
+            <span className="text-rose-500">*</span>
             Upload
             <p className="text-rose-500 text-sm">
-              ( Maximum Upload Size 2MB & Allowed Format JPG / PDF / PNG )
+              ( Maximum Upload Size 4 MB & Allowed Format JPG / PDF / PNG )
             </p>
           </div>
           <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
@@ -550,6 +568,7 @@ const Religious: React.FC = (): JSX.Element => {
         <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
             <span className="mr-2">4.2</span> Undertaking
+            <span className="text-rose-500">*</span>
             <a
               href="/undertaking_establish.pdf"
               download
@@ -559,7 +578,7 @@ const Religious: React.FC = (): JSX.Element => {
               <p> Click to Download Format</p>
             </a>
             <p className="text-rose-500 text-sm">
-              ( Maximum Upload Size 2MB & Allowed Format JPG / PDF / PNG )
+              ( Maximum Upload Size 4 MB & Allowed Format JPG / PDF / PNG )
             </p>
           </div>
           <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
@@ -597,7 +616,7 @@ const Religious: React.FC = (): JSX.Element => {
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
             <span className="mr-2">4.2</span> Other Document 1
             <p className="text-rose-500 text-sm">
-              ( Maximum Upload Size 2MB & Allowed Format JPG / PDF / PNG )
+              ( Maximum Upload Size 4 MB & Allowed Format JPG / PDF / PNG )
             </p>
           </div>
           <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
@@ -635,7 +654,7 @@ const Religious: React.FC = (): JSX.Element => {
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
             <span className="mr-2">4.4</span> Other Document 2
             <p className="text-rose-500 text-sm">
-              ( Maximum Upload Size 2MB & Allowed Format JPG / PDF / PNG )
+              ( Maximum Upload Size 4 MB & Allowed Format JPG / PDF / PNG )
             </p>
           </div>
           <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
@@ -675,6 +694,7 @@ const Religious: React.FC = (): JSX.Element => {
         <div className="w-full bg-[#0984e3] py-2 rounded-md px-4 mt-4">
           <p className="text-left font-semibold text-xl text-white">
             5. Applicant Declaration and Signature{" "}
+            <span className="text-rose-500">*</span>
           </p>
         </div>
 
@@ -703,7 +723,7 @@ const Religious: React.FC = (): JSX.Element => {
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
             <span className="mr-2">5.2</span> Applicant Signature Image
             <p className="text-rose-500 text-sm">
-              ( Maximum Upload Size 2MB & Allowed Format JPG / PDF / PNG )
+              ( Maximum Upload Size 4 MB & Allowed Format JPG / PDF / PNG )
             </p>
           </div>
           <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">

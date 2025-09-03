@@ -815,7 +815,7 @@ const ReligiousView: React.FC = (): JSX.Element => {
             <span className="mr-2">4.1</span> Applicant and 2 witness Aadhaar
             Upload
             <p className="text-rose-500 text-sm">
-              ( Maximum Upload Size 2MB & Allowed Format JPG / PDF / PNG )
+              ( Maximum Upload Size 4 MB & Allowed Format JPG / PDF / PNG )
             </p>
           </div>
           <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
@@ -836,7 +836,7 @@ const ReligiousView: React.FC = (): JSX.Element => {
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
             <span className="mr-2">4.2</span> Undertaking
             <p className="text-rose-500 text-sm">
-              ( Maximum Upload Size 2MB & Allowed Format JPG / PDF / PNG )
+              ( Maximum Upload Size 4 MB & Allowed Format JPG / PDF / PNG )
             </p>
           </div>
           <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
@@ -853,47 +853,55 @@ const ReligiousView: React.FC = (): JSX.Element => {
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
-          <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
-            <span className="mr-2">4.3</span> Other Document 1
-            <p className="text-rose-500 text-sm">
-              ( Maximum Upload Size 2MB & Allowed Format JPG / PDF / PNG )
-            </p>
-          </div>
-          <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
-            <a
-              target="_blank"
-              href={from_data.doc_1_url}
-              className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium"
-              rel="noreferrer"
-            >
-              <div className="flex items-center gap-2">
-                <Fa6SolidLink></Fa6SolidLink> View Doc.
+        {from_data.doc_1_url != null &&
+          from_data.doc_1_url != undefined &&
+          from_data.doc_1_url != "" && (
+            <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
+              <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
+                <span className="mr-2">4.3</span> Other Document 1
+                <p className="text-rose-500 text-sm">
+                  ( Maximum Upload Size 4 MB & Allowed Format JPG / PDF / PNG )
+                </p>
               </div>
-            </a>
-          </div>
-        </div>
+              <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
+                <a
+                  target="_blank"
+                  href={from_data.doc_1_url}
+                  className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium"
+                  rel="noreferrer"
+                >
+                  <div className="flex items-center gap-2">
+                    <Fa6SolidLink></Fa6SolidLink> View Doc.
+                  </div>
+                </a>
+              </div>
+            </div>
+          )}
 
-        <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
-          <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
-            <span className="mr-2">4.4</span> Other Document 2
-            <p className="text-rose-500 text-sm">
-              ( Maximum Upload Size 2MB & Allowed Format JPG / PDF / PNG )
-            </p>
-          </div>
-          <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
-            <a
-              target="_blank"
-              href={from_data.doc_2_url}
-              className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium"
-              rel="noreferrer"
-            >
-              <div className="flex items-center gap-2">
-                <Fa6SolidLink></Fa6SolidLink> View Doc.
+        {from_data.doc_2_url != null &&
+          from_data.doc_2_url != undefined &&
+          from_data.doc_2_url != "" && (
+            <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
+              <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
+                <span className="mr-2">4.4</span> Other Document 2
+                <p className="text-rose-500 text-sm">
+                  ( Maximum Upload Size 4 MB & Allowed Format JPG / PDF / PNG )
+                </p>
               </div>
-            </a>
-          </div>
-        </div>
+              <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
+                <a
+                  target="_blank"
+                  href={from_data.doc_2_url}
+                  className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium"
+                  rel="noreferrer"
+                >
+                  <div className="flex items-center gap-2">
+                    <Fa6SolidLink></Fa6SolidLink> View Doc.
+                  </div>
+                </a>
+              </div>
+            </div>
+          )}
 
         {/*--------------------- section 4 end here ------------------------- */}
 
@@ -926,7 +934,7 @@ const ReligiousView: React.FC = (): JSX.Element => {
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
             <span className="mr-2">5.2</span> Applicant Signature Image
             <p className="text-rose-500 text-sm">
-              ( Maximum Upload Size 2MB & Allowed Format JPG / PDF / PNG )
+              ( Maximum Upload Size 4 MB & Allowed Format JPG / PDF / PNG )
             </p>
           </div>
           <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">

@@ -24,7 +24,7 @@ const QueryTabs: React.FC<QueryTabsProps> = (props: QueryTabsProps): JSX.Element
                 {(props.doc == null || props.doc == undefined || props.doc == "") ? null :
                     <div>
                         <a target="_blank" href={props.doc}
-                            className=" py-1 mt-2 inline-block w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                            className=" py-1 mt-2 inline-block w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium" rel="noreferrer"
                         >
                             View Doc
                         </a>

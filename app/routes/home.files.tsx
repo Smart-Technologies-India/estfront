@@ -321,9 +321,12 @@ const Dashboard: React.FC = (): JSX.Element => {
                   <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">
                     Form Id
                   </th>
-                  <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">
-                    File With
-                  </th>
+                  {user.role == "USER" ? null : (
+                    <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">
+                      File With
+                    </th>
+                  )}
+
                   <th className="px-6 py-4 whitespace-nowrap font-medium text-white text-xl text-left">
                     Applicant
                   </th>
@@ -351,9 +354,12 @@ const Dashboard: React.FC = (): JSX.Element => {
                           `0000${val.form_id}`.length - 4
                         )}
                       </td>
-                      <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                        {authusertorole(val.auth_user_id.toString())}
-                      </td>
+                      {user.role == "USER" ? null : (
+                        <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                          {authusertorole(val.auth_user_id.toString())}
+                        </td>
+                      )}
+
                       <td className="text-lg text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                         {val.name}
                       </td>
