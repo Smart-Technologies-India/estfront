@@ -60,7 +60,7 @@ import { useRef } from "react";
 const Editor: React.FC = (): JSX.Element => {
     const notings = useRef<HTMLTextAreaElement>(null);
     const getdata = () => {
-        console.log(notings.current?.value.replace(/\n/g, "\\n"))
+        // console.log(notings.current?.value.replace(/\n/g, "\\n"))
     }
     return (
         <>

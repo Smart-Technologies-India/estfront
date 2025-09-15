@@ -25,6 +25,7 @@ const Header = () => {
                     <Link className="roboto text-2xl hover:text-[#c30734] font-medium text-gray-800 px-2 hidden sm:inline-block" to="/home/services" >Marriage</Link>
                     <Link className="roboto text-2xl hover:text-[#c30734] font-medium text-gray-800 px-2 hidden sm:inline-block" to="/home/services" >Roadshow</Link>
                     <Link className="roboto text-2xl hover:text-[#c30734] font-medium text-gray-800 px-2 hidden sm:inline-block" to="/home/services" >Religious</Link>
+                    <Link className="roboto text-2xl hover:text-[#c30734] font-medium text-gray-800 px-2 hidden sm:inline-block" to="/home/services" >Generic</Link>
                     <div className="grow"></div>
                     <Link className="roboto text-xl font-medium text-white px-4 bg-cyan-500 rounded-md py-1 shrink-0" to="/mobilelogin" >Login</Link>
                     <Link className="roboto text-xl font-medium text-white px-2 bg-[#0984e3] rounded-md py-1 shrink-0" to="/login" >Staff Login</Link>

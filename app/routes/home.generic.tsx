@@ -40,7 +40,7 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
   return json({ user: userdata.data.getUserById });
 };
 
-const Religious: React.FC = (): JSX.Element => {
+const Generic: React.FC = (): JSX.Element => {
   const user = useLoaderData().user;
 
   const nameRef = useRef<HTMLInputElement>(null);
@@ -120,7 +120,7 @@ const Religious: React.FC = (): JSX.Element => {
   };
 
   const submit = async () => {
-    const ReligiousScheme = z
+    const GenericScheme = z
       .object({
         name: z.string().nonempty("Applicant Name is required."),
         address: z.string().nonempty("Applicant address is required."),
@@ -161,7 +161,7 @@ const Religious: React.FC = (): JSX.Element => {
     //   path: ["from_date", "to_date"],
     // });
 
-    type ReligiousScheme = z.infer<typeof ReligiousScheme>;
+    type GenericScheme = z.infer<typeof GenericScheme>;
 
     // Helper to convert a UTC date to IST (Indian Standard Time)
     const toIST = (date: Date): Date => {
@@ -169,7 +169,7 @@ const Religious: React.FC = (): JSX.Element => {
       return new Date(date.getTime() + 5.5 * 60 * 60 * 1000);
     };
 
-    const religiousScheme: ReligiousScheme = {
+    const genericScheme: GenericScheme = {
       name: nameRef!.current!.value,
       address: addressRef!.current!.value,
       mobile: mobileRef!.current!.value,
@@ -185,7 +185,7 @@ const Religious: React.FC = (): JSX.Element => {
       route_info: route_infoRef!.current!.value,
     };
 
-    const parsed = ReligiousScheme.safeParse(religiousScheme);
+    const parsed = GenericScheme.safeParse(genericScheme);
     if (parsed.success) {
       if (sigimg == null || sigimg == undefined) {
         toast.error("Upload Signature Image.", { theme: "light" });
@@ -218,30 +218,29 @@ const Religious: React.FC = (): JSX.Element => {
         undertaking_urlt.status
       ) {
         const data = await ApiCall({
-          query: `
-                    mutation createReligious($createReligiousInput:CreateReligiousInput!){
-                        createReligious(createReligiousInput:$createReligiousInput){
+          query: `mutation createGeneric($createGenericInput:CreateGenericInput!){
+                        createGeneric(createGenericInput:$createGenericInput){
                           id
                         }
                       }
                     `,
           veriables: {
-            createReligiousInput: {
+            createGenericInput: {
               userId: Number(user.id),
-              name: religiousScheme.name,
-              address: religiousScheme.address,
-              email: religiousScheme.email,
-              mobile: religiousScheme.mobile,
-              user_uid: religiousScheme.user_uid,
-              village_id: religiousScheme.village_id,
+              name: genericScheme.name,
+              address: genericScheme.address,
+              email: genericScheme.email,
+              mobile: genericScheme.mobile,
+              user_uid: genericScheme.user_uid,
+              village_id: genericScheme.village_id,
               signature_url: sign_url.data,
-              from_date: religiousScheme.from_date,
-              to_date: religiousScheme.to_date,
-              iagree: religiousScheme.iagree,
-              event_name: religiousScheme.event_name,
-              event_address: religiousScheme.event_address,
-              relation: religiousScheme.relation,
-              route_info: religiousScheme.route_info,
+              from_date: genericScheme.from_date,
+              to_date: genericScheme.to_date,
+              iagree: genericScheme.iagree,
+              event_name: genericScheme.event_name,
+              event_address: genericScheme.event_address,
+              relation: genericScheme.relation,
+              route_info: genericScheme.route_info,
               doc_1_url: witness_1_urlt != undefined ? witness_1_urlt.data : "",
               doc_2_url: witness_2_urlt != undefined ? witness_2_urlt.data : "",
               applicant_uid_url: applicant_uid_urlt.data,
@@ -253,7 +252,7 @@ const Religious: React.FC = (): JSX.Element => {
         if (!data.status) {
           toast.error(data.message, { theme: "light" });
         } else {
-          navigator(`/home/religiousview/${data.data.createReligious.id}`);
+          navigator(`/home/genericview/${data.data.createGeneric.id}`);
         }
       } else {
         toast.error("Something went wrong unable to upload images.", {
@@ -293,7 +292,7 @@ const Religious: React.FC = (): JSX.Element => {
     <>
       <div className="bg-white rounded-md shadow-lg p-4 my-4 w-full">
         <h1 className="text-gray-800 text-xl md:text-3xl font-semibold text-center">
-          Religious Permission
+          Generic Permission
         </h1>
         <div className="w-full flex gap-4 my-4">
           <div className="grow bg-gray-700 h-[2px]"></div>
@@ -301,8 +300,7 @@ const Religious: React.FC = (): JSX.Element => {
           <div className="grow bg-gray-700 h-[2px]"></div>
         </div>
         <p className="text-center font-semibold text-lg md:text-xl text-gray-800">
-          {" "}
-          Subject : Request for Obtaining Religious Permission.{" "}
+          Subject : Request for Obtaining Generic Permission.
         </p>
 
         {/*--------------------- section 1 start here ------------------------- */}
@@ -776,4 +774,4 @@ const Religious: React.FC = (): JSX.Element => {
   );
 };
 
-export default Religious;
+export default Generic;

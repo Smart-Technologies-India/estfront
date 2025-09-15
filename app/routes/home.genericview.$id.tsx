@@ -15,8 +15,8 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
   const cookie: any = await userPrefs.parse(cookieHeader);
   const data = await ApiCall({
     query: `
-        query getMarriageById($id:Int!){
-            getMarriageById(id:$id){
+        query getGenericById($id:Int!){
+            getGenericById(id:$id){
               id,
               name,
               address,
@@ -30,8 +30,9 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
               event_name,
               event_address,
               relation,
-              witness_1_url,
-              witness_2_url,
+			  route_info,
+              doc_1_url,
+              doc_2_url,
               applicant_uid_url,
               undertaking_url,
               iagree,
@@ -68,11 +69,10 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
     veriables: {
       searchCommonInput: {
         form_id: parseInt(id!),
-        form_type: "MARRIAGE",
+        form_type: "GENERIC",
       },
     },
   });
-
   const village = await ApiCall({
     query: `
         query getVillageById($id:Int!){
@@ -83,20 +83,20 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
           }
       `,
     veriables: {
-      id: parseInt(data.data.getMarriageById.village_id),
+      id: parseInt(data.data.getGenericById.village_id),
     },
   });
 
   return json({
     user: cookie,
-    from_data: data.data.getMarriageById,
+    from_data: data.data.getGenericById,
     submit: submit.status,
     village: village.data.getVillageById,
     common: submit.data.searchCommon,
   });
 };
 
-const MarriageView: React.FC = (): JSX.Element => {
+const GenericView: React.FC = (): JSX.Element => {
   const loader = useLoaderData();
   const user = loader.user;
   const villagedata = loader.village;
@@ -132,7 +132,7 @@ const MarriageView: React.FC = (): JSX.Element => {
           number: from_data.mobile.toString(),
           event_date: from_data.from_date,
           form_status: 1,
-          form_type: "MARRIAGE",
+          form_type: "GENERIC",
           query_status: "SUBMIT",
         },
       },
@@ -168,7 +168,7 @@ const MarriageView: React.FC = (): JSX.Element => {
     if (queryRef.current?.value == null || queryRef.current?.value == "")
       return toast.error("Remark is required", { theme: "light" });
     const req: { [key: string]: any } = {
-      stage: "MARRIAGE",
+      stage: "GENERIC",
       form_id: from_data.id,
       from_user_id: Number(user.id),
       to_user_id: from_data.userId,
@@ -224,7 +224,7 @@ const MarriageView: React.FC = (): JSX.Element => {
   }
 
   const [nextdata, setNextData] = useState<forwardqueryType>({
-    title: "Send to SUPTD",
+    title: "Send to Suptd",
     authuserid: "0",
     foacaluserid: "0",
     intrauserid: "0",
@@ -239,7 +239,7 @@ const MarriageView: React.FC = (): JSX.Element => {
     if (forwardRef.current?.value == null || forwardRef.current?.value == "")
       return toast.error("Remark is required", { theme: "light" });
     const req: { [key: string]: any } = {
-      stage: "MARRIAGE",
+      stage: "GENERIC",
       form_id: from_data.id,
       from_user_id: Number(user.id),
       to_user_id: args.touserid,
@@ -335,7 +335,7 @@ const MarriageView: React.FC = (): JSX.Element => {
       veriables: {
         searchQueryInput: {
           form_id: from_data.id,
-          stage: "MARRIAGE",
+          stage: "GENERIC",
           query_type: isUser ? "PUBLIC" : "INTRA",
         },
       },
@@ -376,7 +376,7 @@ const MarriageView: React.FC = (): JSX.Element => {
       toast.error(data.message, { theme: "light" });
     } else {
       const req: { [key: string]: any } = {
-        stage: "MARRIAGE",
+        stage: "GENERIC",
         form_id: from_data.id,
         from_user_id: Number(user.id),
         to_user_id: from_data.userId,
@@ -410,15 +410,91 @@ const MarriageView: React.FC = (): JSX.Element => {
         toast.error(data.message, { theme: "light" });
       }
     }
-
     setRejectBox(false);
     setTimeout(() => {
       window.location.reload();
     }, 1500);
   };
 
+  const [notingsbox, setNotingsBox] = useState<boolean>(false);
+  const noticeRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (noticeRef && from_data.condition_to_follow) {
+      noticeRef!.current!.value =
+        from_data.condition_to_follow.replace(/\\n/g, "\n") ?? "";
+    }
+  }, []);
+
+  const sendnotingpint = async (): Promise<boolean> => {
+    if (
+      noticeRef!.current!.value == null ||
+      noticeRef!.current!.value == undefined ||
+      noticeRef!.current!.value == ""
+    ) {
+      toast.error("Enter some noting points...", { theme: "light" });
+      return false;
+    }
+
+    const data = await ApiCall({
+      query: `
+            mutation updateGenericById($updateGenericInput:UpdateGenericInput!){
+                updateGenericById(updateGenericInput:$updateGenericInput){
+                  id
+                }
+              }
+            `,
+      veriables: {
+        updateGenericInput: {
+          id: Number(from_data.id),
+          condition_to_follow: noticeRef!.current!.value.replace(/\n/g, "\\n"),
+        },
+      },
+    });
+    if (!data.status) {
+      setNotingsBox((val) => false);
+      toast.error(data.message, { theme: "light" });
+    } else {
+      setNotingsBox((val) => false);
+      setForwardBox((val) => true);
+    }
+
+    return false;
+  };
+
   return (
     <>
+      {/* notings box start here */}
+      <div
+        className={`fixed top-0 left-0 bg-black bg-opacity-20 min-h-screen w-full  z-50 ${
+          notingsbox ? "grid place-items-center" : "hidden"
+        }`}
+      >
+        <div className="bg-white p-4 rounded-md w-[50rem]">
+          <h3 className="text-2xl text-center font-semibold">Notice Points</h3>
+          <div className="w-full h-[2px] bg-gray-800 my-4"></div>
+          <textarea
+            ref={noticeRef}
+            placeholder="Information Needed"
+            className=" w-full border-2 border-gray-600 bg-transparent outline-none fill-none text-slate-800 p-2 h-48 resize-none"
+          ></textarea>
+          <div className="flex flex-wrap gap-6 mt-4">
+            <button
+              onClick={sendnotingpint}
+              className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium grow"
+            >
+              Send
+            </button>
+            <button
+              onClick={() => setNotingsBox((val) => false)}
+              className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-rose-500 text-center rounded-md font-medium grow"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+      {/* notings box end here */}
       {/* reject box start here */}
       <div
         className={`fixed top-0 left-0 bg-black bg-opacity-20 min-h-screen w-full  z-50 ${
@@ -579,7 +655,7 @@ const MarriageView: React.FC = (): JSX.Element => {
       {/* forward box end here */}
       <div className="bg-white rounded-md shadow-lg p-4 my-4 w-full">
         <h1 className="text-gray-800 text-3xl font-semibold text-center">
-          Marriage Permission
+          Generic Information
         </h1>
         <div className="w-full flex gap-4 my-4">
           <div className="grow bg-gray-700 h-[2px]"></div>
@@ -588,13 +664,13 @@ const MarriageView: React.FC = (): JSX.Element => {
         </div>
         <p className="text-center font-semibold text-xl text-gray-800">
           {" "}
-          SUBJECT : Request for Obtaining Marriage Permission.{" "}
+          SUBJECT : Request for Obtaining Generic Information.{" "}
         </p>
 
         {/*--------------------- section 1 start here ------------------------- */}
         <div className="w-full bg-[#0984e3] py-2 rounded-md px-4 mt-4">
           <p className="text-left font-semibold text-xl text-white">
-            1. Land Details{" "}
+            1. Village Details{" "}
           </p>
         </div>
         <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
@@ -661,13 +737,13 @@ const MarriageView: React.FC = (): JSX.Element => {
         <div className="w-full bg-[#0984e3] py-2 rounded-md px-4 mt-4">
           <p className="text-left font-semibold text-xl text-white">
             {" "}
-            3. Document Attachment{" "}
+            3. Event Details{" "}
           </p>
         </div>
 
         <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
-            <span className="mr-2">3.1</span> Name of the Bride / Groom
+            <span className="mr-2">3.1</span> Name of the Event
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal">
             {from_data.event_name}
@@ -683,7 +759,15 @@ const MarriageView: React.FC = (): JSX.Element => {
         </div>
         <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
-            <span className="mr-2">3.3</span> Applicant Relation
+            <span className="mr-2">3.3</span> Route Information
+          </div>
+          <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal">
+            {from_data.route_info}
+          </div>
+        </div>
+        <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
+          <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
+            <span className="mr-2">3.4</span> Applicant Relation
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal">
             {from_data.relation}
@@ -691,7 +775,7 @@ const MarriageView: React.FC = (): JSX.Element => {
         </div>
         <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
-            <span className="mr-2">3.4</span> Event From Date
+            <span className="mr-2">3.5</span> Event From Date
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal">
             {new Date(from_data.from_date)
@@ -704,7 +788,7 @@ const MarriageView: React.FC = (): JSX.Element => {
         </div>
         <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
-            <span className="mr-2">3.5</span> Event To Date
+            <span className="mr-2">3.6</span> Event To Date
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal">
             {new Date(from_data.to_date)
@@ -722,10 +806,10 @@ const MarriageView: React.FC = (): JSX.Element => {
 
         <div className="w-full bg-[#0984e3] py-2 rounded-md px-4 mt-4">
           <p className="text-left font-semibold text-xl text-white">
-            {" "}
-            4. Attachment(s){" "}
+            4. Attachment(s)
           </p>
         </div>
+
         <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
             <span className="mr-2">4.1</span> Applicant and 2 witness Aadhaar
@@ -768,9 +852,10 @@ const MarriageView: React.FC = (): JSX.Element => {
             </a>
           </div>
         </div>
-        {from_data.witness_1_url != null &&
-          from_data.witness_1_url != undefined &&
-          from_data.witness_1_url != "" && (
+
+        {from_data.doc_1_url != null &&
+          from_data.doc_1_url != undefined &&
+          from_data.doc_1_url != "" && (
             <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
               <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
                 <span className="mr-2">4.3</span> Other Document 1
@@ -781,7 +866,7 @@ const MarriageView: React.FC = (): JSX.Element => {
               <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
                 <a
                   target="_blank"
-                  href={from_data.witness_1_url}
+                  href={from_data.doc_1_url}
                   className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium"
                   rel="noreferrer"
                 >
@@ -793,12 +878,12 @@ const MarriageView: React.FC = (): JSX.Element => {
             </div>
           )}
 
-        {from_data.witness_2_url != null &&
-          from_data.witness_2_url != undefined &&
-          from_data.witness_2_url != "" && (
+        {from_data.doc_2_url != null &&
+          from_data.doc_2_url != undefined &&
+          from_data.doc_2_url != "" && (
             <div className="flex flex-wrap gap-4 gap-y-2 items-center px-4 py-2 my-2">
               <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700">
-                <span className="mr-2">4.3</span> Other Document 2
+                <span className="mr-2">4.4</span> Other Document 2
                 <p className="text-rose-500 text-sm">
                   ( Maximum Upload Size 4 MB & Allowed Format JPG / PDF / PNG )
                 </p>
@@ -806,7 +891,7 @@ const MarriageView: React.FC = (): JSX.Element => {
               <div className="flex-none flex gap-4 lg:flex-1 w-full lg:w-auto">
                 <a
                   target="_blank"
-                  href={from_data.witness_2_url}
+                  href={from_data.doc_2_url}
                   className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-green-500 text-center rounded-md font-medium"
                   rel="noreferrer"
                 >
@@ -823,7 +908,7 @@ const MarriageView: React.FC = (): JSX.Element => {
         {/*--------------------- section 5 start here ------------------------- */}
         <div className="w-full bg-[#0984e3] py-2 rounded-md px-4 mt-4">
           <p className="text-left font-semibold text-xl text-white">
-            5. Applicant / Occupant Declaration and Signature{" "}
+            5. Applicant Declaration and Signature{" "}
           </p>
         </div>
 
@@ -868,15 +953,13 @@ const MarriageView: React.FC = (): JSX.Element => {
         {/*--------------------- section 5 end here ------------------------- */}
         {isSubmited ? (
           user.id == from_data.userId ? (
-            common.form_status == 175 ? (
-              <>
-                <Link
-                  to={`/marriagepdf/${from_data.id}`}
-                  className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
-                >
-                  Download Certificate
-                </Link>
-              </>
+            common.form_status == 225 ? (
+              <Link
+                to={`/genericpdf/${from_data.id}`}
+                className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+              >
+                Download Certificate
+              </Link>
             ) : null
           ) : (
             <>
@@ -887,7 +970,6 @@ const MarriageView: React.FC = (): JSX.Element => {
                 >
                   Close
                 </Link>
-
                 {common.query_status == "REJECTED" ? null : (
                   <>
                     <button
@@ -908,6 +990,7 @@ const MarriageView: React.FC = (): JSX.Element => {
                       </button>
                     )}
 
+                    {/* SUPTD button */}
                     {common.form_status == 1 &&
                     user.id == common.auth_user_id ? (
                       <button
@@ -980,10 +1063,33 @@ const MarriageView: React.FC = (): JSX.Element => {
                     {common.form_status == 75 && user.id == 4 ? (
                       <button
                         onClick={() => {
-                          setForwardBox((val) => true);
+                          setNotingsBox((val) => true);
+                          // setForwardBox(val => true);
+                          setNextData((val) => ({
+                            title: "Forward to Sdpo",
+                            formstatus: 100,
+                            querytype: "INTRA",
+                            authuserid: "8",
+                            foacaluserid: "5",
+                            intrauserid: "5,4,8",
+                            interuserid: "8",
+                            touserid: 8,
+                            querystatus: "INPROCESS",
+                          }));
+                        }}
+                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                      >
+                        Forward to Sdpo
+                      </button>
+                    ) : null}
+                    {common.form_status == 75 && user.id == 4 ? (
+                      <button
+                        onClick={() => {
+                          setNotingsBox((val) => true);
+                          // setForwardBox(val => true);
                           setNextData((val) => ({
                             title: "Forward to Collector",
-                            formstatus: 100,
+                            formstatus: 150,
                             querytype: "INTRA",
                             authuserid: "3",
                             foacaluserid: "5",
@@ -1004,8 +1110,78 @@ const MarriageView: React.FC = (): JSX.Element => {
                         onClick={() => {
                           setForwardBox((val) => true);
                           setNextData((val) => ({
-                            title: "Direct Approval",
+                            title: "Forward to SUPTD",
+                            formstatus: 200,
+                            querytype: "INTRA",
+                            authuserid: "5",
+                            foacaluserid: "5",
+                            intrauserid: "5,4",
+                            interuserid: "0",
+                            touserid: 5,
+                            querystatus: "INPROCESS",
+                          }));
+                        }}
+                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                      >
+                        Forward to SUPTD
+                      </button>
+                    ) : null}
+
+                    {/* SHO button */}
+                    {common.form_status == 100 && user.id == 8 ? (
+                      <button
+                        onClick={() => {
+                          setNotingsBox((val) => true);
+                          // setForwardBox(val => true);
+                          setNextData((val) => ({
+                            title: "Reply to Dy.Collector",
+                            formstatus: 125,
+                            querytype: "INTRA",
+                            authuserid: "4",
+                            foacaluserid: "5",
+                            intrauserid: "5,4",
+                            interuserid: "8",
+                            touserid: 4,
+                            querystatus: "INPROCESS",
+                          }));
+                        }}
+                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                      >
+                        Reply to Dy.Collector
+                      </button>
+                    ) : null}
+
+                    {/* Dy.Collector button */}
+                    {common.form_status == 125 && user.id == 4 ? (
+                      <button
+                        onClick={() => {
+                          setNotingsBox((val) => true);
+                          // setForwardBox(val => true);
+                          setNextData((val) => ({
+                            title: "Forward to Collector",
                             formstatus: 150,
+                            querytype: "INTRA",
+                            authuserid: "3",
+                            foacaluserid: "5",
+                            intrauserid: "5,4,3",
+                            interuserid: "0",
+                            touserid: 3,
+                            querystatus: "INPROCESS",
+                          }));
+                        }}
+                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                      >
+                        Forward to Collector
+                      </button>
+                    ) : null}
+
+                    {common.form_status == 125 && user.id == 4 ? (
+                      <button
+                        onClick={() => {
+                          setForwardBox((val) => true);
+                          setNextData((val) => ({
+                            title: "Direct Approval",
+                            formstatus: 200,
                             querytype: "INTRA",
                             authuserid: "5",
                             foacaluserid: "5",
@@ -1022,14 +1198,13 @@ const MarriageView: React.FC = (): JSX.Element => {
                     ) : null}
 
                     {/* Collector button */}
-                    {common.form_status == 100 && user.id == 3 ? (
+                    {common.form_status == 150 && user.id == 3 ? (
                       <button
                         onClick={() => {
                           setForwardBox((val) => true);
-
                           setNextData((val) => ({
                             title: "Forward to Dy.Collector",
-                            formstatus: 125,
+                            formstatus: 175,
                             querytype: "INTRA",
                             authuserid: "4",
                             foacaluserid: "5",
@@ -1046,13 +1221,13 @@ const MarriageView: React.FC = (): JSX.Element => {
                     ) : null}
 
                     {/* Dy.Collector button */}
-                    {common.form_status == 125 && user.id == 4 ? (
+                    {common.form_status == 175 && user.id == 4 ? (
                       <button
                         onClick={() => {
                           setForwardBox((val) => true);
                           setNextData((val) => ({
                             title: "Forward to SUPTD",
-                            formstatus: 150,
+                            formstatus: 200,
                             querytype: "INTRA",
                             authuserid: "5",
                             foacaluserid: "5",
@@ -1069,13 +1244,13 @@ const MarriageView: React.FC = (): JSX.Element => {
                     ) : null}
 
                     {/* Suptd button */}
-                    {common.form_status == 150 && user.id == 5 ? (
+                    {common.form_status == 200 && user.id == 5 ? (
                       <button
                         onClick={async () => {
                           setForwardBox((val) => true);
                           setNextData((val) => ({
                             title: "Convey to Applicant",
-                            formstatus: 175,
+                            formstatus: 225,
                             querytype: "PUBLIC",
                             authuserid: "0",
                             foacaluserid: "5",
@@ -1084,7 +1259,6 @@ const MarriageView: React.FC = (): JSX.Element => {
                             touserid: from_data.userId,
                             querystatus: "APPROVED",
                           }));
-
                           await axios.post(
                             `http://sms.smartechwebworks.com/submitsms.jsp?user=ESTDAMAN&key=7670b7cc9eXX&mobile=+91${from_data.mobile}&message=Permission%20for%20Application%20No.%20656565%20has%20been%20accepted.-Establishment%2CCollectorate%20Daman.&senderid=ESTDMN&accusage=1&entityid=1701175448046997959&tempid=1707175473115723301`
                           );
@@ -1094,11 +1268,10 @@ const MarriageView: React.FC = (): JSX.Element => {
                         Convey to Applicant
                       </button>
                     ) : null}
-
-                    {(common.form_status == 175 || common.form_status == 150) &&
+                    {(common.form_status == 225 || common.form_status == 200) &&
                     user.id == 5 ? (
                       <Link
-                        to={`/marriagepdf/${from_data.id}`}
+                        to={`/genericpdf/${from_data.id}`}
                         className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
                       >
                         Download Certificate
@@ -1201,4 +1374,4 @@ const MarriageView: React.FC = (): JSX.Element => {
   );
 };
 
-export default MarriageView;
+export default GenericView;

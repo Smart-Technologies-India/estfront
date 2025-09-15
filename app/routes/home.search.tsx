@@ -1,8 +1,8 @@
-import { LoaderArgs, LoaderFunction, json } from "@remix-run/node";
+import type { LoaderArgs, LoaderFunction} from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { boolean } from "zod";
 import { userPrefs } from "~/cookies";
 import { ApiCall } from "~/services/api";
 
@@ -27,10 +27,10 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
     });
 };
 
-const search = () => {
+const Search = () => {
     const loader = useLoaderData();
     const village = loader.village;
-    const user = loader.user;
+    // const user = loader.user;
 
     const eventRef = useRef<HTMLInputElement>(null);
     const numberRef = useRef<HTMLInputElement>(null);
@@ -300,4 +300,4 @@ const search = () => {
         </>
     );
 }
-export default search;
+export default Search;

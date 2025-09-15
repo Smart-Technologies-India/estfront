@@ -44,8 +44,6 @@ ChartJS.register(
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
   const cookieHeader = props.request.headers.get("Cookie");
   const cookie: any = await userPrefs.parse(cookieHeader);
-  console.log("cookie-------------------------");
-  console.log(cookie);
   if (cookie.role == "USER" || cookie.role == "SHO") {
     return redirect("/home/files/");
   }
@@ -450,7 +448,7 @@ const DashBoard = (): JSX.Element => {
               title="Generic"
               color="bg-gradient-to-r from-green-400 to-green-600"
               textcolor="text-green-500"
-              link="/home"
+              link="/home/vgeneric"
               value={filecount.GENERIC}
             />
           </div>

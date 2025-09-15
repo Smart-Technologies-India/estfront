@@ -286,7 +286,7 @@ const ReligiousView: React.FC = (): JSX.Element => {
             auth_user_id: args.authuserid,
             focal_user_id: args.foacaluserid,
             intra_user_id: args.intrauserid,
-            inter_user_id: args.interuserid,
+            ...(args.interuserid != "0" && { inter_user_id: args.interuserid }),
             form_status: args.formstatus,
             query_status: args.querystatus,
           },
@@ -470,13 +470,13 @@ const ReligiousView: React.FC = (): JSX.Element => {
           notingsbox ? "grid place-items-center" : "hidden"
         }`}
       >
-        <div className="bg-white p-4 rounded-md w-80">
+        <div className="bg-white p-4 rounded-md w-[50rem]">
           <h3 className="text-2xl text-center font-semibold">Notice Points</h3>
           <div className="w-full h-[2px] bg-gray-800 my-4"></div>
           <textarea
             ref={noticeRef}
             placeholder="Information Needed"
-            className=" w-full border-2 border-gray-600 bg-transparent outline-none fill-none text-slate-800 p-2 h-28 resize-none"
+            className=" w-full border-2 border-gray-600 bg-transparent outline-none fill-none text-slate-800 p-2 h-48 resize-none"
           ></textarea>
           <div className="flex flex-wrap gap-6 mt-4">
             <button
@@ -1072,7 +1072,7 @@ const ReligiousView: React.FC = (): JSX.Element => {
                             authuserid: "8",
                             foacaluserid: "5",
                             intrauserid: "5,4,8",
-                            interuserid: "0",
+                            interuserid: "8",
                             touserid: 8,
                             querystatus: "INPROCESS",
                           }));
@@ -1140,7 +1140,7 @@ const ReligiousView: React.FC = (): JSX.Element => {
                             authuserid: "4",
                             foacaluserid: "5",
                             intrauserid: "5,4",
-                            interuserid: "0",
+                            interuserid: "8",
                             touserid: 4,
                             querystatus: "INPROCESS",
                           }));

@@ -11,6 +11,7 @@ import {
   Fa6SolidMagnifyingGlass,
   Fa6SolidObjectUngroup,
   Fa6SolidXmark,
+  FluentCheckmarkStarburst16Filled,
   MaterialSymbolsActivityZone,
   MaterialSymbolsAlignHorizontalRight,
   MaterialSymbolsLogoutRounded,
@@ -64,7 +65,7 @@ const Home: React.FC = (): JSX.Element => {
 
   const isUser = user.role == "USER";
   const username = user.name;
-  const role = useLoaderData().role;
+  // const role = useLoaderData().role;
 
   const navigator = useNavigate();
 
@@ -220,6 +221,19 @@ const Home: React.FC = (): JSX.Element => {
                         active={asideindex === SideBarTabs.Religious}
                       ></SidebarTab>
                     </Link>
+                    <Link
+                      to={"/home/vgeneric"}
+                      onClick={() => {
+                        achangeindex(SideBarTabs.Generic);
+                        changeMobile(false);
+                      }}
+                    >
+                      <SidebarTab
+                        icon={MaterialSymbolsOralDisease}
+                        title="Generic"
+                        active={asideindex === SideBarTabs.Generic}
+                      ></SidebarTab>
+                    </Link>
                     <div className="w-full h-[2px] bg-gray-800 my-3"></div>
                   </>
                 )}
@@ -257,6 +271,29 @@ const Home: React.FC = (): JSX.Element => {
                     </Link>
                   </>
                 ) : null}
+                {[
+                  "ADMIN",
+                  "COLLECTOR",
+                  "DYCOLLECTOR",
+                  "SUPERITENDANT",
+                  "LDC",
+                  "UDC",
+                  "SHO",
+                ].includes(user.role) && (
+                  <Link
+                    to={"/home/approvedfiles"}
+                    onClick={() => {
+                      achangeindex(SideBarTabs.ApprovedFiles);
+                      changeMobile(false);
+                    }}
+                  >
+                    <SidebarTab
+                      icon={FluentCheckmarkStarburst16Filled}
+                      title="Approved Files"
+                      active={asideindex === SideBarTabs.ApprovedFiles}
+                    ></SidebarTab>
+                  </Link>
+                )}
                 <button onClick={logoutHandle}>
                   <SidebarTab
                     icon={MaterialSymbolsLogoutRounded}
