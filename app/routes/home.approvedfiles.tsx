@@ -13,6 +13,8 @@ import { usePagination } from "~/hooks/usepagination";
 import { ApiCall } from "~/services/api";
 import { authusertorole } from "~/utils";
 
+import ExcelJS from "exceljs";
+
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
   const cookieHeader = props.request.headers.get("Cookie");
   const cookie: any = await userPrefs.parse(cookieHeader);
@@ -44,10 +46,31 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
       },
     },
   });
+  const report = await ApiCall({
+    query: `
+        query DownloadReport{
+          downloadReport{
+            srNo,
+            applicantName,
+            applicantAddress,
+            applicationDate,
+            eventName,
+            permissionAddress,
+            permissionDate,
+            routeInfo,
+            mobile,
+            email,
+            relation,
+            formType
+          }
+        }`,
+    veriables: {},
+  });
 
   return json({
     user: cookie,
     department: department.data.filterCommon ?? [],
+    report: report.data.downloadReport ?? [],
   });
 };
 
@@ -182,6 +205,70 @@ const Dashboard: React.FC = (): JSX.Element => {
     init();
   };
 
+  const columnname = [
+    "Sr. No.",
+    "Applicant Name",
+    "Applicant Address",
+    "Application Date",
+    "Event Name",
+    "Permission Address",
+    "Permission Date",
+    "Route Info",
+    "Mobile",
+    "Email",
+    "Relation",
+    "Form Type",
+  ];
+
+  const columnkey = [
+    "srNo",
+    "applicantName",
+    "applicantAddress",
+    "applicationDate",
+    "eventName",
+    "permissionAddress",
+    "permissionDate",
+    "routeInfo",
+    "mobile",
+    "email",
+    "relation",
+    "formType",
+  ];
+  const downloadreport = async () => {
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet("Applications");
+    // 4. Add header row from object keys
+    // worksheet.columns = columnname.map((header) => ({
+    //   header: header,
+    //   key: header.replace(/\s+/g, "").toLowerCase(),
+    //   width: 25,
+    // }));
+    worksheet.columns = columnkey.map((key, index) => ({
+      header: columnname[index],
+      key: key,
+      width: 25,
+    }));
+
+    loader.report.forEach((row: any) => {
+      worksheet.addRow(row);
+    });
+
+    // Write to buffer (for browser)
+    const buffer = await workbook.xlsx.writeBuffer();
+
+    // Create blob and trigger download
+    const blob = new Blob([buffer], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "applications.xlsx";
+    a.click();
+    window.URL.revokeObjectURL(url);
+  };
+
   const getViewLink = (value: string, id: number): string => {
     if (value == "MARRIAGE") {
       return `/home/marriageview/${id}`;
@@ -270,6 +357,12 @@ const Dashboard: React.FC = (): JSX.Element => {
               OTHER
             </button>
           </div> */}
+          <button
+            onClick={downloadreport}
+            className="rounded-md bg-green-500 shadow-md h-full px-6 py-1 text-white flex gap-2 items-center"
+          >
+            Download Report
+          </button>
           {user.role == "USER" ? null : isSearch ? (
             <>
               <div className="grid place-items-center rounded-md bg-[#0984e3] shadow-md h-full p-2 text-white">

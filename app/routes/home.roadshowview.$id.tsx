@@ -30,14 +30,15 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
               event_name,
               event_address,
               relation,
-			  route_info,
+			        route_info,
               doc_1_url,
               doc_2_url,
               applicant_uid_url,
               undertaking_url,
               iagree,
               signature_url,
-              condition_to_follow
+              condition_to_follow,
+              remarks,
             }
           }
       `,
@@ -801,6 +802,15 @@ const RoadshowView: React.FC = (): JSX.Element => {
           </div>
         </div>
 
+        <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
+          <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
+            <span className="mr-2">3.7</span> Remark
+          </div>
+          <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal">
+            {from_data.remarks}
+          </div>
+        </div>
+
         {/*--------------------- section 3 end here ------------------------- */}
 
         {/*--------------------- section 4 start here ------------------------- */}
@@ -1126,6 +1136,27 @@ const RoadshowView: React.FC = (): JSX.Element => {
                         className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
                       >
                         Forward to SUPTD
+                      </button>
+                    ) : null}
+                    {common.form_status == 75 && user.id == 4 ? (
+                      <button
+                        onClick={() => {
+                          setForwardBox((val) => true);
+                          setNextData((val) => ({
+                            title: "Query Raised",
+                            formstatus: 1,
+                            querytype: "INTRA",
+                            authuserid: "5",
+                            foacaluserid: "5",
+                            intrauserid: "5,4",
+                            interuserid: "0",
+                            touserid: 5,
+                            querystatus: "INPROCESS",
+                          }));
+                        }}
+                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                      >
+                        Query Raised
                       </button>
                     ) : null}
 

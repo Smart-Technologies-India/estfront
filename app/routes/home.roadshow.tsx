@@ -47,6 +47,7 @@ const Roadshow: React.FC = (): JSX.Element => {
   const addressRef = useRef<HTMLTextAreaElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const uidRef = useRef<HTMLInputElement>(null);
+  const remarksRef = useRef<HTMLTextAreaElement>(null);
 
   const villageRef = useRef<HTMLSelectElement>(null);
   const [village, setVillage] = useState<any[]>([]);
@@ -130,6 +131,7 @@ const Roadshow: React.FC = (): JSX.Element => {
           .nonempty("Applicant Contact Number is required.")
           .length(10, "Contact Number should be 10 digit."),
         email: z.string().email("Enter a valid email.").optional(),
+        remarks: z.string().nonempty("Remarks are required."),
         user_uid: z
           .string()
           .refine((value) => checkUID(value), {
@@ -173,6 +175,7 @@ const Roadshow: React.FC = (): JSX.Element => {
       address: addressRef!.current!.value,
       mobile: mobileRef!.current!.value,
       email: emailRef!.current!.value,
+      remarks: remarksRef!.current!.value,
       user_uid: uidRef!.current!.value,
       village_id: parseInt(villageRef!.current!.value),
       from_date: toIST(parseDateString(dates[0])),
@@ -184,9 +187,6 @@ const Roadshow: React.FC = (): JSX.Element => {
       route_info: route_infoRef!.current!.value,
     };
 
-    {
-      /*--------------------- Karan start here ------------------------- */
-    }
     const parsed = RoadshowScheme.safeParse(roadshowScheme);
     if (parsed.success) {
       if (sigimg == null || sigimg == undefined) {
@@ -504,7 +504,7 @@ const Roadshow: React.FC = (): JSX.Element => {
 
         <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
           <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
-            <span className="mr-2">3.6</span> Route Information
+            <span className="mr-2">3.5</span> Route Information
             <span className="text-rose-500">*</span>
           </div>
           <div className="flex-none lg:flex-1 w-full lg:w-auto">
@@ -514,6 +514,19 @@ const Roadshow: React.FC = (): JSX.Element => {
               className=" w-full border-2 border-gray-600 bg-transparent outline-none fill-none text-slate-800 p-2"
               placeholder="Route Info"
             />
+          </div>
+        </div>
+        <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
+          <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
+            <span className="mr-2">3.6</span> Remark
+            <span className="text-rose-500">*</span>
+          </div>
+          <div className="flex-none lg:flex-1 w-full lg:w-auto">
+            <textarea
+              ref={remarksRef}
+              placeholder="Remark"
+              className=" w-full border-2 border-gray-600 bg-transparent outline-none fill-none text-slate-800 p-2 h-28 resize-none"
+            ></textarea>
           </div>
         </div>
 

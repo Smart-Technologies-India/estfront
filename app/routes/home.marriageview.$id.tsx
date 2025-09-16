@@ -36,7 +36,8 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
               undertaking_url,
               iagree,
               signature_url,
-              condition_to_follow
+              condition_to_follow,
+              remarks,
             }
           }
       `,
@@ -715,6 +716,14 @@ const MarriageView: React.FC = (): JSX.Element => {
               .join("/")}
           </div>
         </div>
+        <div className="flex  flex-wrap gap-4 gap-y-2 px-4 py-2 my-2">
+          <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal text-left text-gray-700 ">
+            <span className="mr-2">3.6</span> Remark
+          </div>
+          <div className="flex-none lg:flex-1 w-full lg:w-auto text-xl font-normal">
+            {from_data.remarks}
+          </div>
+        </div>
 
         {/*--------------------- section 3 end here ------------------------- */}
 
@@ -981,9 +990,33 @@ const MarriageView: React.FC = (): JSX.Element => {
                       <button
                         onClick={() => {
                           setForwardBox((val) => true);
+                          // setForwardBox(val => true);
+                          setNextData((val) => ({
+                            title: "Forward to Sdpo",
+                            formstatus: 100,
+                            querytype: "INTRA",
+                            authuserid: "8",
+                            foacaluserid: "5",
+                            intrauserid: "5,4,8",
+                            interuserid: "8",
+                            touserid: 8,
+                            querystatus: "INPROCESS",
+                          }));
+                        }}
+                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                      >
+                        Forward to Sdpo
+                      </button>
+                    ) : null}
+
+                    {/* Dy.Collector button */}
+                    {common.form_status == 75 && user.id == 4 ? (
+                      <button
+                        onClick={() => {
+                          setForwardBox((val) => true);
                           setNextData((val) => ({
                             title: "Forward to Collector",
-                            formstatus: 100,
+                            formstatus: 150,
                             querytype: "INTRA",
                             authuserid: "3",
                             foacaluserid: "5",
@@ -1004,8 +1037,100 @@ const MarriageView: React.FC = (): JSX.Element => {
                         onClick={() => {
                           setForwardBox((val) => true);
                           setNextData((val) => ({
-                            title: "Direct Approval",
+                            title: "Forward to SUPTD",
+                            formstatus: 200,
+                            querytype: "INTRA",
+                            authuserid: "5",
+                            foacaluserid: "5",
+                            intrauserid: "5,4",
+                            interuserid: "0",
+                            touserid: 5,
+                            querystatus: "INPROCESS",
+                          }));
+                        }}
+                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                      >
+                        Forward to SUPTD
+                      </button>
+                    ) : null}
+
+                    {common.form_status == 75 && user.id == 4 ? (
+                      <button
+                        onClick={() => {
+                          setForwardBox((val) => true);
+                          setNextData((val) => ({
+                            title: "Query Raised",
+                            formstatus: 1,
+                            querytype: "INTRA",
+                            authuserid: "5",
+                            foacaluserid: "5",
+                            intrauserid: "5,4",
+                            interuserid: "0",
+                            touserid: 5,
+                            querystatus: "INPROCESS",
+                          }));
+                        }}
+                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                      >
+                        Query Raised
+                      </button>
+                    ) : null}
+
+                    {/* SHO button */}
+                    {common.form_status == 100 && user.id == 8 ? (
+                      <button
+                        onClick={() => {
+                          // setNotingsBox((val) => true);
+                          setForwardBox((val) => true);
+                          setNextData((val) => ({
+                            title: "Reply to Dy.Collector",
+                            formstatus: 125,
+                            querytype: "INTRA",
+                            authuserid: "4",
+                            foacaluserid: "5",
+                            intrauserid: "5,4",
+                            interuserid: "8",
+                            touserid: 4,
+                            querystatus: "INPROCESS",
+                          }));
+                        }}
+                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                      >
+                        Reply to Dy.Collector
+                      </button>
+                    ) : null}
+
+                    {/* Dy.Collector button */}
+                    {common.form_status == 125 && user.id == 4 ? (
+                      <button
+                        onClick={() => {
+                          // setNotingsBox((val) => true);
+                          setForwardBox((val) => true);
+                          setNextData((val) => ({
+                            title: "Forward to Collector",
                             formstatus: 150,
+                            querytype: "INTRA",
+                            authuserid: "3",
+                            foacaluserid: "5",
+                            intrauserid: "5,4,3",
+                            interuserid: "0",
+                            touserid: 3,
+                            querystatus: "INPROCESS",
+                          }));
+                        }}
+                        className="py-1 w-full sm:w-auto text-white text-lg px-4 bg-cyan-500 text-center rounded-md font-medium"
+                      >
+                        Forward to Collector
+                      </button>
+                    ) : null}
+
+                    {common.form_status == 125 && user.id == 4 ? (
+                      <button
+                        onClick={() => {
+                          setForwardBox((val) => true);
+                          setNextData((val) => ({
+                            title: "Direct Approval",
+                            formstatus: 200,
                             querytype: "INTRA",
                             authuserid: "5",
                             foacaluserid: "5",
@@ -1022,14 +1147,13 @@ const MarriageView: React.FC = (): JSX.Element => {
                     ) : null}
 
                     {/* Collector button */}
-                    {common.form_status == 100 && user.id == 3 ? (
+                    {common.form_status == 150 && user.id == 3 ? (
                       <button
                         onClick={() => {
                           setForwardBox((val) => true);
-
                           setNextData((val) => ({
                             title: "Forward to Dy.Collector",
-                            formstatus: 125,
+                            formstatus: 175,
                             querytype: "INTRA",
                             authuserid: "4",
                             foacaluserid: "5",
@@ -1046,13 +1170,13 @@ const MarriageView: React.FC = (): JSX.Element => {
                     ) : null}
 
                     {/* Dy.Collector button */}
-                    {common.form_status == 125 && user.id == 4 ? (
+                    {common.form_status == 175 && user.id == 4 ? (
                       <button
                         onClick={() => {
                           setForwardBox((val) => true);
                           setNextData((val) => ({
                             title: "Forward to SUPTD",
-                            formstatus: 150,
+                            formstatus: 200,
                             querytype: "INTRA",
                             authuserid: "5",
                             foacaluserid: "5",
@@ -1069,13 +1193,13 @@ const MarriageView: React.FC = (): JSX.Element => {
                     ) : null}
 
                     {/* Suptd button */}
-                    {common.form_status == 150 && user.id == 5 ? (
+                    {common.form_status == 200 && user.id == 5 ? (
                       <button
                         onClick={async () => {
                           setForwardBox((val) => true);
                           setNextData((val) => ({
                             title: "Convey to Applicant",
-                            formstatus: 175,
+                            formstatus: 225,
                             querytype: "PUBLIC",
                             authuserid: "0",
                             foacaluserid: "5",
@@ -1095,7 +1219,7 @@ const MarriageView: React.FC = (): JSX.Element => {
                       </button>
                     ) : null}
 
-                    {(common.form_status == 175 || common.form_status == 150) &&
+                    {(common.form_status == 200 || common.form_status == 225) &&
                     user.id == 5 ? (
                       <Link
                         to={`/marriagepdf/${from_data.id}`}
