@@ -61,11 +61,14 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
             mobile,
             email,
             relation,
-            formType
+            formType,
+            queryStatus,
+            authUserId
           }
         }`,
     veriables: {},
   });
+
 
   return json({
     user: cookie,
@@ -148,6 +151,8 @@ const Dashboard: React.FC = (): JSX.Element => {
     "Email",
     "Relation",
     "Form Type",
+    "Status",
+    "File With",
   ];
 
   const columnkey = [
@@ -163,6 +168,8 @@ const Dashboard: React.FC = (): JSX.Element => {
     "email",
     "relation",
     "formType",
+    "queryStatus",
+    "authUserId",
   ];
   const downloadreport = async () => {
     const workbook = new ExcelJS.Workbook();
